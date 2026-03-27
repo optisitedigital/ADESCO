@@ -202,13 +202,13 @@
 <body>
 
     <div id="splash">
-        <img src="images/logo.png" alt="ADESCO" class="splash-logo">
+        <img src="ADESCO/logo.png" alt="ADESCO" class="splash-logo">
     </div>
 
     <header id="header">
         <div class="nav-container">
             <a href="#" class="logo-box">
-                <img src="images/logo.png" alt="Logo ADESCO" class="logo-img-small">
+                <img src="ADESCO/logo.png" alt="Logo ADESCO" class="logo-img-small">
                 <div class="logo-text">ADE<span>SCO</span></div>
             </a>
             <div class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></div>
@@ -247,7 +247,7 @@
             <p>Fidèles aux valeurs du socialisme africain, nous formons les cadres de demain pour un Congo souverain et prospère.</p>
         </div>
         <div class="sphinx-image">
-            <img src="images/sphinx_heritage.png" alt="Etienne Tshisekedi">
+            <img src="ADESCO/sphinx_heritage.png" alt="Etienne Tshisekedi">
         </div>
     </section>
 
@@ -255,17 +255,17 @@
         <h2 class="section-title">Notre Comité Interfédéral</h2>
         <div class="leaders-grid">
             <div class="leader-card">
-                <img src="images/tony_kanku.png" alt="Tony Kanku Shiku" class="leader-img">
+                <img src="ADESCO/tony_kanku.png" alt="Tony Kanku Shiku" class="leader-img">
                 <p class="leader-name">Tony Kanku Shiku</p>
                 <p class="leader-role">Autorité Morale</p>
             </div>
             <div class="leader-card">
-                <img src="images/presidente.png" alt="Présidente" class="leader-img">
+                <img src="ADESCO/presidente.png" alt="Présidente" class="leader-img">
                 <p class="leader-name">Mme la Présidente</p>
                 <p class="leader-role">Présidente Interfédérale</p>
             </div>
             <div class="leader-card">
-                <img src="images/secretaire.png" alt="Secrétaire" class="leader-img">
+                <img src="ADESCO/secretaire.png" alt="Secrétaire" class="leader-img">
                 <p class="leader-name">Le Secrétaire</p>
                 <p class="leader-role">Secrétaire Exécutif</p>
             </div>
@@ -275,15 +275,15 @@
     <section id="activites" class="activites-wrapper">
         <h2 class="section-title">Nos Activités en Images</h2>
         <div class="carousel-track">
-            <div class="image-container"><img src="images/photo1.jpg" alt="Activité 1"></div>
-            <div class="image-container"><img src="images/photo2.jpg" alt="Activité 2"></div>
-            <div class="image-container"><img src="images/photo3.jpg" alt="Activité 3"></div>
-            <div class="image-container"><img src="images/photo4.jpg" alt="Activité 4"></div>
-            <div class="image-container"><img src="images/photo1.jpg" alt="Activité 1"></div>
-            <div class="image-container"><img src="images/photo2.jpg" alt="Activité 2"></div>
-            <div class="image-container"><img src="images/photo3.jpg" alt="Activité 3"></div>
-            <div class="image-container"><img src="images/photo4.jpg" alt="Activité 4"></div>
-            <div class="image-container"><img src="images/photo1.jpg" alt="Activité 1"></div>
+            <div class="image-container"><img src="ADESCO/photo1.jpg" alt="Activité 1"></div>
+            <div class="image-container"><img src="ADESCO/photo2.jpg" alt="Activité 2"></div>
+            <div class="image-container"><img src="ADESCO/photo3.jpg" alt="Activité 3"></div>
+            <div class="image-container"><img src="ADESCO/photo4.jpg" alt="Activité 4"></div>
+            <div class="image-container"><img src="ADESCO/photo1.jpg" alt="Activité 1"></div>
+            <div class="image-container"><img src="ADESCO/photo2.jpg" alt="Activité 2"></div>
+            <div class="image-container"><img src="ADESCO/photo3.jpg" alt="Activité 3"></div>
+            <div class="image-container"><img src="ADESCO/photo4.jpg" alt="Activité 4"></div>
+            <div class="image-container"><img src="ADESCO/photo1.jpg" alt="Activité 1"></div>
             <div class="image-container"><img src="images/photo2.jpg" alt="Activité 2"></div>
         </div>
     </section>
@@ -411,10 +411,10 @@
     </section>
 
     <footer>
-        <img src="images/logo.png" alt="Logo ADESCO" class="footer-logo">
+        <img src="ADESCO/logo.png" alt="Logo ADESCO" class="footer-logo">
         <div class="footer-info">
             <p><strong>Siège Social :</strong> Croisement Enseignement & Gambela N°128, Kasa-Vubu, Kinshasa</p>
-            <p><strong>Contact :</strong> +243 84 084 48 48 | <strong>Email :</strong> adescopartie@gmail.com</p>
+            <p><strong>Contact :</strong> +243 895 133 916 & 812492339  | <strong>Email :</strong> adescopartie@gmail.com</p>
         </div>
         <div class="copyright">
             &copy; 2026 ADESCO - Tous droits réservés | Développé par <strong>OPTISITE DIGITAL</strong>
@@ -487,14 +487,14 @@
 
                 data.forEach(item => {
                     const card = `
-                        <div class="news-card">
-                            <img src="${item.Lien_Photo || 'images/default_news.png'}" class="news-image" onerror="this.src='images/default_news.png'">
-                            <div class="news-content">
-                                <span class="news-date">${item.Date || ''}</span>
-                                <h3 class="news-title">${item.Titre_Actu}</h3>
-                                <p class="news-description">${item.Description || ''}</p>
-                            </div>
+                  <div class="news-card">
+                        <img src="${item.Lien_Photo || 'images/default_news.png'}" class="news-image">
+                        <div class="news-content">
+                            <span class="news-date">${item.Date || ''}</span>
+                            <h3 class="news-title">${item.Titre_Actu}</h3>
+                            <p class="news-description">${item.Description || ''}</p>
                         </div>
+                    </div>
                     `;
                     container.innerHTML += card;
                 });

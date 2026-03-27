@@ -228,6 +228,25 @@
             .section-title { font-size: 2.2rem; }
             .leader-img { width: 200px; height: 200px; }
         }
+/* --- ADAPTATION MOBILE GLOBALE --- */
+@media (max-width: 768px) {
+    body, html { font-size: 16px; }
+    header { height: auto; padding: 15px 20px; }
+    .nav-menu { flex-direction: column; width: 100%; }
+    .nav-menu li { width: 100%; text-align: center; }
+    .hero-content { padding: 0 15px; }
+    .sphinx-heritage, .leaders-section, .activites-wrapper, .news-section, .adhesion-section {
+        padding: 50px 15px !important;
+        flex-direction: column !important;
+        text-align: center !important;
+    }
+    .leaders-grid, .news-grid { grid-template-columns: 1fr !important; gap: 25px; }
+    .form-container { padding: 25px !important; width: 100%; }
+    img { max-width: 100%; height: auto; }
+    .btn, .btn-primary, .btn-outline { width: 100%; }
+    .carousel-track { flex-wrap: nowrap; overflow-x: scroll; scroll-snap-type: x mandatory; }
+    .image-container { flex: 0 0 80%; margin: 0 auto; scroll-snap-align: start; }
+}        
     </style>
 </head>
 <body>

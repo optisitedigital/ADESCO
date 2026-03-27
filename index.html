@@ -1,438 +1,495 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ADESCO - Site Officiel</title>
+\<\!DOCTYPE html\>
+
+\<html lang="fr"\>
+\<head\>
+\<meta charset="UTF-8"\>
+\<meta name="viewport" content="width=device-width, initial-scale=1.0"\>
+\<title\>ADESCO - Site Officiel\</title\>
+
+```
+<link rel="icon" type="image/png" href="images/logo.png">
+
+<link href="[https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Playfair+Display:wght@700;900&family=Poppins:wght@300;400;600&family=Inter:wght@400;600&display=swap](https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Playfair+Display:wght@700;900&family=Poppins:wght@300;400;600&family=Inter:wght@400;600&display=swap)" rel="stylesheet">
+<link rel="stylesheet" href="[https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css)">
+
+<style>
+    :root {
+        /* Couleurs Officielles ADESCO */
+        --primary: #003399;
+        --accent: #FFD700;
+        --adesco-blue: #0056b3;
+        --adesco-red: #d92323;
+        --adesco-yellow: #f9d71c;
+        --white: #ffffff;
+        --dark: #0a0a0a;
+        --bg-gray: #f8fafc;
+        --text-main: #1e293b;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+    body { font-family: 'Montserrat', sans-serif; background: #fff; color: var(--dark); overflow-x: hidden; }
+
+    /* --- SPLASH SCREEN --- */
+    #splash {
+        position: fixed; inset: 0; background: white; z-index: 10000;
+        display: flex; justify-content: center; align-items: center;
+        transition: opacity 0.8s ease-out, visibility 0.8s;
+    }
+    .splash-logo { width: 180px; animation: pulse 1.5s infinite; }
+    @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
+    .hide-splash { opacity: 0; visibility: hidden; }
+
+    /* --- HEADER --- */
+    header {
+        position: fixed; width: 100%; top: 0; z-index: 1000;
+        background: transparent; height: 90px; display: flex; align-items: center;
+        transition: 0.4s;
+    }
+    header.scrolled { background: rgba(255, 255, 255, 0.98); height: 70px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
     
-    <link rel="icon" type="image/png" href="images/logo.png">
+    .nav-container { width: 90%; max-width: 1200px; margin: auto; display: flex; justify-content: space-between; align-items: center; }
+    .logo-box { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo-img-small { width: 50px; transition: 0.4s; }
+    .logo-text { font-family: 'Playfair Display'; font-size: 1.8rem; font-weight: 900; color: var(--white); }
+    header.scrolled .logo-text { color: var(--primary); }
+    .logo-text span { color: var(--accent); }
+
+    .nav-menu { display: flex; gap: 30px; list-style: none; }
+    .nav-menu a { text-decoration: none; color: var(--white); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; transition: 0.3s; }
+    header.scrolled .nav-menu a { color: var(--primary); }
+    .nav-menu a:hover { color: var(--accent) !important; }
+
+    /* --- HERO & HERITAGE --- */
+    #accueil {
+        height: 100vh;
+        background: linear-gradient(rgba(0, 51, 153, 0.6), rgba(0, 0, 0, 0.8)), url('images/banniere_accueil.png') center/cover no-repeat;
+        display: flex; align-items: center; justify-content: center; text-align: center; color: white;
+    }
+    .hero-content { max-width: 900px; padding: 20px; }
+    .badge-heritage { 
+        background: var(--accent); color: var(--primary); padding: 8px 20px; 
+        border-radius: 50px; display: inline-block; font-weight: 900; 
+        margin-bottom: 25px; font-size: 0.85rem; letter-spacing: 1px;
+        animation: fadeInDown 1s ease-out;
+    }
+    .hero-content h1 { font-family: 'Playfair Display'; font-size: clamp(2.5rem, 8vw, 4.5rem); line-height: 1.1; margin-bottom: 20px; }
     
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Playfair+Display:wght@700;900&family=Poppins:wght@300;400;600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    .authority-mention {
+        margin-top: 30px; border-left: 4px solid var(--accent); padding-left: 20px; 
+        text-align: left; display: inline-block; animation: fadeInLeft 1.2s ease-out;
+    }
+    .authority-label { color: var(--accent); font-weight: bold; text-transform: uppercase; font-size: 0.9rem; margin-bottom: 5px; }
+    .authority-name { font-size: 2rem; font-weight: 900; color: white; }
+
+    .hero-btns { display: flex; gap: 15px; justify-content: center; margin-top: 40px; }
+    .btn { padding: 15px 35px; border-radius: 50px; text-decoration: none; font-weight: 700; transition: 0.3s; text-transform: uppercase; font-size: 0.9rem; }
+    .btn-primary { background: var(--accent); color: var(--primary); }
+    .btn-outline { border: 2px solid white; color: white; }
+    .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+
+    /* Section Héritage Sphinx */
+    .sphinx-heritage { padding: 80px 5%; background: #fff; display: flex; align-items: center; gap: 50px; flex-wrap: wrap; }
+    .sphinx-text { flex: 1; min-width: 300px; }
+    .sphinx-text h2 { font-family: 'Playfair Display'; font-size: 2.5rem; color: var(--primary); margin-bottom: 20px; }
+    .sphinx-text p { line-height: 1.8; color: #444; margin-bottom: 15px; font-size: 1.1rem; }
+    .sphinx-quote { font-style: italic; border-left: 4px solid var(--primary); padding-left: 20px; margin: 25px 0; color: var(--primary); font-weight: 600; }
+
+    /* --- CAROUSEL ACTIVITÉS --- */
+    .activites-wrapper { width: 100%; overflow: hidden; background: var(--bg-gray); padding: 80px 0; }
+    .section-title { text-align: center; font-family: 'Playfair Display'; font-size: 2.8rem; color: var(--primary); margin-bottom: 50px; }
+    .carousel-track { display: flex; width: calc(320px * 8); animation: glisse-infini 30s linear infinite; }
+    .image-container { width: 300px; height: 220px; margin: 0 10px; flex-shrink: 0; }
+    .image-container img { width: 100%; height: 100%; object-fit: cover; border-radius: 15px; filter: grayscale(20%); transition: 0.4s; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+    .image-container img:hover { filter: grayscale(0%); transform: scale(1.05); }
+    @keyframes glisse-infini { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-320px * 4)); } }
+
+    /* --- LEADERS --- */
+    .leaders-section { padding: 100px 5%; background: white; text-align: center; }
+    .leaders-grid { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-top: 50px; }
+    .leader-card { width: 280px; text-align: center; }
+    .leader-img { width: 220px; height: 220px; border-radius: 50%; object-fit: cover; border: 5px solid var(--accent); margin-bottom: 20px; }
+    .leader-name { font-weight: 900; color: var(--primary); font-size: 1.2rem; margin-bottom: 5px; }
+    .leader-role { color: var(--adesco-red); font-weight: 700; font-size: 0.9rem; text-transform: uppercase; }
+
+    /* --- ACTUALITÉS --- */
+    .news-section { padding: 100px 5%; background: var(--bg-gray); }
+    .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; max-width: 1200px; margin: auto; }
+    .news-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: 0.3s; height: 100%; }
+    .news-card:hover { transform: translateY(-10px); }
+    .news-image { width: 100%; height: 220px; object-fit: cover; }
+    .news-content { padding: 25px; }
+    .news-date { color: var(--adesco-red); font-weight: 700; font-size: 0.8rem; margin-bottom: 10px; display: block; }
+    .news-title { color: var(--primary); font-size: 1.3rem; margin-bottom: 15px; font-weight: 800; }
+    .news-description { font-size: 0.95rem; color: #555; line-height: 1.6; }
+    .news-loader { text-align: center; grid-column: 1/-1; padding: 50px; font-style: italic; color: #666; }
+
+    /* --- ADHÉSION (Amélioré selon reproches) --- */
+    .adhesion-section { padding: 100px 20px; background-color: var(--bg-gray); font-family: 'Inter', sans-serif; }
+    .form-container { max-width: 900px; margin: 0 auto; background: white; padding: 40px; border-radius: 30px; box-shadow: 0 20px 50px rgba(0,0,0,0.08); }
+    .form-header { text-align: center; margin-bottom: 40px; }
+    .form-header h2 { color: var(--adesco-blue); text-transform: uppercase; font-size: 2.2rem; font-weight: 900; font-family: 'Montserrat'; }
     
-    <style>
-        :root {
-            /* Couleurs Officielles ADESCO */
-            --primary: #003399;
-            --accent: #FFD700;
-            --adesco-blue: #0056b3;
-            --adesco-red: #d92323;
-            --adesco-yellow: #f9d71c;
-            --white: #ffffff;
-            --dark: #0a0a0a;
-            --bg-gray: #f8fafc;
-            --text-main: #1e293b;
-        }
+    /* Titres de sous-sections du formulaire */
+    .form-section-title { background: var(--primary); color: white; padding: 12px 20px; border-radius: 8px; font-size: 1rem; margin: 35px 0 20px; text-transform: uppercase; font-weight: 700; display: flex; align-items: center; gap: 10px; }
+    
+    .form-group { margin-bottom: 25px; }
+    .form-group label { display: block; font-weight: 700; margin-bottom: 10px; color: var(--text-main); font-size: 0.95rem; }
+    .form-group input, .form-group select, .form-group textarea { 
+        width: 100%; padding: 14px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 16px; transition: 0.3s; font-family: 'Inter';
+    }
+    .form-group input:focus { border-color: var(--adesco-blue); outline: none; box-shadow: 0 0 0 4px rgba(0,86,179,0.1); }
+    
+    /* Grid pour les cases à cocher améliorée */
+    .checkbox-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; background: #f8fafc; padding: 25px; border-radius: 15px; border: 1px solid #e2e8f0; }
+    .check-item { display: flex; align-items: flex-start; gap: 12px; font-size: 0.9rem; font-weight: 600; cursor: pointer; color: var(--text-main); }
+    .check-item input { width: 20px; height: 20px; cursor: pointer; flex-shrink: 0; }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-        body { font-family: 'Montserrat', sans-serif; background: #fff; color: var(--dark); overflow-x: hidden; }
+    .btn-submit { 
+        width: 100%; padding: 20px; background-color: var(--adesco-blue); color: white; border: none; 
+        border-radius: 12px; font-size: 1.15rem; font-weight: 800; cursor: pointer; transition: 0.3s; margin-top: 40px; 
+        text-transform: uppercase; letter-spacing: 1px;
+    }
+    .btn-submit:hover { background-color: #003d7a; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,0,0,0.15); }
 
-        /* --- SPLASH SCREEN --- */
-        #splash {
-            position: fixed; inset: 0; background: white; z-index: 10000;
-            display: flex; justify-content: center; align-items: center;
-            transition: opacity 0.8s ease-out, visibility 0.8s;
-        }
-        .splash-logo { width: 180px; animation: pulse 1.5s infinite; }
-        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
-        .hide-splash { opacity: 0; visibility: hidden; }
+    /* --- FOOTER --- */
+    footer { background: #0f172a; color: white; padding: 80px 20px 40px; text-align: center; }
+    .footer-logo { width: 90px; margin-bottom: 30px; }
+    .footer-info { color: #94a3b8; line-height: 2; margin-bottom: 40px; }
+    .footer-info strong { color: white; }
+    .copyright { border-top: 1px solid #334155; padding-top: 30px; font-size: 0.9rem; color: #64748b; }
 
-        /* --- HEADER --- */
-        header {
-            position: fixed; width: 100%; top: 0; z-index: 1000;
-            background: transparent; height: 90px; display: flex; align-items: center;
-            transition: 0.4s;
-        }
-        header.scrolled { background: rgba(255, 255, 255, 0.98); height: 70px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
-        
-        .nav-container { width: 90%; max-width: 1200px; margin: auto; display: flex; justify-content: space-between; align-items: center; }
-        .logo-box { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-        .logo-img-small { width: 50px; transition: 0.4s; }
-        .logo-text { font-family: 'Playfair Display'; font-size: 1.8rem; font-weight: 900; color: var(--white); }
-        header.scrolled .logo-text { color: var(--primary); }
-        .logo-text span { color: var(--accent); }
+    /* Animations */
+    @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeInLeft { from { opacity: 0; transform: translateX(-30px); } to { opacity: 1; transform: translateX(0); } }
 
-        .nav-menu { display: flex; gap: 30px; list-style: none; }
-        .nav-menu a { text-decoration: none; color: var(--white); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; transition: 0.3s; }
-        header.scrolled .nav-menu a { color: var(--primary); }
-        .nav-menu a:hover { color: var(--accent) !important; }
+    /* Responsive */
+    @media (max-width: 768px) {
+        .nav-menu { display: none; }
+        .hero-content h1 { font-size: 2.2rem; }
+        .form-container { padding: 25px; }
+        .sphinx-heritage { flex-direction: column-reverse; text-align: center; }
+        .authority-mention { text-align: center; border-left: none; border-top: 4px solid var(--accent); padding-top: 20px; }
+    }
+</style>
+```
 
-        /* --- HERO & HERITAGE (Amélioré avec Sphinx) --- */
-        #accueil {
-            height: 100vh;
-            background: linear-gradient(rgba(0, 51, 153, 0.6), rgba(0, 0, 0, 0.8)), url('images/banniere_accueil.png') center/cover no-repeat;
-            display: flex; align-items: center; justify-content: center; text-align: center; color: white;
-        }
-        .hero-content { max-width: 900px; padding: 20px; }
-        .badge-heritage { 
-            background: var(--accent); color: var(--primary); padding: 8px 20px; 
-            border-radius: 50px; display: inline-block; font-weight: 900; 
-            margin-bottom: 25px; font-size: 0.85rem; letter-spacing: 1px;
-            animation: fadeInDown 1s ease-out;
-        }
-        .hero-content h1 { font-family: 'Playfair Display'; font-size: clamp(2.5rem, 8vw, 4.5rem); line-height: 1.1; margin-bottom: 20px; }
-        
-        /* Mention Autorité Morale */
-        .authority-mention {
-            margin-top: 30px; border-left: 4px solid var(--accent); padding-left: 20px; 
-            text-align: left; display: inline-block; animation: fadeInLeft 1.2s ease-out;
-        }
-        .authority-label { color: var(--accent); font-weight: bold; text-transform: uppercase; font-size: 0.9rem; margin-bottom: 5px; }
-        .authority-name { font-size: 2rem; font-weight: 900; color: white; }
+\</head\>
+\<body\>
 
-        .hero-btns { display: flex; gap: 15px; justify-content: center; margin-top: 40px; }
-        .btn { padding: 15px 35px; border-radius: 50px; text-decoration: none; font-weight: 700; transition: 0.3s; text-transform: uppercase; font-size: 0.9rem; }
-        .btn-primary { background: var(--accent); color: var(--primary); }
-        .btn-outline { border: 2px solid white; color: white; }
-        .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+```
+<div id="splash">
+    <img src="images/logo.png" alt="ADESCO" class="splash-logo">
+</div>
 
-        /* Section Héritage Sphinx */
-        .sphinx-heritage { padding: 80px 5%; background: #fff; display: flex; align-items: center; gap: 50px; flex-wrap: wrap; }
-        .sphinx-text { flex: 1; min-width: 300px; }
-        .sphinx-text h2 { font-family: 'Playfair Display'; font-size: 2.5rem; color: var(--primary); margin-bottom: 20px; }
-        .sphinx-text p { line-height: 1.8; color: #444; margin-bottom: 15px; font-size: 1.1rem; }
-        .sphinx-quote { font-style: italic; border-left: 4px solid var(--primary); padding-left: 20px; margin: 25px 0; color: var(--primary); font-weight: 600; }
-
-        /* --- CAROUSEL ACTIVITÉS --- */
-        .activites-wrapper { width: 100%; overflow: hidden; background: var(--bg-gray); padding: 80px 0; }
-        .section-title { text-align: center; font-family: 'Playfair Display'; font-size: 2.8rem; color: var(--primary); margin-bottom: 50px; }
-        .carousel-track { display: flex; width: calc(320px * 8); animation: glisse-infini 30s linear infinite; }
-        .image-container { width: 300px; height: 220px; margin: 0 10px; flex-shrink: 0; }
-        .image-container img { width: 100%; height: 100%; object-fit: cover; border-radius: 15px; filter: grayscale(20%); transition: 0.4s; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-        .image-container img:hover { filter: grayscale(0%); transform: scale(1.05); }
-        @keyframes glisse-infini { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-320px * 4)); } }
-
-        /* --- COMITÉ INTERFÉDÉRAL (Nouveauté leaders) --- */
-        .leaders-section { padding: 100px 5%; background: white; text-align: center; }
-        .leaders-grid { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-top: 50px; }
-        .leader-card { width: 280px; text-align: center; }
-        .leader-img { width: 220px; height: 220px; border-radius: 50%; object-fit: cover; border: 5px solid var(--accent); margin-bottom: 20px; }
-        .leader-name { font-weight: 900; color: var(--primary); font-size: 1.2rem; margin-bottom: 5px; }
-        .leader-role { color: var(--adesco-red); font-weight: 700; font-size: 0.9rem; text-transform: uppercase; }
-
-        /* --- ACTUALITÉS (Style injecté) --- */
-        .news-section { padding: 100px 5%; background: var(--bg-gray); }
-        .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; max-width: 1200px; margin: auto; }
-        .news-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: 0.3s; height: 100%; }
-        .news-card:hover { transform: translateY(-10px); }
-        .news-image { width: 100%; height: 220px; object-fit: cover; }
-        .news-content { padding: 25px; }
-        .news-date { color: var(--adesco-red); font-weight: 700; font-size: 0.8rem; margin-bottom: 10px; display: block; }
-        .news-title { color: var(--primary); font-size: 1.3rem; margin-bottom: 15px; font-weight: 800; }
-        .news-description { font-size: 0.95rem; color: #555; line-height: 1.6; }
-        .news-loader { text-align: center; grid-column: 1/-1; padding: 50px; font-style: italic; color: #666; }
-
-        /* --- ADHÉSION (Style injecté) --- */
-        .adhesion-section { padding: 100px 20px; background-color: var(--bg-gray); font-family: 'Inter', sans-serif; }
-        .form-container { max-width: 800px; margin: 0 auto; background: white; padding: 50px; border-radius: 30px; box-shadow: 0 20px 50px rgba(0,0,0,0.08); }
-        .form-header { text-align: center; margin-bottom: 45px; }
-        .form-header h2 { color: var(--adesco-blue); text-transform: uppercase; font-size: 2.2rem; font-weight: 900; margin-bottom: 10px; font-family: 'Montserrat'; }
-        .form-header p { color: #666; font-size: 1.1rem; }
-        .form-group { margin-bottom: 25px; }
-        .form-group label { display: block; font-weight: 700; margin-bottom: 10px; color: var(--text-main); font-size: 0.9rem; }
-        .form-group input, .form-group select, .form-group textarea { 
-            width: 100%; padding: 14px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 16px; transition: 0.3s; font-family: 'Inter';
-        }
-        .form-group input:focus { border-color: var(--adesco-blue); outline: none; background: #fff; box-shadow: 0 0 0 4px rgba(0,86,179,0.1); }
-        .checkbox-group { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; background: #f1f5f9; padding: 20px; border-radius: 12px; }
-        .checkbox-group label { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 0.9rem; cursor: pointer; }
-        .btn-submit { 
-            width: 100%; padding: 18px; background-color: var(--adesco-blue); color: white; border: none; 
-            border-radius: 12px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: 0.3s; margin-top: 30px; 
-            text-transform: uppercase; letter-spacing: 1px;
-        }
-        .btn-submit:hover { background-color: #003d7a; transform: scale(1.02); }
-
-        /* --- FOOTER --- */
-        footer { background: #0f172a; color: white; padding: 80px 20px 40px; text-align: center; }
-        .footer-logo { width: 100px; margin-bottom: 30px; }
-        .footer-info { margin-bottom: 40px; font-size: 1rem; color: #94a3b8; line-height: 2; }
-        .footer-info strong { color: white; }
-        .copyright { border-top: 1px solid #334155; padding-top: 30px; font-size: 0.9rem; color: #64748b; }
-
-        /* Animations */
-        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeInLeft { from { opacity: 0; transform: translateX(-30px); } to { opacity: 1; transform: translateX(0); } }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav-menu { display: none; }
-            .hero-content h1 { font-size: 2.5rem; }
-            .checkbox-group { grid-template-columns: 1fr; }
-            .sphinx-heritage { flex-direction: column-reverse; text-align: center; }
-            .authority-mention { text-align: center; border-left: none; border-top: 4px solid var(--accent); padding: 20px 0 0 0; }
-            .form-container { padding: 30px 20px; }
-        }
-    </style>
-</head>
-<body>
-
-    <div id="splash">
-        <img src="images/logo.png" alt="ADESCO" class="splash-logo">
+<header id="header">
+    <div class="nav-container">
+        <a href="#" class="logo-box">
+            <img src="images/logo.png" alt="Logo ADESCO" class="logo-img-small">
+            <div class="logo-text">ADE<span>SCO</span></div>
+        </a>
+        <ul class="nav-menu">
+            <li><a href="#accueil">Accueil</a></li>
+            <li><a href="#heritage">Héritage</a></li>
+            <li><a href="#comite">Dirigeants</a></li>
+            <li><a href="#actualites">Actualités</a></li>
+            <li><a href="#adhesion">Adhésion</a></li>
+        </ul>
     </div>
+</header>
 
-    <header id="header">
-        <div class="nav-container">
-            <a href="#" class="logo-box">
-                <img src="images/logo.png" alt="Logo ADESCO" class="logo-img-small">
-                <div class="logo-text">ADE<span>SCO</span></div>
-            </a>
-            <ul class="nav-menu">
-                <li><a href="#accueil">Accueil</a></li>
-                <li><a href="#heritage">Héritage</a></li>
-                <li><a href="#comite">Dirigeants</a></li>
-                <li><a href="#actualites">Actualités</a></li>
-                <li><a href="#adhesion">Adhésion</a></li>
-            </ul>
+<section id="accueil">
+    <div class="hero-content">
+        <div class="badge-heritage">HÉRITIER DE L'IDÉOLOGIE D'ÉTIENNE TSHISEKEDI</div>
+        <h1>Alliance des Démocrates Socialistes Congolais</h1>
+        
+        <div class="authority-mention">
+            <p class="authority-label">Sous la Haute Autorité Morale de</p>
+            <p class="authority-name">Tony Kanku Shiku</p>
         </div>
-    </header>
 
-    <section id="accueil">
-        <div class="hero-content">
-            <div class="badge-heritage">HÉRITIER DE L'IDÉOLOGIE D'ÉTIENNE TSHISEKEDI</div>
-            <h1>Alliance des Démocrates Socialistes Congolais</h1>
+        <div class="hero-btns">
+            <a href="#adhesion" class="btn btn-primary">Devenir Membre</a>
+            <a href="#actualites" class="btn btn-outline">Actualités</a>
+        </div>
+    </div>
+</section>
+
+<section id="heritage" class="sphinx-heritage">
+    <div class="sphinx-text">
+        <h2>L'Héritage du Sphinx</h2>
+        <p>L'ADESCO puise ses racines dans le combat historique d'<strong>Étienne Tshisekedi wa Mulumba</strong>. Nous portons l'idéologie du progrès social, de la démocratie et de l'État de droit en République Démocratique du Congo.</p>
+        <div class="sphinx-quote">
+            "Le peuple d'abord n'est pas qu'un slogan, c'est un engagement sacré que nous perpétuons sous le leadership transformationnel de l'ADESCO."
+        </div>
+        <p>Fidèles aux valeurs du socialisme africain, nous formons les cadres de demain pour un Congo souverain et prospère.</p>
+    </div>
+    <div class="sphinx-image" style="flex: 1; text-align: center;">
+        <img src="images/sphinx_heritage.png" alt="Etienne Tshisekedi" style="max-width: 100%; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.15);">
+    </div>
+</section>
+
+<section id="comite" class="leaders-section">
+    <h2 class="section-title">Notre Comité Interfédéral</h2>
+    <div class="leaders-grid">
+        <div class="leader-card">
+            <img src="images/tony_kanku.png" alt="Tony Kanku Shiku" class="leader-img">
+            <p class="leader-name">Tony Kanku Shiku</p>
+            <p class="leader-role">Autorité Morale</p>
+        </div>
+        <div class="leader-card">
+            <img src="images/presidente.png" alt="Présidente" class="leader-img">
+            <p class="leader-name">Mme la Présidente</p>
+            <p class="leader-role">Présidente Interfédérale</p>
+        </div>
+        <div class="leader-card">
+            <img src="images/secretaire.png" alt="Secrétaire" class="leader-img">
+            <p class="leader-name">Le Secrétaire</p>
+            <p class="leader-role">Secrétaire Exécutif</p>
+        </div>
+    </div>
+</section>
+
+<section id="activites" class="activites-wrapper">
+    <h2 class="section-title">Nos Activités en Images</h2>
+    <div class="carousel-track">
+        <div class="image-container"><img src="photo1.jpg" alt="Activité 1"></div>
+        <div class="image-container"><img src="photo2.jpg" alt="Activité 2"></div>
+        <div class="image-container"><img src="photo3.jpg" alt="Activité 3"></div>
+        <div class="image-container"><img src="photo4.jpg" alt="Activité 4"></div>
+        <div class="image-container"><img src="photo1.jpg" alt="Activité 1"></div>
+        <div class="image-container"><img src="photo2.jpg" alt="Activité 2"></div>
+        <div class="image-container"><img src="photo3.jpg" alt="Activité 3"></div>
+        <div class="image-container"><img src="photo4.jpg" alt="Activité 4"></div>
+    </div>
+</section>
+
+<section id="actualites" class="news-section">
+    <h2 class="section-title">Actualités du Parti</h2>
+    <div id="news-container" class="news-grid">
+        <div class="news-loader">Chargement des actualités en cours...</div>
+    </div>
+</section>
+
+<section id="adhesion" class="adhesion-section">
+    <div class="form-container">
+        <div class="form-header">
+            <h2>Fiche d'Adhésion ADESCO</h2>
+            <p>Rejoignez l'Alliance des Démocrates Socialistes Congolais pour le changement</p>
+        </div>
+
+        <form id="adhesionForm">
+            <div class="form-section-title"><i class="fas fa-user"></i> Identité du Demandeur</div>
+            <div class="form-group">
+                <label>Nom complet</label>
+                <input type="text" name="nom_complet" placeholder="Ex: Jean Mukendi" required>
+            </div>
             
-            <div class="authority-mention">
-                <p class="authority-label">Sous la Haute Autorité Morale de</p>
-                <p class="authority-name">Tony Kanku Shiku</p>
+            <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                <div class="form-group" style="flex: 1; min-width: 200px;">
+                    <label>Date de naissance</label>
+                    <input type="date" name="date_naissance" required>
+                </div>
+                <div class="form-group" style="flex: 1; min-width: 200px;">
+                    <label>Nationalité</label>
+                    <input type="text" name="nationalite" value="Congolaise" required>
+                </div>
             </div>
 
-            <div class="hero-btns">
-                <a href="#adhesion" class="btn btn-primary">Devenir Membre</a>
-                <a href="#actualites" class="btn btn-outline">Actualités</a>
-            </div>
-        </div>
-    </section>
-
-    <section id="heritage" class="sphinx-heritage">
-        <div class="sphinx-text">
-            <h2>L'Héritage du Sphinx</h2>
-            <p>L'ADESCO puise ses racines dans le combat historique d'<strong>Étienne Tshisekedi wa Mulumba</strong>. Nous portons l'idéologie du progrès social, de la démocratie et de l'État de droit en République Démocratique du Congo.</p>
-            <div class="sphinx-quote">
-                "Le peuple d'abord n'est pas qu'un slogan, c'est un engagement sacré que nous perpétuons sous le leadership transformationnel de l'ADESCO."
-            </div>
-            <p>Fidèles aux valeurs du socialisme africain, nous formons les cadres de demain pour un Congo souverain et prospère.</p>
-        </div>
-        <div class="sphinx-image" style="flex: 1; text-align: center;">
-            <img src="images/sphinx_heritage.png" alt="Etienne Tshisekedi" style="max-width: 100%; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.15);">
-        </div>
-    </section>
-
-    <section id="comite" class="leaders-section">
-        <h2 class="section-title">Notre Comité Interfédéral</h2>
-        <div class="leaders-grid">
-            <div class="leader-card">
-                <img src="images/tony_kanku.png" alt="Tony Kanku Shiku" class="leader-img">
-                <p class="leader-name">Tony Kanku Shiku</p>
-                <p class="leader-role">Autorité Morale</p>
-            </div>
-            <div class="leader-card">
-                <img src="images/presidente.png" alt="Présidente" class="leader-img">
-                <p class="leader-name">Mme Jolie YOMBO MUKENDI</p>
-                <p class="leader-role">PRÉSIDENTE NATIONALE</p>
-            </div>
-            <div class="leader-card">
-                <img src="images/secretaire.png" alt="Secrétaire" class="leader-img">
-                <p class="leader-name">Monsieur Dan MARSHALL MUBENGA</p>
-                <p class="leader-role">SECRÉTAIRE GÉNÉRAL</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="activites" class="activites-wrapper">
-        <h2 class="section-title">Nos Activités en Images</h2>
-        <div class="carousel-track">
-            <div class="image-container"><img src="photo1.jpg" alt="Activité 1"></div>
-            <div class="image-container"><img src="photo2.jpg" alt="Activité 2"></div>
-            <div class="image-container"><img src="photo3.jpg" alt="Activité 3"></div>
-            <div class="image-container"><img src="photo4.jpg" alt="Activité 4"></div>
-            <div class="image-container"><img src="photo1.jpg" alt="Activité 1"></div>
-            <div class="image-container"><img src="photo2.jpg" alt="Activité 2"></div>
-            <div class="image-container"><img src="photo3.jpg" alt="Activité 3"></div>
-            <div class="image-container"><img src="photo4.jpg" alt="Activité 4"></div>
-        </div>
-    </section>
-
-    <section id="actualites" class="news-section">
-        <h2 class="section-title">Actualités du Parti</h2>
-        <div id="news-container" class="news-grid">
-            <div class="news-loader">Chargement des actualités en cours...</div>
-        </div>
-    </section>
-
-    <section id="adhesion" class="adhesion-section">
-        <div class="form-container">
-            <div class="form-header">
-                <h2>Fiche d'Adhésion ADESCO</h2>
-                <p>Rejoignez l'Alliance des Démocrates Socialistes Congolais pour le changement</p>
+            <div class="form-group">
+                <label>Adresse complète</label>
+                <input type="text" name="adresse" placeholder="N°, Avenue, Quartier, Commune, Ville" required>
             </div>
 
-            <form id="adhesionForm">
-                <div class="form-group">
-                    <label>Nom complet</label>
-                    <input type="text" name="nom_complet" placeholder="Ex: Jean Mukendi" required>
+            <div class="form-group">
+                <label>Téléphone (WhatsApp)</label>
+                <input type="tel" name="telephone" placeholder="+243..." required>
+            </div>
+
+            <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                <div class="form-group" style="flex: 1; min-width: 200px;">
+                    <label>Profession</label>
+                    <input type="text" name="profession" required>
                 </div>
-                
-                <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-                    <div class="form-group" style="flex: 1; min-width: 200px;">
-                        <label>Date de naissance</label>
-                        <input type="date" name="date_naissance" required>
-                    </div>
-                    <div class="form-group" style="flex: 1; min-width: 200px;">
-                        <label>Nationalité</label>
-                        <input type="text" name="nationalite" value="Congolaise" required>
-                    </div>
+                <div class="form-group" style="flex: 1; min-width: 200px;">
+                    <label>État Civil</label>
+                    <select name="statut_marital">
+                        <option value="Célibataire">Célibataire</option>
+                        <option value="Marié(e)">Marié(e)</option>
+                        <option value="Veuf/Veuve">Veuf/Veuve</option>
+                    </select>
                 </div>
+            </div>
 
-                <div class="form-group">
-                    <label>Adresse complète</label>
-                    <input type="text" name="adresse" placeholder="N°, Avenue, Quartier, Commune, Ville" required>
+            <div class="form-section-title"><i class="fas fa-file-signature"></i> Informations sur l'adhésion</div>
+            
+            <div class="form-group">
+                <label>Motif d'adhésion au parti ADESCO (cocher la ou les cases correspondantes) :</label>
+                <div class="checkbox-grid">
+                    <label class="check-item"><input type="checkbox" name="motif_adhesion" value="Partage des valeurs"> Partage des valeurs et objectifs</label>
+                    <label class="check-item"><input type="checkbox" name="motif_adhesion" value="Vie politique"> Souhait de participer activement à la vie politique</label>
+                    <label class="check-item"><input type="checkbox" name="motif_adhesion" value="Projets spécifiques"> Contribuer à des projets spécifiques</label>
                 </div>
+                <input type="text" name="motif_autre" placeholder="Autres (préciser)" style="margin-top:10px;">
+            </div>
 
-                <div class="form-group">
-                    <label>Téléphone (WhatsApp)</label>
-                    <input type="tel" name="telephone" placeholder="+243..." required>
+            <div class="form-group">
+                <label>Appartenance à un autre parti politique :</label>
+                <select name="autre_parti">
+                    <option value="Non">Non</option>
+                    <option value="Oui">Oui</option>
+                </select>
+                <input type="text" name="autre_parti_nom" placeholder="Si oui, préciser lequel" style="margin-top:10px;">
+            </div>
+
+            <div class="form-section-title"><i class="fas fa-check-double"></i> Engagement et responsabilités</div>
+            
+            <div class="form-group">
+                <label>S'engager à respecter les statuts et règlements internes du parti :</label>
+                <select name="engagement_statuts" required>
+                    <option value="Oui">Oui</option>
+                    <option value="Non">Non</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Activités souhaitées :</label>
+                <div class="checkbox-grid">
+                    <label class="check-item"><input type="checkbox" name="activites_souhaitees" value="Campagnes"> Campagnes électorales</label>
+                    <label class="check-item"><input type="checkbox" name="activites_souhaitees" value="Parole publique"> Prises de parole publiques</label>
+                    <label class="check-item"><input type="checkbox" name="activites_souhaitees" value="Gestion événements"> Gestion des événements</label>
+                    <label class="check-item"><input type="checkbox" name="activites_souhaitees" value="Recrutement"> Recrutement et sensibilisation</label>
                 </div>
+                <input type="text" name="activites_autre" placeholder="Autres (préciser)" style="margin-top:10px;">
+            </div>
 
-                <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-                    <div class="form-group" style="flex: 1; min-width: 200px;">
-                        <label>Profession</label>
-                        <input type="text" name="profession" required>
-                    </div>
-                    <div class="form-group" style="flex: 1; min-width: 200px;">
-                        <label>Statut marital</label>
-                        <select name="statut_marital">
-                            <option value="Célibataire">Célibataire</option>
-                            <option value="Marié(e)">Marié(e)</option>
-                            <option value="Veuf/Veuve">Veuf/Veuve</option>
-                            <option value="Autre">Autre</option>
-                        </select>
-                    </div>
+            <div class="form-section-title"><i class="fas fa-users-rays"></i> Parrainage (si applicable)</div>
+            <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                <div class="form-group" style="flex: 1; min-width: 200px;">
+                    <label>Nom du parrain (membre du parti)</label>
+                    <input type="text" name="parrain_nom">
                 </div>
-
-                <div class="form-group">
-                    <label>Motivations (Pourquoi nous rejoindre ?)</label>
-                    <textarea name="motivations" rows="3" placeholder="Vos convictions politiques..."></textarea>
+                <div class="form-group" style="flex: 1; min-width: 200px;">
+                    <label>Numéro de membre du parrain</label>
+                    <input type="text" name="parrain_numero">
                 </div>
+            </div>
 
-                <div class="form-group">
-                    <label>Activités d'intérêt</label>
-                    <div class="checkbox-group">
-                        <label><input type="checkbox" name="activites" value="Campagnes"> Campagnes</label>
-                        <label><input type="checkbox" name="activites" value="Communication"> Communication</label>
-                        <label><input type="checkbox" name="activites" value="Événements"> Événements</label>
-                        <label><input type="checkbox" name="activites" value="Recrutement"> Recrutement</label>
-                    </div>
-                </div>
+            <div class="form-group" style="margin-top: 30px;">
+                <label class="check-item">
+                    <input type="checkbox" name="declaration_honneur" required> 
+                    Je déclare sur l'honneur que ces informations sont exactes et j'adhère aux statuts de l'ADESCO.
+                </label>
+            </div>
 
-                <div class="form-group" style="margin-top: 30px;">
-                    <label style="display: flex; align-items: flex-start; gap: 10px; font-weight: 500;">
-                        <input type="checkbox" name="declaration_honneur" style="width: auto; margin-top: 5px;" required> 
-                        Je déclare sur l'honneur que ces informations sont exactes et j'adhère aux statuts de l'ADESCO.
-                    </label>
-                </div>
+            <button type="submit" class="btn-submit" id="submitBtn">VALIDER MON ADHÉSION</button>
+        </form>
+    </div>
+</section>
 
-                <button type="submit" class="btn-submit" id="submitBtn">ENVOYER MON ADHÉSION</button>
-            </form>
-        </div>
-    </section>
+<footer>
+    <img src="images/logo.png" alt="Logo ADESCO" class="footer-logo">
+    <div class="footer-info">
+        <p><strong>Siège Social :</strong> Croisement Enseignement & Gambela N°128, Kasa-Vubu, Kinshasa</p>
+        <p><strong>Contact :</strong> +243 84 084 48 48 | <strong>Email :</strong> adescopartie@gmail.com</p>
+    </div>
+    <div class="copyright">
+        &copy; 2026 ADESCO - Tous droits réservés | Développé par <strong>OPTISITE DIGITAL</strong>
+    </div>
+</footer>
 
-    <footer>
-        <img src="images/logo.png" alt="Logo ADESCO" class="footer-logo">
-        <div class="footer-info">
-            <p><strong>Siège Social :</strong> Croisement Enseignement & Gambela N°128, Kasa-Vubu, Kinshasa</p>
-            <p><strong>Contact :</strong> +243 84 084 48 48 | <strong>Email :</strong> adescopartie@gmail.com</p>
-        </div>
-        <div class="copyright">
-            &copy; 2026 ADESCO - Tous droits réservés | Développé par <strong>OPTISITE DIGITAL</strong>
-        </div>
-    </footer>
+<script>
+    // 1. Splash Screen
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            document.getElementById('splash').classList.add('hide-splash');
+        }, 1800);
+    });
 
-    <script>
-        // 1. Gestion du Splash Screen
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                const splash = document.getElementById('splash');
-                splash.classList.add('hide-splash');
-            }, 1800);
-        });
+    // 2. Navigation Scroll Effect
+    window.addEventListener('scroll', () => {
+        const header = document.getElementById('header');
+        window.scrollY > 50 ? header.classList.add('scrolled') : header.classList.remove('scrolled');
+    });
 
-        // 2. Navigation Scroll Effect
-        window.addEventListener('scroll', () => {
-            const header = document.getElementById('header');
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
+    // 3. Script Chargement Actualités (URL Google Sheets / App Script)
+    // PLACE TON URL APPS SCRIPT CI-DESSOUS (PUBLIÉ AU WEB)
+    const NEWS_API_URL = "https://script.google.com/macros/s/AKfycbyYJSnfOw5FxCfA5IkGiJ7LBuqgPNDoMtBzhFsIzFa-80BZGfJjBVcpoDTjDDXHX8JV/exec";
 
-        // 3. Script Chargement Actualités (Google Sheets)
-        const NEWS_API_URL = "https://script.google.com/macros/s/AKfycby4PQQTjgjpdWqs8rj0QOH8dReADTlR-LnHLZROoNJkG2rKrHOaFBNJ7rg6uVwL4HQm8Q/exec";
+    async function loadNews() {
+        try {
+            const response = await fetch(NEWS_API_URL);
+            const data = await response.json();
+            const container = document.getElementById('news-container');
+            container.innerHTML = '';
 
-        async function loadNews() {
-            try {
-                const response = await fetch(NEWS_API_URL);
-                const data = await response.json();
-                const container = document.getElementById('news-container');
-                container.innerHTML = '';
-
-                data.forEach(item => {
-                    const card = `
-                        <div class="news-card">
-                            <img src="${item.Lien_Photo || 'https://via.placeholder.com/400x250'}" alt="${item.Titre_Actu}" class="news-image">
-                            <div class="news-content">
-                                <span class="news-date">${item.Date || 'Actualité'}</span>
-                                <h3 class="news-title">${item.Titre_Actu}</h3>
-                                <p class="news-description">${item.Description || ''}</p>
-                            </div>
+            data.forEach(item => {
+                const card = `
+                    <div class="news-card">
+                        <img src="${item.Lien_Photo || 'images/default_news.png'}" class="news-image">
+                        <div class="news-content">
+                            <span class="news-date">${item.Date || ''}</span>
+                            <h3 class="news-title">${item.Titre_Actu}</h3>
+                            <p class="news-description">${item.Description || ''}</p>
                         </div>
-                    `;
-                    container.innerHTML += card;
-                });
-            } catch (error) {
-                console.error("Erreur de chargement:", error);
-                document.getElementById('news-container').innerHTML = "<p style='grid-column:1/-1; text-align:center;'>Mise à jour des actualités en cours...</p>";
-            }
-        }
-
-        // 4. Script Envoi Formulaire Adhésion
-        const ADHESION_API_URL = "https://script.google.com/macros/s/AKfycby4PQQTjgjpdWqs8rj0QOH8dReADTlR-LnHLZROoNJkG2rKrHOaFBNJ7rg6uVwL4HQm8Q/exec";
-
-        document.getElementById('adhesionForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const btn = document.getElementById('submitBtn');
-            const originalText = btn.innerText;
-            btn.innerText = "ENVOI EN COURS...";
-            btn.disabled = true;
-
-            const formData = new FormData(this);
-            const data = {};
-            formData.forEach((value, key) => { data[key] = value });
-
-            // Collecte des activités cochées
-            const activites = [];
-            document.querySelectorAll('input[name="activites"]:checked').forEach(cb => activites.push(cb.value));
-            data.activites_interet = activites.join(', ');
-
-            fetch(ADHESION_API_URL, {
-                method: 'POST',
-                mode: 'no-cors',
-                body: JSON.stringify(data)
-            }).then(() => {
-                alert("Votre demande d'adhésion a été envoyée avec succès !");
-                this.reset();
-                btn.innerText = originalText;
-                btn.disabled = false;
-            }).catch(err => {
-                alert("Une erreur est survenue lors de l'envoi. Veuillez réessayer.");
-                btn.innerText = originalText;
-                btn.disabled = false;
+                    </div>
+                `;
+                container.innerHTML += card;
             });
+        } catch (error) {
+            console.error("News load error");
+            document.getElementById('news-container').innerHTML = "<p style='grid-column:1/-1; text-align:center;'>Suivez nos actualités sur nos réseaux sociaux.</p>";
+        }
+    }
+
+    // 4. Script Envoi Formulaire Adhésion vers Google Sheet
+    // PLACE TON URL APPS SCRIPT DE DÉPLOIEMENT CI-DESSOUS
+    const ADHESION_API_URL = "https://script.google.com/macros/s/AKfycbyeF2_FigCylqCoPbsin4VPPkAn6DHcz8w5ToKkj0M13Jf_lYLSuGDS8IP9SKFRenEe5Q/exec";
+
+    document.getElementById('adhesionForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const btn = document.getElementById('submitBtn');
+        btn.innerText = "ENREGISTREMENT...";
+        btn.disabled = true;
+
+        const formData = new FormData(this);
+        const data = {};
+        
+        // Collecte des données simples
+        formData.forEach((value, key) => {
+            if (key !== 'motif_adhesion' && key !== 'activites_souhaitees') {
+                data[key] = value;
+            }
         });
 
-        // Lancement au chargement
-        loadNews();
-    </script>
-</body>
-</html>
+        // Collecte spécifique des cases à cocher (Motifs)
+        const motifs = [];
+        document.querySelectorAll('input[name="motif_adhesion"]:checked').forEach(cb => motifs.push(cb.value));
+        data.motifs_selectionnes = motifs.join(', ');
+
+        // Collecte spécifique des cases à cocher (Activités)
+        const activites = [];
+        document.querySelectorAll('input[name="activites_souhaitees"]:checked').forEach(cb => activites.push(cb.value));
+        data.activites_selectionnees = activites.join(', ');
+
+        fetch(ADHESION_API_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            body: JSON.stringify(data)
+        }).then(() => {
+            alert("Votre fiche d'adhésion a été transmise au secrétariat de l'ADESCO avec succès !");
+            this.reset();
+            btn.innerText = "VALIDER MON ADHÉSION";
+            btn.disabled = false;
+        }).catch(err => {
+            alert("Une erreur de connexion est survenue.");
+            btn.disabled = false;
+        });
+    });
+
+    // Lancement Initial
+    loadNews();
+</script>
+```
+
+\</body\>
+\</html\>

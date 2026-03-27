@@ -249,6 +249,7 @@
                 <li><a href="#comite">Dirigeants</a></li>
                 <li><a href="#actualites">Actualités</a></li>
                 <li><a href="#adhesion">Adhésion</a></li>
+                
             </ul>
         </div>
     </header>
@@ -266,8 +267,70 @@
                 <a href="#actualites" class="btn btn-outline">Actualités</a>
             </div>
         </div>
+        
     </section>
+ <section id="Historique">
+<style>
+    /* STYLE IDENTITÉ ADESCO (COULEURS DU PDF) */
+    .adesco-identity-container {
+        padding: 50px 5%;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 30px;
+        margin: 40px auto;
+        max-width: 1100px;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    }
+    .identity-card {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 25px;
+    }
+    .box-info {
+        background: #f8fafc;
+        padding: 25px;
+        border-radius: 15px;
+        border-left: 6px solid #003399; /* Bleu Royal */
+        transition: 0.3s;
+    }
+    .box-info:hover { transform: translateY(-5px); }
+    .box-info h3 {
+        color: #003399;
+        font-family: 'Playfair Display', serif;
+        font-size: 1.3rem;
+        margin-bottom: 12px;
+        border-bottom: 2px solid #FFD700; /* Or */
+        display: inline-block;
+    }
+    .box-info p { font-size: 0.9rem; color: #334155; line-height: 1.6; margin-bottom: 8px; }
+    .box-info ul { list-style: none; padding: 0; }
+    .box-info li { font-size: 0.85rem; margin-bottom: 6px; padding-left: 15px; position: relative; }
+    .box-info li::before { content: "➤"; color: #d92323; position: absolute; left: 0; }
+    .highlight-pdf { color: #003399; font-weight: 700; }
+</style>
 
+<div class="adesco-identity-container">
+    <div class="identity-card">
+        <div class="box-info">
+            <h3>Historique</h3>
+            <p><strong>Création :</strong> <span class="highlight-pdf">30 juin 2023</span></p>
+            <p><strong>Fondateur :</strong> S.E. Tony Kanku Shiku.</p>
+            <p>Héritière des valeurs de l'UDPS et du combat d'Etienne Tshisekedi.</p>
+        </div>
+        <div class="box-info">
+            <h3>Siège Social</h3>
+            <p><strong>Adresse :</strong> Croisement des avenues <span class="highlight-pdf">Gambela et Enseignement</span>.</p>
+            <p>Commune de Kasa-Vubu, Kinshasa.</p>
+        </div>
+        <div class="box-info">
+            <h3>But & Objectifs</h3>
+            <p><strong>But :</strong> Instaurer une démocratie socialiste centrée sur le progrès social.</p>
+            <ul>
+                <li>Former des cadres via l'École du Parti.</li>
+                <li>Bâtir un Congo prospère et souverain.</li>
+            </ul>
+        </div>
+    </div>
+</div>
     <section id="heritage" class="sphinx-heritage">
         <div class="sphinx-text">
             <h2>L'Héritage du Sphinx</h2>
@@ -500,43 +563,60 @@
             }
         });
 
-        // 3. Script Chargement Actualités
-        const NEWS_API_URL = "https://script.google.com/macros/s/AKfycbyYJSnfOw5FxCfA5IkGiJ7LBuqgPNDoMtBzhFsIzFa-80BZGfJjBVcpoDTjDDXHX8JV/exec";
+      // 3. Script Chargement Actualités
+const NEWS_API_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTDFMpVR6xyqvk6JTYAbIuCEMSVQLceZUoztTvFEymZsQWxhh-GDsMd74BpdVdyvi2FGOSuZfnH1Pc7/pub?output=csv";
 
-        async function loadNews() {
-            try {
-                const response = await fetch(NEWS_API_URL);
-                const data = await response.json();
-                const container = document.getElementById('news-container');
-                if (!container) return;
-                container.innerHTML = '';
+async function loadNews() {
+    const container = document.getElementById('news-container');
+    if (!container) return;
 
-                if (!data || data.length === 0) {
-                    container.innerHTML = "<p class='news-loader'>Aucune actualité pour le moment.</p>";
-                    return;
-                }
+    try {
+        const response = await fetch(NEWS_API_URL);
+        const csvText = await response.text(); // On récupère du TEXTE (CSV)
+        
+        // On sépare le texte par lignes
+        const rows = csvText.split('\n');
+        
+        // On retire la première ligne (les titres)
+        const dataRows = rows.slice(1);
 
-                data.forEach(item => {
-                    const card = `
-                    <div class="news-card">
-                        <img src="${item.Lien_Photo || 'logo.png'}" class="news-image" alt="Actualité ADESCO">
-                        <div class="news-content">
-                            <span class="news-date">${item.Date || ''}</span>
-                            <h3 class="news-title">${item.Titre_Actu}</h3>
-                            <p class="news-description">${item.Description || ''}</p>
-                        </div>
-                    </div>
-                    `;
-                    container.innerHTML += card;
-                });
-            } catch (error) {
-                console.error("News load error", error);
-                const container = document.getElementById('news-container');
-                if (container) {
-                    container.innerHTML = "<p style='grid-column:1/-1; text-align:center; padding: 20px;'>Suivez nos actualités en direct sur nos réseaux sociaux.</p>";
-                }
-            }
+        container.innerHTML = '';
+
+        if (dataRows.length === 0 || dataRows[0].trim() === "") {
+            container.innerHTML = "<p class='news-loader'>Aucune actualité pour le moment.</p>";
+            return;
         }
+
+        dataRows.forEach(row => {
+            // On sépare chaque ligne par les virgules
+            const columns = row.split(','); 
+            
+            // On vérifie qu'on a au moins les colonnes nécessaires (Titre, Date, Desc)
+            if (columns.length >= 3) {
+                const titre = columns[0].trim();
+                const date = columns[1].trim();
+                const desc = columns[2].trim();
+                const photo = columns[3] ? columns[3].trim() : 'logo.png'; // Image par défaut
+
+                const card = `
+                <div class="news-card">
+                    <img src="${photo}" class="news-image" alt="Actualité ADESCO">
+                    <div class="news-content">
+                        <span class="news-date">${date}</span>
+                        <h3 class="news-title">${titre}</h3>
+                        <p class="news-description">${desc}</p>
+                    </div>
+                </div>
+                `;
+                container.innerHTML += card;
+            }
+        });
+
+    } catch (error) {
+        console.error("News load error", error);
+        container.innerHTML = "<p style='grid-column:1/-1; text-align:center; padding: 20px;'>Suivez nos actualités en direct sur nos réseaux sociaux.</p>";
+    }
+}
 
         // 4. Script Envoi Formulaire Adhésion
         const ADHESION_API_URL = "https://script.google.com/macros/s/AKfycbyeF2_FigCylqCoPbsin4VPPkAn6DHcz8w5ToKkj0M13Jf_lYLSuGDS8IP9SKFRenEe5Q/exec";

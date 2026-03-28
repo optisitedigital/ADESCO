@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADESCO - Historique</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* CSS SPÉCIFIQUE À L'ONGLET HISTORIQUE */
+        :root {
+            --primary-color: #000; /* Texte Noir demandé */
+            --accent-color: #0056b3; /* Bleu pour les icônes et titres */
+            --bg-card: #fff;
+            --shadow-card: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            color: var(--primary-color);
+            overflow-x: hidden;
+        }
+
+        /* Barre de Navigation (Rappel pour la cohérence) */
+        .navbar {
+            background: #fff;
+            height: 70px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .nav-container { width: 90%; max-width: 1200px; display: flex; justify-content: space-between; align-items: center; }
+        .nav-brand { font-weight: bold; color: var(--accent-color); }
+        .nav-links { display: flex; list-style: none; gap: 15px; }
+        .nav-links a { text-decoration: none; color: #000; font-weight: 500; font-size: 0.9rem;}
+        .nav-links a.active { color: var(--accent-color); border-bottom: 2px solid var(--accent-color); }
+
+        /* Conteneur Principal */
+        .main-container {
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .page-title {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .page-subtitle {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 40px;
+        }
+
+        /* --- CAROUSEL AUTOMATIQUE D'HISTORIQUE --- */
+        .history-carousel-container {
+            width: 100%;
+            max-width: 500px; /* Largeur max d'une box */
+            margin: 0 auto;
+            overflow: hidden; /* Cache les boxes qui dépassent */
+            position: relative;
+            border-radius: 15px;
+        }
+
+        .history-track {
+            display: flex;
+            transition: transform 0.8s ease-in-out; /* Animation douce de transition */
+        }
+
+        /* --- STYLE DES BOXES (CARDS) --- */
+        .history-box {
+            min-width: 100%; /* Chaque box occupe toute la largeur du conteneur */
+            background-color: var(--bg-card);
+            padding: 40px 30px;
+            box-shadow: var(--shadow-card);
+            scroll-snap-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            border-bottom: 4px solid var(--accent-color); /* Ligne de décoration */
+        }
+
+        /* Icônes dans les boxes */
+        .box-icon {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 25px;
+            background: #e6f0ff;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .history-box h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .history-box p {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #444;
+            margin: 0;
+        }
+
+        /* Indicateurs de position (Petits points en bas) */
+        .carousel-dots {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .dot {
+            height: 10px;
+            width: 10px;
+            margin: 0 5px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .dot.active {
+            background-color: var(--accent-color);
+        }
+
+        /* --- ADAPTATION MOBILE (ÉCRAN COURT) --- */
+        @media screen and (max-width: 600px) {
+            .main-container { padding: 20px 10px; }
+            .page-title { font-size: 1.5rem; }
+            
+            .history-carousel-container { max-width: 100%; } /* Utilise toute la largeur */
+            
+            .history-box { padding: 30px 20px; min-height: 350px; } /* Hauteur min pour uniformité */
+            .box-icon { font-size: 2.5rem; width: 70px; height: 70px; }
+            .history-box h3 { font-size: 1.2rem; }
+            .history-box p { font-size: 0.95rem; line-height: 1.6; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">ADESCO KC</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="historique.html" class="active">Historique</a></li>
+                <li><a href="actualites.html">Actualités</a></li>
+                <li><a href="adhesion.html">Adhésions</a></li>
+                <li><a href="apropos.html">À Propos</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <h1 class="page-title">Notre Histoire</h1>
+        <p class="page-subtitle">Découvrez les fondements de l'ADESCO.</p>
+
+        <div class="history-carousel-container">
+            <div class="history-track" id="historyTrack">
+                
+                <div class="history-box">
+                    <div class="box-icon"><i class="fas fa-calendar-alt"></i></div>
+                    <h3>Date de création</h3>
+                    <p>L'Alliance des Démocrates Socialistes Congolais (ADESCO) a été officiellement fondée le <strong>30 juin 2023</strong>.</p>
+                </div>
+
+                <div class="history-box">
+                    <div class="box-icon"><i class="fas fa-seedling"></i></div>
+                    <h3>Qui a créé ?</h3>
+                    <p>Le parti est né de la volonté de cadres et militants formés à l'école de l'UDPS, désireux de poursuivre le combat d'Étienne Tshisekedi wa Mulumba.</p>
+                </div>
+
+                <div class="history-box">
+                    <div class="box-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <h3>Adresse du siège</h3>
+                    <p>Le siège national est établi à Kinshasa, au croisement des avenues Gambela et de l'Enseignement, dans la commune de Kasa-Vubu.</p>
+                </div>
+
+                <div class="history-box">
+                    <div class="box-icon"><i class="fas fa-bullseye"></i></div>
+                    <h3>But du Parti</h3>
+                    <p>Le but est de conquérir et d'exercer le pouvoir d'État pour instaurer une démocratie socialiste, garantissant le progrès social et la dignité humaine.</p>
+                </div>
+
+                <div class="history-box">
+                    <div class="box-icon"><i class="fas fa-check-double"></i></div>
+                    <h3>Objectifs</h3>
+                    <p>Promouvoir l'État de droit, assurer la justice sociale, former une élite politique intègre et bâtir un Congo uni, fort et prospère.</p>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="carousel-dots">
+            <span class="dot active" onclick="currentSlide(0)"></span>
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+            <span class="dot" onclick="currentSlide(4)"></span>
+        </div>
+
+    </main>
+
+    <script>
+        /* MODIF CLIENT : Logique du Carousel Automatique */
+        const track = document.getElementById('historyTrack');
+        const dots = document.querySelectorAll('.dot');
+        const boxes = document.querySelectorAll('.history-box');
+        
+        let currentIndex = 0;
+        const intervalTime = 5000; // 5 secondes par box
+        let slideInterval;
+
+        // Fonction pour changer de slide
+        function changeSlide(index) {
+            // Met à jour l'index
+            currentIndex = index;
+            
+            // Si on dépasse la fin, on revient au début
+            if (currentIndex >= boxes.length) {
+                currentIndex = 0;
+            } else if (currentIndex < 0) {
+                currentIndex = boxes.length - 1;
+            }
+
+            // Calcule le déplacement (100% par box)
+            const offset = -currentIndex * 100;
+            track.style.transform = `translateX(${offset}%)`;
+
+            // Met à jour les points indicateurs
+            updateDots();
+        }
+
+        // Met à jour la classe active sur les dots
+        function updateDots() {
+            dots.forEach((dot, index) => {
+                if (index === currentIndex) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+
+        // Fonction pour le défilement automatique
+        function startAutoSlide() {
+            slideInterval = setInterval(() => {
+                changeSlide(currentIndex + 1);
+            }, intervalTime);
+        }
+
+        // Fonction pour aller à une slide spécifique (clic sur dot)
+        function currentSlide(index) {
+            clearInterval(slideInterval); // Arrête le défilement auto
+            changeSlide(index); // Change la slide
+            startAutoSlide(); // Reprend le défilement auto
+        }
+
+        // Arrêter le défilement si l'utilisateur interagit (touch)
+        track.addEventListener('touchstart', () => {
+            clearInterval(slideInterval);
+        });
+
+        track.addEventListener('touchend', () => {
+            startAutoSlide();
+        });
+
+        // Démarrage automatique
+        startAutoSlide();
+    </script>
+</body>
+</html>

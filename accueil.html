@@ -49,7 +49,7 @@
         .nav-brand {
             font-weight: 800;
             color: var(--primary);
-            font-size: 1rem;
+            font-size: 0.9rem;
         }
 
         .menu-toggle {
@@ -77,7 +77,7 @@
 
         /* --- HERO --- */
         .hero {
-            height: 60vh;
+            height: 50vh;
             background: #fff;
             display: flex;
             flex-direction: column;
@@ -87,30 +87,31 @@
             padding-top: 70px;
         }
 
-        .hero-logo { width: 180px; margin-bottom: 15px; }
-        .hero-title { font-size: 2rem; font-weight: 900; color: #000; }
+        .hero-logo { width: 150px; margin-bottom: 15px; }
+        .hero-title { font-size: 1.8rem; font-weight: 900; color: #000; }
 
         /* --- SECTIONS & CAROUSEL --- */
-        .section-block { padding: 50px 0; background: #fff; }
+        .section-block { padding: 40px 0; background: #fff; border-bottom: 1px solid #eee; }
         .title-decor {
             text-align: center;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             text-transform: uppercase;
             font-weight: 800;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             color: var(--dark);
+            padding: 0 10px;
         }
         .title-decor::after {
-            content: ''; display: block; width: 60px; height: 4px; background: var(--gold); margin: 10px auto;
+            content: ''; display: block; width: 50px; height: 4px; background: var(--gold); margin: 10px auto;
         }
 
-        .carousel-outer { overflow: hidden; width: 100%; cursor: grab; }
+        .carousel-outer { overflow: hidden; width: 100%; }
         .carousel-track {
             display: flex;
             gap: 20px;
             width: max-content;
-            padding: 20px;
-            animation: scroll 30s linear infinite;
+            padding: 10px 20px;
+            animation: scroll 25s linear infinite;
         }
 
         @keyframes scroll {
@@ -119,29 +120,33 @@
         }
 
         .member-card {
-            width: 280px;
+            width: 260px;
             background: #fff;
-            border-radius: 15px;
-            padding: 25px 15px;
+            border-radius: 12px;
+            padding: 20px 10px;
             text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            border: 1px solid #eee;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border: 1px solid #f0f0f0;
         }
 
-        .member-card img, .no-photo {
-            width: 130px; height: 130px; border-radius: 50%;
-            margin: 0 auto 15px; object-fit: cover;
+        .photo-container {
+            width: 120px; height: 120px;
+            margin: 0 auto 15px;
+            border-radius: 50%;
             border: 4px solid var(--primary);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f0f2f5;
         }
 
-        .no-photo {
-            background: #f0f2f5; display: flex; align-items: center; justify-content: center;
-            font-size: 3rem; color: #ccd0d5;
-        }
+        .photo-container img { width: 100%; height: 100%; object-fit: cover; }
+        .photo-container i { font-size: 3rem; color: #ccd0d5; }
 
-        .member-card h3 { font-size: 1rem; color: #000; margin-bottom: 5px; }
-        .role { font-size: 0.75rem; font-weight: 800; color: var(--primary); text-transform: uppercase; }
-        .charge { font-size: 0.7rem; color: #666; font-style: italic; display: block; margin-top: 3px; }
+        .member-card h3 { font-size: 0.95rem; color: #000; margin-bottom: 5px; min-height: 40px; display: flex; align-items: center; justify-content: center; }
+        .role { font-size: 0.75rem; font-weight: 800; color: var(--primary); text-transform: uppercase; display: block; }
+        .charge { font-size: 0.7rem; color: #666; font-style: italic; display: block; margin-top: 4px; }
 
         /* --- MOBILE --- */
         @media (max-width: 768px) {
@@ -152,7 +157,9 @@
                 transition: 0.4s; z-index: 999;
             }
             .nav-links.active { right: 0; }
-            .hero-title { font-size: 1.5rem; }
+            .nav-links li { margin: 15px 0; }
+            .nav-links a { font-size: 1.1rem; }
+            .hero-title { font-size: 1.4rem; }
         }
     </style>
 </head>
@@ -173,66 +180,74 @@
     </nav>
 
     <header class="hero">
-        <img src="logo.png" alt="Logo" class="hero-logo">
+        <img src="logo.png" alt="Logo" class="hero-logo" onerror="this.style.display='none'">
         <h1 class="hero-title">ADESCO KONGO CENTRAL</h1>
-        <p style="font-weight: 600; color: #555; padding: 0 20px;">ALLIANCE DES DÉMOCRATES SOCIALISTES CONGOLAIS</p>
+        <p style="font-weight: 600; color: #555; font-size: 0.8rem;">DÉMOCRATIE - SOCIALISME - PROGRÈS</p>
     </header>
 
     <main>
         <section class="section-block">
-            <h2 class="title-decor">La Direction Nationale</h2>
+            <h2 class="title-decor">La Direction Nationale du Parti politique ADESCO</h2>
             <div class="carousel-outer">
                 <div class="carousel-track">
                     <div class="member-card">
-                        <img src="tony_kanku.jpg" alt="Tony Kanku">
-                        <h3>S.E. Tony KANKU SHIKU</h3>
-                        <p class="role">Autorité Morale</p>
+                        <div class="photo-container"><img src="tony_kanku.jpg" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><i class="fas fa-user-tie" style="display:none;"></i></div>
+                        <h3>Son Excellence Tony KANKU SHIKU</h3>
+                        <p class="role">AUTORITÉ MORALE</p>
                     </div>
                     <div class="member-card">
-                        <img src="jolie_yombo.jpg" alt="Jolie Yombo">
+                        <div class="photo-container"><img src="jolie_yombo.jpg" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><i class="fas fa-user-tie" style="display:none;"></i></div>
                         <h3>Mme Jolie YOMBO MUKENDI</h3>
-                        <p class="role">Présidente Nationale</p>
+                        <p class="role">LA PRÉSIDENTE DU PARTI</p>
                     </div>
                     <div class="member-card">
-                        <img src="dan_marshall.jpg" alt="Dan Marshall">
-                        <h3>M. Dan MARSHALL MUBENGA</h3>
-                        <p class="role">Secrétaire Général</p>
+                        <div class="photo-container"><img src="dan_marshall.jpg" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><i class="fas fa-user-tie" style="display:none;"></i></div>
+                        <h3>Monsieur Dan MARSHALL MUBENGA</h3>
+                        <p class="role">SECRÉTAIRE GÉNÉRAL</p>
                     </div>
-                    <div class="member-card"><img src="tony_kanku.jpg"><h3>S.E. Tony KANKU</h3><p class="role">Autorité Morale</p></div>
-                    <div class="member-card"><img src="jolie_yombo.jpg"><h3>Mme Jolie YOMBO</h3><p class="role">Présidente Nationale</p></div>
+                    <div class="member-card">
+                        <div class="photo-container"><img src="tony_kanku.jpg" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><i class="fas fa-user-tie" style="display:none;"></i></div>
+                        <h3>S.E. Tony KANKU SHIKU</h3><p class="role">AUTORITÉ MORALE</p>
+                    </div>
+                    <div class="member-card">
+                        <div class="photo-container"><img src="jolie_yombo.jpg" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><i class="fas fa-user-tie" style="display:none;"></i></div>
+                        <h3>Mme Jolie YOMBO MUKENDI</h3><p class="role">LA PRÉSIDENTE</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="section-block" style="background: #fdfdfd; border-top: 1px solid #eee;">
-            <h2 class="title-decor">COMITE INTERFEDERAL KONGO CENTRAL</h2>
+        <section class="section-block" style="background: #fdfdfd;">
+            <h2 class="title-decor">LE COMITÉ INTERFÉDÉRAL DU KONGO CENTRAL</h2>
             <div class="carousel-outer">
-                <div class="carousel-track" style="animation-duration: 40s;">
+                <div class="carousel-track" style="animation-duration: 35s;">
                     <div class="member-card">
-                        <div class="no-photo"><i class="fas fa-user-tie"></i></div>
-                        <h3>M. MABIALA PHAMBU ADOLPHE</h3>
+                        <div class="photo-container"><img src="mabiala.jpg" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><i class="fas fa-user-tie" style="display:none;"></i></div>
+                        <h3>Monsieur MABIALA PHAMBU ADOLPHE</h3>
                         <p class="role">Président Interfédéral</p>
                     </div>
                     <div class="member-card">
-                        <div class="no-photo"><i class="fas fa-user-tie"></i></div>
-                        <h3>M. MIANTEZOLO MATONDO Rolly</h3>
+                        <div class="photo-container"><img src="miantezolo.jpg" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><i class="fas fa-user-tie" style="display:none;"></i></div>
+                        <h3>Monsieur MIANTEZOLO MATONDO Rolly</h3>
                         <p class="role">Président Interfédéral Adjoint</p>
                         <span class="charge">En charge des Cataractes</span>
                     </div>
                     <div class="member-card">
-                        <div class="no-photo"><i class="fas fa-user-tie"></i></div>
-                        <h3>Mme BINDA KI LEVO Joséphine</h3>
-                        <p class="role">Présidente Interfédérale Adjointe</p>
+                        <div class="photo-container"><img src="binda.jpg" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><i class="fas fa-user-tie" style="display:none;"></i></div>
+                        <h3>Madame BINDA KI LEVO BINDA Joséphine</h3>
+                        <p class="role">Présidente Interfédérale adjointe</p>
                         <span class="charge">En charge du Bas-fleuve</span>
                     </div>
                     <div class="member-card">
-                        <div class="no-photo"><i class="fas fa-user-tie"></i></div>
-                        <h3>Mme GHONDA PULULU Brunette</h3>
-                        <p class="role">Présidente Interfédérale Adjointe</p>
+                        <div class="photo-container"><img src="ghonda.jpg" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><i class="fas fa-user-tie" style="display:none;"></i></div>
+                        <h3>Madame GHONDA PULULU Brunette</h3>
+                        <p class="role">Présidente Interfédérale adjointe</p>
                         <span class="charge">En charge de la LUKAYA</span>
                     </div>
-                    <div class="member-card"><div class="no-photo"><i class="fas fa-user-tie"></i></div><h3>M. MABIALA PHAMBU</h3><p class="role">Président Interfédéral</p></div>
-                    <div class="member-card"><div class="no-photo"><i class="fas fa-user-tie"></i></div><h3>M. MIANTEZOLO Rolly</h3><p class="role">P.I. Adjoint</p></div>
+                    <div class="member-card">
+                        <div class="photo-container"><i class="fas fa-user-tie"></i></div>
+                        <h3>M. MABIALA PHAMBU ADOLPHE</h3><p class="role">Président Interfédéral</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -248,7 +263,7 @@
             toggle.querySelector('i').classList.toggle('fa-times');
         });
 
-        // Fermer le menu si on clique sur un lien
+        // Fermeture auto du menu
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 nav.classList.remove('active');

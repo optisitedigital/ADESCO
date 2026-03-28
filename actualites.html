@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADESCO - Actualités</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* STYLE SPÉCIFIQUE ACTUALITÉS PROFESSIONNEL */
+        :root {
+            --primary-black: #000000;
+            --adesco-blue: #0056b3;
+            --bg-light: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-light);
+            margin: 0;
+            color: var(--primary-black);
+        }
+
+        .main-content {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .section-header { margin-bottom: 30px; }
+        .section-header h1 { font-size: 2rem; text-transform: uppercase; }
+        .section-header .underline { 
+            width: 80px; height: 4px; background: var(--adesco-blue); margin: 10px auto; 
+        }
+
+        /* CONTENEUR DU CAROUSEL */
+        .news-carousel-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .news-container {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 20px;
+            padding: 20px 10px;
+            scrollbar-width: none; /* Firefox */
+            scroll-behavior: smooth;
+            width: 100%;
+        }
+
+        .news-container::-webkit-scrollbar { display: none; } /* Chrome/Safari */
+
+        /* STYLE DES CARTES D'ACTUALITÉS */
+        .news-card {
+            min-width: 320px; /* Taille fixe pour mobile */
+            max-width: 400px;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            scroll-snap-align: center;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+            transition: transform 0.3s ease;
+        }
+
+        .news-card:hover { transform: translateY(-5px); }
+
+        /* IMAGE ENTIÈRE ET GRANDE */
+        .news-image-box {
+            width: 100%;
+            height: 250px;
+            background: #eee;
+            overflow: hidden;
+        }
+
+        .news-image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Remplit bien l'espace */
+            display: block;
+        }
+
+        .news-body { padding: 20px; flex-grow: 1; }
+        
+        .news-date { 
+            font-size: 0.85rem; color: var(--adesco-blue); font-weight: bold; margin-bottom: 10px; display: block;
+        }
+
+        .news-title { 
+            font-size: 1.2rem; font-weight: 800; margin-bottom: 15px; 
+            text-decoration: underline; text-decoration-color: var(--adesco-blue);
+        }
+
+        .news-desc { 
+            font-size: 0.95rem; line-height: 1.6; color: #444; 
+            max-height: 150px; overflow-y: auto; /* Permet de lire les descriptions longues */
+        }
+
+        /* FLÈCHES DE NAVIGATION */
+        .nav-btn {
+            background: white; border: none; width: 45px; height: 45px;
+            border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            cursor: pointer; z-index: 10; position: absolute;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--adesco-blue); font-size: 1.2rem;
+        }
+
+        .prev-btn { left: -10px; }
+        .next-btn { right: -10px; }
+
+        /* LOADING SPINNER */
+        #loader { padding: 50px; font-weight: bold; color: var(--adesco-blue); }
+
+        /* MOBILE OPTIMIZATION */
+        @media screen and (max-width: 600px) {
+            .news-card { min-width: 85vw; } /* Quasi plein écran sur petit mobile */
+            .news-image-box { height: 200px; }
+            .nav-btn { display: none; } /* On swipe au doigt sur mobile */
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">ADESCO KC</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="historique.html">Historique</a></li>
+                <li><a href="actualites.html" class="active">Actualités</a></li>
+                <li><a href="adhesion.html">Adhésions</a></li>
+                <li><a href="apropos.html">À Propos</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="section-header">
+            <h1>Dernières Actualités</h1>
+            <div class="underline"></div>
+        </div>
+
+        <div id="loader"><i class="fas fa-spinner fa-spin"></i> Chargement des actualités...</div>
+
+        <div class="news-carousel-wrapper" id="carouselWrapper" style="display:none;">
+            <button class="nav-btn prev-btn" id="prevBtn"><i class="fas fa-chevron-left"></i></button>
+            
+            <div class="news-container" id="newsContainer">
+                </div>
+
+            <button class="nav-btn next-btn" id="nextBtn"><i class="fas fa-chevron-right"></i></button>
+        </div>
+    </main>
+
+    <script>
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyYJSnfOw5FxCfA5IkGiJ7LBuqgPNDoMtBzhFsIzFa-80BZGfJjBVcpoDTjDDXHX8JV/exec";
+
+        async function fetchNews() {
+            try {
+                const response = await fetch(SCRIPT_URL);
+                const data = await response.json();
+                
+                if (data.error) {
+                    document.getElementById('loader').innerText = "Erreur de chargement.";
+                    return;
+                }
+
+                const container = document.getElementById('newsContainer');
+                container.innerHTML = ""; // Vide le loader
+
+                data.forEach(item => {
+                    // Formatage de la date si nécessaire
+                    const dateObj = new Date(item.Date);
+                    const formattedDate = dateObj.toLocaleDateString('fr-FR', {
+                        day: 'numeric', month: 'long', year: 'numeric'
+                    });
+
+                    const card = `
+                        <div class="news-card">
+                            <div class="news-image-box">
+                                <img src="${item.Lien_Photo}" alt="Actualité ADESCO" onerror="this.src='https://via.placeholder.com/400x250?text=ADESCO+ACTU'">
+                            </div>
+                            <div class="news-body">
+                                <span class="news-date"><i class="far fa-calendar-alt"></i> ${formattedDate}</span>
+                                <h3 class="news-title">${item.Titre_Actu}</h3>
+                                <div class="news-desc">${item.Description}</div>
+                            </div>
+                        </div>
+                    `;
+                    container.innerHTML += card;
+                });
+
+                document.getElementById('loader').style.display = 'none';
+                document.getElementById('carouselWrapper').style.display = 'flex';
+
+            } catch (error) {
+                console.error("Erreur:", error);
+                document.getElementById('loader').innerText = "Impossible de charger les données.";
+            }
+        }
+
+        // Gestion des flèches
+        const container = document.getElementById('newsContainer');
+        document.getElementById('nextBtn').onclick = () => container.scrollLeft += 340;
+        document.getElementById('prevBtn').onclick = () => container.scrollLeft -= 340;
+
+        // Lancer la récupération au chargement
+        window.onload = fetchNews;
+    </script>
+</body>
+</html>

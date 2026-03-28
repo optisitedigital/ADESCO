@@ -169,6 +169,51 @@
             .form-container { padding: 25px 15px; }
             .section-title { font-size: 1.8rem; }
         }
+
+        /* ===== AJOUT RESPONSIVE MOBILE ===== */
+        @media (max-width: 768px) {
+            body { font-size: 15px; } /* Texte plus lisible */
+            
+            nav { padding: 0 15px; }
+            .logo-text { font-size: 1.2rem; }
+            .logo-box img { height: 45px; }
+
+            .hero { 
+                height: auto; 
+                min-height: 450px; 
+                padding: 100px 15px 60px; /* Évite que le texte soit sous le header */
+            }
+            
+            .hero-content h1 { font-size: 1.8rem; margin-bottom: 15px; }
+            .hero-content p { font-size: 1rem; margin-bottom: 25px; }
+            .btn-main { padding: 12px 25px; font-size: 0.9rem; }
+
+            section { padding: 50px 15px; }
+            .section-title { font-size: 1.6rem; margin-bottom: 30px; }
+
+            .history-grid { grid-template-columns: 1fr; gap: 20px; }
+            .history-item { padding: 20px; }
+
+            .news-container { grid-template-columns: 1fr; gap: 20px; }
+            .news-image { height: 180px; }
+
+            .form-container { width: 100%; padding: 20px 15px; border-radius: 15px; }
+            .form-group { margin-bottom: 15px; }
+            input, select, textarea { padding: 10px; font-size: 16px; } /* 16px empêche l'auto-zoom iOS */
+            
+            .adhesion-section { border-radius: 0; margin-bottom: 40px; }
+
+            .footer-grid { grid-template-columns: 1fr; gap: 30px; text-align: center; }
+            .footer-socials { justify-content: center; }
+            
+            img { max-width: 100%; height: auto; } /* Images ne dépassent jamais */
+        }
+
+        /* Correction spécifique pour les très petits écrans */
+        @media (max-width: 480px) {
+            .hero-content h1 { font-size: 1.5rem; }
+            .member-card { min-width: 100%; }
+        }
     </style>
 </head>
 <body>
@@ -489,7 +534,7 @@
 
             fetch(ADHESION_API_URL, {
                 method: 'POST',
-                mode: 'no-cors',
+                // mode: 'no-cors', // À commenter si vous avez besoin de lire la réponse JSON du serveur
                 body: JSON.stringify(data)
             }).then(() => {
                 alert("Votre fiche d'adhésion a été transmise avec succès !");
@@ -500,6 +545,13 @@
                 alert("Erreur d'envoi. Vérifiez votre connexion.");
                 btn.disabled = false;
             });
+        });
+
+        // ===== AJOUT RESPONSIVE MOBILE (SCRIPTS) =====
+        // Ajuste le carousel lors du redimensionnement de l'écran pour éviter les décalages
+        window.addEventListener('resize', () => {
+            track.style.transform = `translateX(0px)`;
+            index = 0;
         });
 
         // Init

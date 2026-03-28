@@ -104,6 +104,42 @@
     .btn:hover { transform: translateY(-5px); box-shadow: 0 12px 25px rgba(0,0,0,0.3); }
     .btn-primary:hover { background: #f0cc00; }
     .btn-outline:hover { background: white; color: var(--primary); }
+<style>
+    /* STYLE IDENTITÉ ADESCO (COULEURS DU PDF) */
+    .adesco-identity-container {
+        padding: 50px 5%;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 30px;
+        margin: 40px auto;
+        max-width: 1100px;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    }
+    .identity-card {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 25px;
+    }
+    .box-info {
+        background: #f8fafc;
+        padding: 25px;
+        border-radius: 15px;
+        border-left: 6px solid #003399; /* Bleu Royal */
+        transition: 0.3s;
+    }
+    .box-info:hover { transform: translateY(-5px); }
+    .box-info h3 {
+        color: #003399;
+        font-family: 'Playfair Display', serif;
+        font-size: 1.3rem;
+        margin-bottom: 12px;
+        border-bottom: 2px solid #FFD700; /* Or */
+        display: inline-block;
+    }
+    .box-info p { font-size: 0.9rem; color: #334155; line-height: 1.6; margin-bottom: 8px; }
+    .box-info ul { list-style: none; padding: 0; }
+    .box-info li { font-size: 0.85rem; margin-bottom: 6px; padding-left: 15px; position: relative; }
+    .box-info li::before { content: "➤"; color: #d92323; position: absolute; left: 0; }
+    .highlight-pdf { color: #003399; font-weight: 700; }        
 
     /* Section Héritage Sphinx */
     .sphinx-heritage { padding: 120px 5%; background: #fff; display: flex; align-items: center; gap: 60px; flex-wrap: wrap; max-width: 1250px; margin: auto; }
@@ -288,45 +324,6 @@
         </div>
         
     </section>
- <section id="Historique">
-<style>
-    /* STYLE IDENTITÉ ADESCO (COULEURS DU PDF) */
-    .adesco-identity-container {
-        padding: 50px 5%;
-        background: rgba(255, 255, 255, 0.95);
-        border-radius: 30px;
-        margin: 40px auto;
-        max-width: 1100px;
-        box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-    }
-    .identity-card {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 25px;
-    }
-    .box-info {
-        background: #f8fafc;
-        padding: 25px;
-        border-radius: 15px;
-        border-left: 6px solid #003399; /* Bleu Royal */
-        transition: 0.3s;
-    }
-    .box-info:hover { transform: translateY(-5px); }
-    .box-info h3 {
-        color: #003399;
-        font-family: 'Playfair Display', serif;
-        font-size: 1.3rem;
-        margin-bottom: 12px;
-        border-bottom: 2px solid #FFD700; /* Or */
-        display: inline-block;
-    }
-    .box-info p { font-size: 0.9rem; color: #334155; line-height: 1.6; margin-bottom: 8px; }
-    .box-info ul { list-style: none; padding: 0; }
-    .box-info li { font-size: 0.85rem; margin-bottom: 6px; padding-left: 15px; position: relative; }
-    .box-info li::before { content: "➤"; color: #d92323; position: absolute; left: 0; }
-    .highlight-pdf { color: #003399; font-weight: 700; }
-</style>
-
 <div class="adesco-identity-container">
     <div class="identity-card">
         <div class="box-info">

@@ -79,7 +79,7 @@
             width: 50px; height: 4px; background: var(--gold); margin: 0 auto 40px;
         }
 
-        /* --- GRILLE D'ACTUALITÉS --- */
+        /* --- GRILLE D'ACTUALITÉS MODIFIÉE --- */
         .news-container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -97,19 +97,25 @@
             display: flex;
             flex-direction: column;
             border: 1px solid rgba(0,0,0,0.05);
+            height: 100%; /* Important pour l'alignement */
         }
 
         .news-card:hover { transform: translateY(-8px); }
 
         .news-image-box {
             width: 100%;
-            height: 200px;
+            height: 220px;
             background: #eee;
         }
 
         .news-image-box img { width: 100%; height: 100%; object-fit: cover; }
 
-        .news-body { padding: 20px; }
+        .news-body { 
+            padding: 20px; 
+            flex-grow: 1; /* Permet au corps de prendre toute la place */
+            display: flex;
+            flex-direction: column;
+        }
 
         .news-date {
             font-size: 0.75rem;
@@ -125,21 +131,24 @@
             font-size: 1.15rem;
             margin: 0 0 12px 0;
             font-weight: 800;
-            line-height: 1.3;
+            line-height: 1.4;
+            color: var(--dark);
         }
 
         .news-desc {
-            font-size: 0.9rem;
-            color: #555;
-            line-height: 1.5;
-            margin-bottom: 15px;
+            font-size: 0.95rem;
+            color: #444;
+            line-height: 1.6;
+            margin: 0;
+            white-space: pre-wrap; /* RESPECTE LES RETOURS À LA LIGNE DU SHEET */
+            word-wrap: break-word; /* EMPÊCHE LE TEXTE DE DÉPASSER */
         }
 
         /* --- ETATS --- */
         #loader { padding: 50px; color: var(--primary); font-size: 2.5rem; }
         #empty-msg { display: none; padding: 50px; color: #888; font-style: italic; }
 
-        /* --- MOBILE --- */
+        /* --- MOBILE ADAPTATION --- */
         @media (max-width: 768px) {
             .menu-toggle { display: block; }
             .nav-links {
@@ -150,6 +159,8 @@
             .nav-links.active { right: 0; }
             .nav-links li { margin: 15px 0; }
             .news-container { grid-template-columns: 1fr; }
+            .main-content { padding-top: 100px; }
+            .news-image-box { height: 180px; }
         }
     </style>
 </head>
@@ -181,7 +192,6 @@
     </main>
 
     <script>
-        // NAVIGATION MOBILE
         const toggle = document.getElementById('mobile-toggle');
         const nav = document.getElementById('nav-list');
         
@@ -192,8 +202,25 @@
             icon.classList.toggle('fa-times');
         });
 
-        // RÉCUPÉRATION CSV (GOOGLE SHEETS)
         const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTDFMpVR6xyqvk6JTYAbIuCEMSVQLceZUoztTvFEymZsQWxhh-GDsMd74BpdVdyvi2FGOSuZfnH1Pc7/pub?output=csv";
+
+        // FONCTION DE PARSING EXPERTE (Gère virgules et guillemets)
+        function parseCSV(str) {
+            const arr = [];
+            let quote = false;
+            let col = "", row = [];
+            for (let c = 0; c < str.length; c++) {
+                let char = str[c], next = str[c+1];
+                if (char == '"' && quote && next == '"') { col += char; c++; continue; }
+                if (char == '"') { quote = !quote; continue; }
+                if (char == ',' && !quote) { row.push(col); col = ""; continue; }
+                if (char == '\r') continue;
+                if (char == '\n' && !quote) { row.push(col); arr.push(row); col = ""; row = []; continue; }
+                col += char;
+            }
+            row.push(col); arr.push(row);
+            return arr;
+        }
 
         async function fetchNews() {
             const container = document.getElementById('newsContainer');
@@ -203,9 +230,9 @@
             try {
                 const response = await fetch(CSV_URL);
                 const data = await response.text();
-                const rows = data.split('\n').slice(1); // On saute l'entête
+                const rows = parseCSV(data).slice(1); // On saute l'entête proprement
 
-                if (rows.length === 0 || (rows.length === 1 && rows[0].trim() === "")) {
+                if (rows.length === 0 || (rows.length === 1 && rows[0][0] === "")) {
                     loader.style.display = 'none';
                     emptyMsg.style.display = 'block';
                     return;
@@ -213,22 +240,29 @@
 
                 container.innerHTML = "";
 
-                rows.forEach(row => {
-                    // Regex pour bien séparer les virgules même s'il y en a dans le texte entre guillemets
-                    const cols = row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
+                rows.forEach(cols => {
                     if (cols.length < 4) return;
 
-                    const [titre, date, desc, photo] = cols.map(c => c.replace(/^"|"$/g, '').trim());
+                    // MAPPING :
+                    // cols[0] = Titre Sheet -> Affiché en Petit texte (news-desc)
+                    // cols[1] = Date Sheet -> Affiché en Date
+                    // cols[2] = Description Sheet -> Affiché en GROS TITRE (news-title)
+                    // cols[3] = Photo Sheet -> Image
+                    
+                    const titreSheet = cols[0].trim();
+                    const dateSheet = cols[1].trim();
+                    const descSheet = cols[2].trim();
+                    const photoSheet = cols[3].trim();
 
                     const card = `
                         <article class="news-card">
                             <div class="news-image-box">
-                                <img src="${photo}" alt="${titre}" onerror="this.src='https://via.placeholder.com/400x250?text=ADESCO+KC'">
+                                <img src="${photoSheet}" alt="ADESCO" onerror="this.src='https://via.placeholder.com/400x250?text=ADESCO+KC'">
                             </div>
                             <div class="news-body">
-                                <span class="news-date"><i class="far fa-calendar-alt"></i> ${date}</span>
-                                <h3 class="news-title">${titre}</h3>
-                                <p class="news-desc">${desc}</p>
+                                <span class="news-date"><i class="far fa-calendar-alt"></i> ${dateSheet}</span>
+                                <h3 class="news-title">${descSheet}</h3>
+                                <p class="news-desc">${titreSheet}</p>
                             </div>
                         </article>
                     `;
@@ -239,7 +273,7 @@
 
             } catch (error) {
                 console.error("Erreur:", error);
-                loader.innerHTML = "<p style='color:red;'>Impossible de charger les actualités.</p>";
+                loader.innerHTML = "<p style='color:red;'>Erreur de chargement.</p>";
             }
         }
 

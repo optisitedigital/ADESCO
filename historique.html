@@ -26,7 +26,7 @@
             overflow-x: hidden;
         }
 
-        /* Barre de Navigation (Rappel pour la cohérence) */
+        /* Barre de Navigation */
         .navbar {
             background: #fff;
             height: 70px;
@@ -35,14 +35,22 @@
             align-items: center;
             position: sticky;
             top: 0;
-            z-index: 1000;
+            z-index: 2000; /* MODIFICATION IA : Priorité pour le menu mobile */
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
         .nav-container { width: 90%; max-width: 1200px; display: flex; justify-content: space-between; align-items: center; }
-        .nav-brand { font-weight: bold; color: var(--accent-color); }
-        .nav-links { display: flex; list-style: none; gap: 15px; }
+        .nav-brand { font-weight: bold; color: var(--accent-color); z-index: 2001; }
+        
+        .nav-links { display: flex; list-style: none; gap: 15px; margin: 0; padding: 0; }
         .nav-links a { text-decoration: none; color: #000; font-weight: 500; font-size: 0.9rem;}
         .nav-links a.active { color: var(--accent-color); border-bottom: 2px solid var(--accent-color); }
+
+        /* MODIFICATION IA : Style du bouton mobile */
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            z-index: 2002;
+        }
 
         /* Conteneur Principal */
         .main-container {
@@ -142,14 +150,43 @@
             background-color: var(--accent-color);
         }
 
-        /* --- ADAPTATION MOBILE (ÉCRAN COURT) --- */
-        @media screen and (max-width: 600px) {
+        /* --- ADAPTATION MOBILE --- */
+        @media screen and (max-width: 768px) {
+            /* MODIFICATION IA : Menu Mobile sortant par la droite */
+            .menu-toggle {
+                display: block !important;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                background: white;
+                width: 75%;
+                height: 100vh;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+                box-shadow: -10px 0 20px rgba(0,0,0,0.2);
+                z-index: 1999;
+                gap: 30px;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links a {
+                font-size: 1.4rem;
+            }
+
             .main-container { padding: 20px 10px; }
             .page-title { font-size: 1.5rem; }
             
-            .history-carousel-container { max-width: 100%; } /* Utilise toute la largeur */
+            .history-carousel-container { max-width: 100%; } 
             
-            .history-box { padding: 30px 20px; min-height: 350px; } /* Hauteur min pour uniformité */
+            .history-box { padding: 30px 20px; min-height: 350px; } 
             .box-icon { font-size: 2.5rem; width: 70px; height: 70px; }
             .history-box h3 { font-size: 1.2rem; }
             .history-box p { font-size: 0.95rem; line-height: 1.6; }
@@ -161,7 +198,12 @@
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-brand">ADESCO KC</div>
-            <ul class="nav-links">
+            
+            <div class="menu-toggle" id="mobile-menu">
+                <i class="fas fa-bars" id="menu-icon" style="font-size: 1.8rem; color: var(--accent-color);"></i>
+            </div>
+
+            <ul class="nav-links" id="nav-list">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="historique.html" class="active">Historique</a></li>
                 <li><a href="actualites.html">Actualités</a></li>
@@ -222,70 +264,75 @@
     </main>
 
     <script>
-        /* MODIF CLIENT : Logique du Carousel Automatique */
+        /* MODIFICATION IA : Logique de navigation mobile */
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navList = document.getElementById('nav-list');
+        const menuIcon = document.getElementById('menu-icon');
+
+        mobileMenu.onclick = function(e) {
+            e.stopPropagation();
+            navList.classList.toggle('active');
+            menuIcon.className = navList.classList.contains('active') ? "fas fa-times" : "fas fa-bars";
+        };
+
+        // Fermeture automatique au clic sur un lien
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.onclick = () => {
+                navList.classList.remove('active');
+                menuIcon.className = "fas fa-bars";
+            };
+        });
+
+        // Fermeture au clic extérieur
+        document.onclick = function(e) {
+            if (!mobileMenu.contains(e.target) && !navList.contains(e.target)) {
+                navList.classList.remove('active');
+                menuIcon.className = "fas fa-bars";
+            }
+        };
+
+        /* LOGIQUE DU CAROUSEL (Conservée) */
         const track = document.getElementById('historyTrack');
         const dots = document.querySelectorAll('.dot');
         const boxes = document.querySelectorAll('.history-box');
         
         let currentIndex = 0;
-        const intervalTime = 5000; // 5 secondes par box
+        const intervalTime = 5000;
         let slideInterval;
 
-        // Fonction pour changer de slide
         function changeSlide(index) {
-            // Met à jour l'index
             currentIndex = index;
-            
-            // Si on dépasse la fin, on revient au début
             if (currentIndex >= boxes.length) {
                 currentIndex = 0;
             } else if (currentIndex < 0) {
                 currentIndex = boxes.length - 1;
             }
-
-            // Calcule le déplacement (100% par box)
             const offset = -currentIndex * 100;
             track.style.transform = `translateX(${offset}%)`;
-
-            // Met à jour les points indicateurs
             updateDots();
         }
 
-        // Met à jour la classe active sur les dots
         function updateDots() {
             dots.forEach((dot, index) => {
-                if (index === currentIndex) {
-                    dot.classList.add('active');
-                } else {
-                    dot.classList.remove('active');
-                }
+                dot.classList.toggle('active', index === currentIndex);
             });
         }
 
-        // Fonction pour le défilement automatique
         function startAutoSlide() {
             slideInterval = setInterval(() => {
                 changeSlide(currentIndex + 1);
             }, intervalTime);
         }
 
-        // Fonction pour aller à une slide spécifique (clic sur dot)
         function currentSlide(index) {
-            clearInterval(slideInterval); // Arrête le défilement auto
-            changeSlide(index); // Change la slide
-            startAutoSlide(); // Reprend le défilement auto
+            clearInterval(slideInterval);
+            changeSlide(index);
+            startAutoSlide();
         }
 
-        // Arrêter le défilement si l'utilisateur interagit (touch)
-        track.addEventListener('touchstart', () => {
-            clearInterval(slideInterval);
-        });
+        track.addEventListener('touchstart', () => clearInterval(slideInterval));
+        track.addEventListener('touchend', () => startAutoSlide());
 
-        track.addEventListener('touchend', () => {
-            startAutoSlide();
-        });
-
-        // Démarrage automatique
         startAutoSlide();
     </script>
 </body>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADESCO - Accueil Officiel</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #0056b3;
+            --dark: #1a1a1a;
+            --gold: #d4af37;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            overflow-x: hidden;
+            color: var(--dark);
+        }
+
+        /* --- NAVIGATION --- */
+        .navbar {
+            background: #ffffff;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            height: 70px;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .nav-brand {
+            font-weight: 800;
+            color: var(--primary);
+            font-size: 1rem;
+        }
+
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+        }
+
+        .nav-links a.active { color: var(--primary); border-bottom: 2px solid var(--primary); }
+
+        /* --- HERO --- */
+        .hero {
+            height: 60vh;
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: 70px;
+        }
+
+        .hero-logo { width: 180px; margin-bottom: 15px; }
+        .hero-title { font-size: 2rem; font-weight: 900; color: #000; }
+
+        /* --- SECTIONS & CAROUSEL --- */
+        .section-block { padding: 50px 0; background: #fff; }
+        .title-decor {
+            text-align: center;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            font-weight: 800;
+            margin-bottom: 40px;
+            color: var(--dark);
+        }
+        .title-decor::after {
+            content: ''; display: block; width: 60px; height: 4px; background: var(--gold); margin: 10px auto;
+        }
+
+        .carousel-outer { overflow: hidden; width: 100%; cursor: grab; }
+        .carousel-track {
+            display: flex;
+            gap: 20px;
+            width: max-content;
+            padding: 20px;
+            animation: scroll 30s linear infinite;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .member-card {
+            width: 280px;
+            background: #fff;
+            border-radius: 15px;
+            padding: 25px 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border: 1px solid #eee;
+        }
+
+        .member-card img, .no-photo {
+            width: 130px; height: 130px; border-radius: 50%;
+            margin: 0 auto 15px; object-fit: cover;
+            border: 4px solid var(--primary);
+        }
+
+        .no-photo {
+            background: #f0f2f5; display: flex; align-items: center; justify-content: center;
+            font-size: 3rem; color: #ccd0d5;
+        }
+
+        .member-card h3 { font-size: 1rem; color: #000; margin-bottom: 5px; }
+        .role { font-size: 0.75rem; font-weight: 800; color: var(--primary); text-transform: uppercase; }
+        .charge { font-size: 0.7rem; color: #666; font-style: italic; display: block; margin-top: 3px; }
+
+        /* --- MOBILE --- */
+        @media (max-width: 768px) {
+            .menu-toggle { display: block; }
+            .nav-links {
+                position: fixed; right: -100%; top: 70px; width: 100%; height: 100vh;
+                background: #fff; flex-direction: column; align-items: center; padding-top: 50px;
+                transition: 0.4s; z-index: 999;
+            }
+            .nav-links.active { right: 0; }
+            .hero-title { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">ADESCO KONGO CENTRAL</div>
+            <div class="menu-toggle" id="mobile-toggle"><i class="fas fa-bars"></i></div>
+            <ul class="nav-links" id="nav-list">
+                <li><a href="accueil.html" class="active">Accueil</a></li>
+                <li><a href="historique.html">Historique</a></li>
+                <li><a href="actualites.html">Actualités</a></li>
+                <li><a href="adhesion.html">Adhésions</a></li>
+                <li><a href="apropos.html">À Propos</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <img src="logo.png" alt="Logo" class="hero-logo">
+        <h1 class="hero-title">ADESCO KONGO CENTRAL</h1>
+        <p style="font-weight: 600; color: #555; padding: 0 20px;">ALLIANCE DES DÉMOCRATES SOCIALISTES CONGOLAIS</p>
+    </header>
+
+    <main>
+        <section class="section-block">
+            <h2 class="title-decor">La Direction Nationale</h2>
+            <div class="carousel-outer">
+                <div class="carousel-track">
+                    <div class="member-card">
+                        <img src="tony_kanku.jpg" alt="Tony Kanku">
+                        <h3>S.E. Tony KANKU SHIKU</h3>
+                        <p class="role">Autorité Morale</p>
+                    </div>
+                    <div class="member-card">
+                        <img src="jolie_yombo.jpg" alt="Jolie Yombo">
+                        <h3>Mme Jolie YOMBO MUKENDI</h3>
+                        <p class="role">Présidente Nationale</p>
+                    </div>
+                    <div class="member-card">
+                        <img src="dan_marshall.jpg" alt="Dan Marshall">
+                        <h3>M. Dan MARSHALL MUBENGA</h3>
+                        <p class="role">Secrétaire Général</p>
+                    </div>
+                    <div class="member-card"><img src="tony_kanku.jpg"><h3>S.E. Tony KANKU</h3><p class="role">Autorité Morale</p></div>
+                    <div class="member-card"><img src="jolie_yombo.jpg"><h3>Mme Jolie YOMBO</h3><p class="role">Présidente Nationale</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-block" style="background: #fdfdfd; border-top: 1px solid #eee;">
+            <h2 class="title-decor">COMITE INTERFEDERAL KONGO CENTRAL</h2>
+            <div class="carousel-outer">
+                <div class="carousel-track" style="animation-duration: 40s;">
+                    <div class="member-card">
+                        <div class="no-photo"><i class="fas fa-user-tie"></i></div>
+                        <h3>M. MABIALA PHAMBU ADOLPHE</h3>
+                        <p class="role">Président Interfédéral</p>
+                    </div>
+                    <div class="member-card">
+                        <div class="no-photo"><i class="fas fa-user-tie"></i></div>
+                        <h3>M. MIANTEZOLO MATONDO Rolly</h3>
+                        <p class="role">Président Interfédéral Adjoint</p>
+                        <span class="charge">En charge des Cataractes</span>
+                    </div>
+                    <div class="member-card">
+                        <div class="no-photo"><i class="fas fa-user-tie"></i></div>
+                        <h3>Mme BINDA KI LEVO Joséphine</h3>
+                        <p class="role">Présidente Interfédérale Adjointe</p>
+                        <span class="charge">En charge du Bas-fleuve</span>
+                    </div>
+                    <div class="member-card">
+                        <div class="no-photo"><i class="fas fa-user-tie"></i></div>
+                        <h3>Mme GHONDA PULULU Brunette</h3>
+                        <p class="role">Présidente Interfédérale Adjointe</p>
+                        <span class="charge">En charge de la LUKAYA</span>
+                    </div>
+                    <div class="member-card"><div class="no-photo"><i class="fas fa-user-tie"></i></div><h3>M. MABIALA PHAMBU</h3><p class="role">Président Interfédéral</p></div>
+                    <div class="member-card"><div class="no-photo"><i class="fas fa-user-tie"></i></div><h3>M. MIANTEZOLO Rolly</h3><p class="role">P.I. Adjoint</p></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const toggle = document.getElementById('mobile-toggle');
+        const nav = document.getElementById('nav-list');
+        
+        toggle.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            toggle.querySelector('i').classList.toggle('fa-bars');
+            toggle.querySelector('i').classList.toggle('fa-times');
+        });
+
+        // Fermer le menu si on clique sur un lien
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('active');
+                toggle.querySelector('i').className = "fas fa-bars";
+            });
+        });
+    </script>
+</body>
+</html>

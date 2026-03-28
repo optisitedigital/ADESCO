@@ -3,559 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ADESCO | Site Officiel - Alliance des Démocrates Socialistes Congolais</title>
-    <meta name="description" content="Site officiel de l'ADESCO (Alliance des Démocrates Socialistes Congolais). Rejoignez-nous pour bâtir un Congo prospère.">
-    
+    <title>ADESCO - Accueil</title>
     <link rel="icon" type="image/png" href="logo.png">
-    
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <style>
-        :root {
-            --primary: #003399; /* Bleu drapeau RDC */
-            --accent: #FFD700;  /* Jaune or */
-            --red: #d92323;     /* Rouge passion */
-            --dark: #0a192f;
-            --light: #f8fafc;
-            --white: #ffffff;
-            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body { font-family: 'Montserrat', sans-serif; background: var(--light); color: var(--dark); line-height: 1.6; overflow-x: hidden; }
-
-        /* --- HEADER & NAV --- */
-        header {
-            position: fixed; width: 100%; top: 0; z-index: 1000;
-            background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px);
-            box-shadow: 0 2px 20px rgba(0,0,0,0.1); height: 80px;
-        }
-        nav {
-            max-width: 1200px; margin: 0 auto; height: 100%;
-            display: flex; justify-content: space-between; align-items: center; padding: 0 20px;
-        }
-        .logo-box { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-        .logo-box img { height: 55px; width: auto; }
-        .logo-text { font-weight: 800; font-size: 1.4rem; color: var(--primary); letter-spacing: -1px; }
-
-        .nav-links { display: flex; gap: 25px; list-style: none; }
-        .nav-links a { 
-            text-decoration: none; color: var(--dark); font-weight: 600; font-size: 0.9rem;
-            text-transform: uppercase; transition: var(--transition); position: relative;
-        }
-        .nav-links a::after {
-            content: ''; position: absolute; width: 0; height: 2px; bottom: -5px; left: 0;
-            background: var(--red); transition: var(--transition);
-        }
-        .nav-links a:hover { color: var(--primary); }
-        .nav-links a:hover::after { width: 100%; }
-
-        .hamburger { display: none; cursor: pointer; font-size: 1.5rem; color: var(--primary); }
-
-        /* --- HERO SECTION --- */
-        .hero {
-            height: 80vh; min-height: 500px; margin-top: 80px;
-            background: linear-gradient(rgba(0, 51, 153, 0.8), rgba(0, 0, 0, 0.6)), url('banniere_accueil.png');
-            background-size: cover; background-position: center;
-            display: flex; align-items: center; justify-content: center; text-align: center; color: var(--white);
-            padding: 0 20px;
-        }
-        .hero-content { max-width: 900px; animation: fadeInUp 1s ease-out; }
-        .hero-content h1 { 
-            font-family: 'Playfair Display', serif; font-size: clamp(2rem, 6vw, 4rem); 
-            line-height: 1.1; margin-bottom: 20px; text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
-        }
-        .hero-content p { font-size: clamp(1rem, 2vw, 1.3rem); margin-bottom: 30px; font-weight: 400; opacity: 0.9; }
-        .btn-main {
-            padding: 15px 35px; background: var(--accent); color: var(--dark);
-            text-decoration: none; font-weight: 800; border-radius: 50px;
-            display: inline-block; transition: var(--transition); border: 2px solid var(--accent);
-        }
-        .btn-main:hover { background: transparent; color: var(--white); transform: translateY(-3px); }
-
-        /* --- COMITÉ CAROUSEL --- */
-        section { padding: 80px 20px; max-width: 1200px; margin: 0 auto; }
-        .section-title { 
-            text-align: center; margin-bottom: 50px; font-family: 'Playfair Display'; 
-            font-size: 2.5rem; color: var(--primary); position: relative;
-        }
-        .section-title::after {
-            content: ''; display: block; width: 70px; height: 4px; background: var(--red); margin: 15px auto;
-        }
-
-        .carousel-wrapper { overflow: hidden; position: relative; padding: 20px 0; }
-        .carousel-track { display: flex; transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1); gap: 20px; }
-        .member-card {
-            min-width: calc(33.333% - 14px); background: var(--white); border-radius: 20px;
-            padding: 30px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            border-bottom: 5px solid var(--primary); transition: var(--transition);
-        }
-        .member-card:hover { transform: translateY(-10px); }
-        .member-img { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; margin-bottom: 20px; border: 4px solid var(--accent); }
-        .member-card h3 { color: var(--primary); margin-bottom: 5px; font-size: 1.2rem; }
-        .member-card span { color: var(--red); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; }
-
-        /* --- HISTORIQUE --- */
-        .history-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .history-item { background: var(--white); padding: 30px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.03); }
-        .history-item i { font-size: 2rem; color: var(--accent); margin-bottom: 15px; }
-        .history-item h4 { font-size: 1.2rem; margin-bottom: 10px; color: var(--primary); }
-
-        /* --- ACTUALITÉS --- */
-        .news-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
-        .news-card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
-        .news-image { width: 100%; height: 200px; object-fit: cover; }
-        .news-content { padding: 20px; }
-        .news-date { color: var(--red); font-weight: 800; font-size: 0.75rem; }
-        .news-title { margin: 10px 0; color: var(--primary); font-size: 1.2rem; }
-        .news-description { font-size: 0.9rem; color: #555; }
-
-        /* --- FORMULAIRE ADHESION --- */
-        .adhesion-section { background: #f0f4f8; border-radius: 30px; margin-bottom: 80px; }
-        .form-container { max-width: 800px; margin: 0 auto; background: var(--white); padding: 40px; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
-        .form-header { text-align: center; margin-bottom: 40px; }
-        .form-section-title { background: var(--primary); color: white; padding: 10px 20px; border-radius: 8px; margin: 25px 0 15px; font-weight: 700; font-size: 0.9rem; }
-        
-        .form-group { margin-bottom: 20px; }
-        label { display: block; margin-bottom: 8px; font-weight: 700; font-size: 0.85rem; }
-        input, select, textarea { width: 100%; padding: 12px 15px; border: 2px solid #eee; border-radius: 10px; font-family: inherit; transition: var(--transition); }
-        input:focus { border-color: var(--primary); outline: none; }
-        
-        .checkbox-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 10px; }
-        .check-item { display: flex; align-items: center; gap: 10px; font-weight: 500; font-size: 0.85rem; cursor: pointer; }
-        .check-item input { width: auto; }
-
-        .btn-submit { 
-            width: 100%; padding: 18px; background: var(--primary); color: white; 
-            border: none; border-radius: 10px; font-weight: 800; font-size: 1rem;
-            cursor: pointer; transition: var(--transition); margin-top: 20px;
-        }
-        .btn-submit:hover { background: var(--dark); transform: scale(1.02); }
-        .btn-submit:disabled { background: #ccc; cursor: not-allowed; }
-
-        /* --- FOOTER --- */
-        footer { background: #050c1a; color: white; padding: 60px 20px 20px; }
-        .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 40px; }
-        .footer-logo { height: 70px; margin-bottom: 20px; }
-        .footer-info p { margin-bottom: 10px; opacity: 0.8; font-size: 0.9rem; }
-        .footer-socials { display: flex; gap: 15px; margin-top: 20px; }
-        .footer-socials a { color: white; font-size: 1.5rem; transition: var(--transition); }
-        .footer-socials a:hover { color: var(--accent); }
-        .copyright { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; text-align: center; font-size: 0.8rem; opacity: 0.6; }
-
-        /* --- ANIMATIONS --- */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* --- MOBILE RESPONSIVE --- */
-        @media (max-width: 992px) {
-            .member-card { min-width: calc(50% - 10px); }
-        }
-
-        @media (max-width: 768px) {
-            .nav-links {
-                position: fixed; top: 80px; left: -100%; width: 100%; height: calc(100vh - 80px);
-                background: var(--white); flex-direction: column; align-items: center; 
-                padding: 50px 0; transition: 0.5s; box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            }
-            .nav-links.active { left: 0; }
-            .hamburger { display: block; }
-            .member-card { min-width: 85%; margin: 0 auto; }
-            .hero { height: 60vh; }
-            .form-container { padding: 25px 15px; }
-            .section-title { font-size: 1.8rem; }
-        }
-
-        /* ===== AJOUT RESPONSIVE MOBILE ===== */
-        @media (max-width: 768px) {
-            body { font-size: 15px; } /* Texte plus lisible */
-            
-            nav { padding: 0 15px; }
-            .logo-text { font-size: 1.2rem; }
-            .logo-box img { height: 45px; }
-
-            .hero { 
-                height: auto; 
-                min-height: 450px; 
-                padding: 100px 15px 60px; /* Évite que le texte soit sous le header */
-            }
-            
-            .hero-content h1 { font-size: 1.8rem; margin-bottom: 15px; }
-            .hero-content p { font-size: 1rem; margin-bottom: 25px; }
-            .btn-main { padding: 12px 25px; font-size: 0.9rem; }
-
-            section { padding: 50px 15px; }
-            .section-title { font-size: 1.6rem; margin-bottom: 30px; }
-
-            .history-grid { grid-template-columns: 1fr; gap: 20px; }
-            .history-item { padding: 20px; }
-
-            .news-container { grid-template-columns: 1fr; gap: 20px; }
-            .news-image { height: 180px; }
-
-            .form-container { width: 100%; padding: 20px 15px; border-radius: 15px; }
-            .form-group { margin-bottom: 15px; }
-            input, select, textarea { padding: 10px; font-size: 16px; } /* 16px empêche l'auto-zoom iOS */
-            
-            .adhesion-section { border-radius: 0; margin-bottom: 40px; }
-
-            .footer-grid { grid-template-columns: 1fr; gap: 30px; text-align: center; }
-            .footer-socials { justify-content: center; }
-            
-            img { max-width: 100%; height: auto; } /* Images ne dépassent jamais */
-        }
-
-        /* Correction spécifique pour les très petits écrans */
-        @media (max-width: 480px) {
-            .hero-content h1 { font-size: 1.5rem; }
-            .member-card { min-width: 100%; }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
-    <header>
-        <nav>
-            <a href="#" class="logo-box">
-                <img src="logo.png" alt="Logo ADESCO">
-                <span class="logo-text">ADESCO</span>
-            </a>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#accueil">Accueil</a></li>
-                <li><a href="#comite">Le Comité</a></li>
-                <li><a href="#historique">Historique</a></li>
-                <li><a href="#actualites">Actualités</a></li>
-                <li><a href="#adhesion">Adhésion</a></li>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">ADESCO KC</div>
+            <button class="menu-toggle" id="mobile-menu" aria-label="Ouvrir le menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Accueil</a></li>
+                <li><a href="historique.html">Historique</a></li>
+                <li><a href="actualites.html">Actualités</a></li>
+                <li><a href="adhesion.html">Adhésions</a></li>
+                <li><a href="apropos.html">À Propos</a></li>
             </ul>
-            <div class="hamburger" onclick="toggleMenu()">
-                <i class="fas fa-bars"></i>
-            </div>
-        </nav>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <img src="logo.png" alt="Grand Logo ADESCO" class="hero-logo">
+            <h1 class="hero-title">ADESCO KONGO CENTRAL</h1>
+            <p class="hero-subtitle">ALLIANCE DES DÉMOCRATES SOCIALISTES CONGOLAIS</p>
+        </div>
     </header>
 
-    <main id="accueil">
-        <section class="hero">
-            <div class="hero-content">
-                <p>Alliance des Démocrates Socialistes Congolais</p>
-                <h1>Former pour l'avenir du Parti et du Congo</h1>
-                <a href="#adhesion" class="btn-main">Devenir Membre <i class="fas fa-arrow-right"></i></a>
-            </div>
-        </section>
-
-        <section id="comite">
-            <h2 class="section-title">Comité Interfédéral</h2>
-            <div class="carousel-wrapper">
-                <div class="carousel-track" id="comiteTrack">
+    <div class="container">
+        
+        <section class="section-block">
+            <h2 class="title-decor">La Direction Nationale</h2>
+            <div class="carousel-container">
+                <div class="carousel-track">
                     <div class="member-card">
-                        <img src="tony.png" alt="Tony Kanku Shiku" class="member-img">
-                        <h3>S.E. Tony Kanku Shiku</h3>
-                        <span>AUTORITÉ MORALE</span>
+                        <img src="tony_kanku.jpg" alt="Tony KANKU SHIKU">
+                        <h3>S.E. Tony KANKU SHIKU</h3>
+                        <p class="role">AUTORITÉ MORALE</p>
                     </div>
                     <div class="member-card">
-                        <img src="presidente.png" alt="Présidente" class="member-img">
+                        <img src="jolie_yombo.jpg" alt="Jolie YOMBO MUKENDI">
                         <h3>Mme Jolie YOMBO MUKENDI</h3>
-                        <span>PRÉSIDENTE NATIONALE</span>
+                        <p class="role">PRÉSIDENTE DU PARTI</p>
                     </div>
                     <div class="member-card">
-                        <img src="secretaire.png" alt="Secrétaire Général" class="member-img">
-                        <h3>Monsieur Dan MARSHALL MUBENGA</h3>
-                        <span>SECRÉTAIRE GÉNÉRAL</span>
+                        <img src="dan_marshall.jpg" alt="Dan MARSHALL MUBENGA">
+                        <h3>M. Dan MARSHALL MUBENGA</h3>
+                        <p class="role">SECRÉTAIRE GÉNÉRAL</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="historique" style="background: #fff; border-radius: 40px; margin-bottom: 40px;">
-            <h2 class="section-title">Notre Identité</h2>
-            <div class="history-grid">
-                <div class="history-item">
-                    <i class="fas fa-calendar-check"></i>
-                    <h4>Création</h4>
-                    <p>Fondée le <strong>30 juin 2023</strong>, date symbolique de l'indépendance de la RDC.</p>
-                </div>
-                <div class="history-item">
-                    <i class="fas fa-bullseye"></i>
-                    <h4>Notre But</h4>
-                    <p>Conquérir et exercer le pouvoir d’État pour assurer le progrès social et la démocratie.</p>
-                </div>
-                <div class="history-item">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <h4>Siège National</h4>
-                    <p>Croisement des avenues Gambela et Enseignement, Commune de Kasa-Vubu, Kinshasa.</p>
-                </div>
-                <div class="history-item">
-                    <i class="fas fa-graduation-cap"></i>
-                    <h4>École du Parti</h4>
-                    <p>Préparer une élite politique compétente pour la gestion publique de demain.</p>
+        <section class="section-block">
+            <h2 class="title-decor">Comité Interfédéral (Kongo Central)</h2>
+            <div class="carousel-container">
+                <div class="carousel-track">
+                    <div class="member-card">
+                        <img src="jolie_yombo.jpg" alt="Jolie YOMBO MUKENDI">
+                        <h3>Mme Jolie YOMBO MUKENDI</h3>
+                        <p class="role">PRÉSIDENTE NATIONALE</p>
+                    </div>
+                    <div class="member-card">
+                        <img src="mabiala_phambu.jpg" alt="MABIALA PHAMBU ADOLPHE">
+                        <h3>M. MABIALA PHAMBU ADOLPHE</h3>
+                        <p class="role">Président Interfédéral</p>
+                    </div>
+                    <div class="member-card">
+                        <img src="miantezolo.jpg" alt="MIANTEZOLO MATONDO Rolly">
+                        <h3>M. MIANTEZOLO MATONDO Rolly</h3>
+                        <p class="role">P.I. Adjoint (Cataractes)</p>
+                    </div>
+                    <div class="member-card">
+                        <img src="binda_ki.jpg" alt="BINDA KI LEVO BINDA Joséphine">
+                        <h3>Mme BINDA KI LEVO BINDA J.</h3>
+                        <p class="role">P.I. Adjointe (Bas-fleuve)</p>
+                    </div>
+                    <div class="member-card">
+                        <img src="ghonda_pululu.jpg" alt="GHONDA PULULU Brunette">
+                        <h3>Mme GHONDA PULULU Brunette</h3>
+                        <p class="role">P.I. Adjointe (Lukaya)</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section id="actualites">
-            <h2 class="section-title">Dernières Actualités</h2>
-            <div id="news-container" class="news-container">
-                <p style="text-align:center; grid-column:1/-1;">Chargement des nouvelles...</p>
-            </div>
-        </section>
+    </div>
 
-        <section id="adhesion" class="adhesion-section">
-            <div class="form-container">
-                <div class="form-header">
-                    <h2 style="font-family:'Playfair Display'; font-size: 2rem; color: var(--primary);">Fiche d'Adhésion</h2>
-                    <p>Rejoignez la famille ADESCO dès aujourd'hui.</p>
-                </div>
-                
-                <form id="adhesionForm">
-                    <div class="form-section-title"><i class="fas fa-user"></i> Identité du Demandeur</div>
-                    <div class="form-group">
-                        <label>Nom complet</label>
-                        <input type="text" name="nom_complet" placeholder="Ex: Jean Mukendi" required>
-                    </div>
-                    
-                    <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-                        <div class="form-group" style="flex: 1; min-width: 200px;">
-                            <label>Date de naissance</label>
-                            <input type="date" name="date_naissance" required>
-                        </div>
-                        <div class="form-group" style="flex: 1; min-width: 200px;">
-                            <label>Nationalité</label>
-                            <input type="text" name="nationalite" value="Congolaise" required>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Adresse complète</label>
-                        <input type="text" name="adresse" placeholder="N°, Avenue, Quartier, Commune, Ville" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Téléphone (WhatsApp)</label>
-                        <input type="tel" name="telephone" placeholder="+243..." required>
-                    </div>
-
-                    <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-                        <div class="form-group" style="flex: 1; min-width: 200px;">
-                            <label>Profession</label>
-                            <input type="text" name="profession" required>
-                        </div>
-                        <div class="form-group" style="flex: 1; min-width: 200px;">
-                            <label>État Civil</label>
-                            <select name="statut_marital">
-                                <option value="Célibataire">Célibataire</option>
-                                <option value="Marié(e)">Marié(e)</option>
-                                <option value="Veuf/Veuve">Veuf/Veuve</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-section-title"><i class="fas fa-file-signature"></i> Informations sur l'adhésion</div>
-                    
-                    <div class="form-group">
-                        <label>Motif d'adhésion (cocher) :</label>
-                        <div class="checkbox-grid">
-                            <label class="check-item"><input type="checkbox" name="motif_adhesion" value="Partage des valeurs"> Partage des valeurs et objectifs</label>
-                            <label class="check-item"><input type="checkbox" name="motif_adhesion" value="Vie politique"> Souhait de participer à la vie politique</label>
-                            <label class="check-item"><input type="checkbox" name="motif_adhesion" value="Projets spécifiques"> Contribuer à des projets spécifiques</label>
-                        </div>
-                        <input type="text" name="motif_autre" placeholder="Autres motifs..." style="margin-top:10px;">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Appartenance à un autre parti politique ?</label>
-                        <select name="autre_parti">
-                            <option value="Non">Non</option>
-                            <option value="Oui">Oui</option>
-                        </select>
-                        <input type="text" name="autre_parti_nom" placeholder="Lequel ?" style="margin-top:10px;">
-                    </div>
-
-                    <div class="form-section-title"><i class="fas fa-check-double"></i> Engagement</div>
-                    
-                    <div class="form-group">
-                        <label>Activités souhaitées :</label>
-                        <div class="checkbox-grid">
-                            <label class="check-item"><input type="checkbox" name="activites_souhaitees" value="Campagnes"> Campagnes électorales</label>
-                            <label class="check-item"><input type="checkbox" name="activites_souhaitees" value="Parole publique"> Prises de parole publiques</label>
-                            <label class="check-item"><input type="checkbox" name="activites_souhaitees" value="Recrutement"> Sensibilisation & Recrutement</label>
-                        </div>
-                    </div>
-
-                    <div class="form-section-title"><i class="fas fa-users-rays"></i> Parrainage</div>
-                    <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-                        <div class="form-group" style="flex: 1; min-width: 200px;">
-                            <label>Nom du parrain</label>
-                            <input type="text" name="parrain_nom">
-                        </div>
-                        <div class="form-group" style="flex: 1; min-width: 200px;">
-                            <label>N° Membre parrain</label>
-                            <input type="text" name="parrain_numero">
-                        </div>
-                    </div>
-
-                    <div class="form-group" style="margin-top: 30px;">
-                        <label class="check-item">
-                            <input type="checkbox" name="declaration_honneur" required> 
-                            Je déclare sur l'honneur que ces informations sont exactes.
-                        </label>
-                    </div>
-
-                    <button type="submit" class="btn-submit" id="submitBtn">VALIDER MON ADHÉSION</button>
-                </form>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="footer-grid">
-            <div>
-                <img src="logo.png" alt="Logo ADESCO" class="footer-logo">
-                <p>Alliance des Démocrates Socialistes Congolais. Une vision pour le grand Congo.</p>
-                <div class="footer-socials">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
-                    <a href="#"><i class="fab fa-whatsapp"></i></a>
-                </div>
-            </div>
-            <div>
-                <h4 style="color: var(--accent); margin-bottom: 20px;">Contact</h4>
-                <div class="footer-info">
-                    <p><strong>Siège :</strong> Croisement Enseignement & Gambela N°128, Kasa-Vubu, Kinshasa</p>
-                    <p><strong>Tel :</strong> +243 895 133 916</p>
-                    <p><strong>Email :</strong> adescopartie@gmail.com</p>
-                </div>
-            </div>
-            <div>
-                <h4 style="color: var(--accent); margin-bottom: 20px;">Navigation</h4>
-                <ul style="list-style:none; line-height: 2;">
-                    <li><a href="#accueil" style="color:white; text-decoration:none;">Accueil</a></li>
-                    <li><a href="#actualites" style="color:white; text-decoration:none;">Actualités</a></li>
-                    <li><a href="#adhesion" style="color:white; text-decoration:none;">Adhésion</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="copyright">
-            &copy; 2026 ADESCO - Tous droits réservés | Développé par <strong>OPTISITE DIGITAL</strong>
-        </div>
-    </footer>
-
-    <script>
-        // --- CONFIGURATION ---
-        const NEWS_API_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTDFMpVR6xyqvk6JTYAbIuCEMSVQLceZUoztTvFEymZsQWxhh-GDsMd74BpdVdyvi2FGOSuZfnH1Pc7/pub?output=csv";
-        const ADHESION_API_URL = "https://script.google.com/macros/s/AKfycbyeF2_FigCylqCoPbsin4VPPkAn6DHcz8w5ToKkj0M13Jf_lYLSuGDS8IP9SKFRenEe5Q/exec";
-
-        // --- MENU HAMBURGER ---
-        function toggleMenu() {
-            const nav = document.getElementById('navLinks');
-            nav.classList.toggle('active');
-            const icon = document.querySelector('.hamburger i');
-            icon.classList.toggle('fa-bars');
-            icon.classList.toggle('fa-times');
-        }
-
-        // Fermer le menu au clic sur un lien
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.onclick = () => {
-                document.getElementById('navLinks').classList.remove('active');
-                document.querySelector('.hamburger i').className = 'fas fa-bars';
-            }
-        });
-
-        // --- CAROUSEL AUTO ---
-        const track = document.getElementById('comiteTrack');
-        let index = 0;
-        function autoScroll() {
-            const cardWidth = track.children[0].offsetWidth + 20;
-            const max = track.children.length - (window.innerWidth > 992 ? 3 : 1);
-            index = (index >= max) ? 0 : index + 1;
-            track.style.transform = `translateX(-${index * cardWidth}px)`;
-        }
-        setInterval(autoScroll, 4000);
-
-        // --- CHARGEMENT ACTUALITÉS ---
-        async function loadNews() {
-            const container = document.getElementById('news-container');
-            try {
-                const response = await fetch(NEWS_API_URL);
-                const csvText = await response.text();
-                const rows = csvText.split('\n').slice(1);
-                
-                container.innerHTML = '';
-                if (rows.length === 0 || rows[0].trim() === "") {
-                    container.innerHTML = "<p>Aucune actualité pour le moment.</p>";
-                    return;
-                }
-
-                rows.forEach(row => {
-                    const columns = row.split(',');
-                    if (columns.length >= 3) {
-                        const card = `
-                            <div class="news-card">
-                                <img src="${columns[3]?.trim() || 'logo.png'}" class="news-image" alt="Actualité">
-                                <div class="news-content">
-                                    <span class="news-date">${columns[1].trim()}</span>
-                                    <h3 class="news-title">${columns[0].trim()}</h3>
-                                    <p class="news-description">${columns[2].trim().substring(0, 100)}...</p>
-                                </div>
-                            </div>`;
-                        container.innerHTML += card;
-                    }
-                });
-            } catch (error) {
-                container.innerHTML = "<p>Suivez nos actualités sur nos réseaux sociaux.</p>";
-            }
-        }
-
-        // --- ENVOI FORMULAIRE ---
-        const form = document.getElementById('adhesionForm');
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const btn = document.getElementById('submitBtn');
-            btn.innerText = "ENREGISTREMENT EN COURS...";
-            btn.disabled = true;
-
-            const formData = new FormData(this);
-            const data = {};
-            formData.forEach((value, key) => {
-                if (!['motif_adhesion', 'activites_souhaitees'].includes(key)) data[key] = value;
-            });
-
-            const motifs = [];
-            document.querySelectorAll('input[name="motif_adhesion"]:checked').forEach(cb => motifs.push(cb.value));
-            data.motifs_selectionnes = motifs.join(', ');
-
-            const activites = [];
-            document.querySelectorAll('input[name="activites_souhaitees"]:checked').forEach(cb => activites.push(cb.value));
-            data.activites_selectionnees = activites.join(', ');
-
-            fetch(ADHESION_API_URL, {
-                method: 'POST',
-                // mode: 'no-cors', // À commenter si vous avez besoin de lire la réponse JSON du serveur
-                body: JSON.stringify(data)
-            }).then(() => {
-                alert("Votre fiche d'adhésion a été transmise avec succès !");
-                form.reset();
-                btn.innerText = "VALIDER MON ADHÉSION";
-                btn.disabled = false;
-            }).catch(() => {
-                alert("Erreur d'envoi. Vérifiez votre connexion.");
-                btn.disabled = false;
-            });
-        });
-
-        // ===== AJOUT RESPONSIVE MOBILE (SCRIPTS) =====
-        // Ajuste le carousel lors du redimensionnement de l'écran pour éviter les décalages
-        window.addEventListener('resize', () => {
-            track.style.transform = `translateX(0px)`;
-            index = 0;
-        });
-
-        // Init
-        window.onload = loadNews;
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>

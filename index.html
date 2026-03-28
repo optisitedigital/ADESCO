@@ -3,22 +3,241 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ADESCO - Accueil</title>
+    <title>ADESCO - Alliance des Démocrates Socialistes Congolais</title>
     <link rel="icon" type="image/png" href="logo.png">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #0056b3;
+            --dark: #1a1a1a;
+            --light: #f8f9fa;
+            --gold: #d4af37;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        /* NAVBAR PROFESSIONNELLE */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+
+        .nav-brand {
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: var(--primary);
+            letter-spacing: -1px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+            margin: 0;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            text-transform: uppercase;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary);
+        }
+
+        /* HERO SECTION ÉPURÉE */
+        .hero {
+            height: 70vh;
+            background: linear-gradient(135deg, #003366 0%, #0056b3 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding-top: 60px;
+        }
+
+        .hero-logo {
+            width: 140px;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2));
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease;
+        }
+
+        .hero-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin: 0;
+            letter-spacing: 2px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-top: 10px;
+            font-weight: 300;
+            letter-spacing: 3px;
+        }
+
+        /* CAROUSEL INFINI FLUIDE */
+        .section-block {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .title-decor {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 40px;
+            position: relative;
+            color: var(--dark);
+        }
+
+        .title-decor::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--gold);
+            margin: 15px auto;
+        }
+
+        .carousel-outer {
+            overflow: hidden;
+            width: 100%;
+            position: relative;
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: 30px;
+            width: max-content;
+            animation: scroll 30s linear infinite;
+        }
+
+        /* Pause au survol sur PC */
+        .carousel-outer:hover .carousel-track {
+            animation-play-state: paused;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* MEMBER CARDS DESIGN */
+        .member-card {
+            width: 280px;
+            background: white;
+            border-radius: 20px;
+            padding: 30px 20px;
+            text-align: center;
+            transition: 0.4s;
+            border: 1px solid rgba(0,0,0,0.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .member-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .member-card img, .no-photo {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            object-fit: cover;
+            border: 4px solid var(--light);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .no-photo {
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ccc;
+            font-size: 3rem;
+        }
+
+        .member-card h3 {
+            font-size: 1.1rem;
+            margin: 10px 0;
+            color: var(--dark);
+        }
+
+        .role {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* MOBILE NAVIGATION */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 60px;
+                right: -100%;
+                background: white;
+                width: 100%;
+                height: 100vh;
+                flex-direction: column;
+                align-items: center;
+                padding-top: 50px;
+                transition: 0.5s;
+            }
+
+            .nav-links.active { right: 0; }
+            .hero-title { font-size: 1.8rem; }
+            .hero-subtitle { font-size: 0.8rem; }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
 <body>
 
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-brand">ADESCO KC</div>
-            <button class="menu-toggle" id="mobile-menu" aria-label="Ouvrir le menu">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </button>
-            <ul class="nav-links">
+            
+            <div class="menu-toggle" id="mobile-menu">
+                <i class="fas fa-bars" style="font-size: 1.5rem; color: var(--primary);"></i>
+            </div>
+
+            <ul class="nav-links" id="nav-list">
                 <li><a href="index.html" class="active">Accueil</a></li>
                 <li><a href="historique.html">Historique</a></li>
                 <li><a href="actualites.html">Actualités</a></li>
@@ -30,32 +249,47 @@
 
     <header class="hero">
         <div class="hero-content">
-            <img src="logo.png" alt="Grand Logo ADESCO" class="hero-logo">
+            <img src="logo.png" alt="ADESCO Logo" class="hero-logo">
             <h1 class="hero-title">ADESCO KONGO CENTRAL</h1>
             <p class="hero-subtitle">ALLIANCE DES DÉMOCRATES SOCIALISTES CONGOLAIS</p>
         </div>
     </header>
 
-    <div class="container">
+    <main class="container">
         
         <section class="section-block">
             <h2 class="title-decor">La Direction Nationale</h2>
-            <div class="carousel-container">
+            <div class="carousel-outer">
                 <div class="carousel-track">
                     <div class="member-card">
                         <img src="tony_kanku.jpg" alt="Tony KANKU SHIKU">
                         <h3>S.E. Tony KANKU SHIKU</h3>
-                        <p class="role">AUTORITÉ MORALE</p>
+                        <p class="role">Autorité Morale</p>
                     </div>
                     <div class="member-card">
                         <img src="jolie_yombo.jpg" alt="Jolie YOMBO MUKENDI">
                         <h3>Mme Jolie YOMBO MUKENDI</h3>
-                        <p class="role">PRÉSIDENTE DU PARTI</p>
+                        <p class="role">Présidente Nationale</p>
                     </div>
                     <div class="member-card">
                         <img src="dan_marshall.jpg" alt="Dan MARSHALL MUBENGA">
                         <h3>M. Dan MARSHALL MUBENGA</h3>
-                        <p class="role">SECRÉTAIRE GÉNÉRAL</p>
+                        <p class="role">Secrétaire Général</p>
+                    </div>
+                    <div class="member-card">
+                        <img src="tony_kanku.jpg" alt="Tony KANKU SHIKU">
+                        <h3>S.E. Tony KANKU SHIKU</h3>
+                        <p class="role">Autorité Morale</p>
+                    </div>
+                    <div class="member-card">
+                        <img src="jolie_yombo.jpg" alt="Jolie YOMBO MUKENDI">
+                        <h3>Mme Jolie YOMBO MUKENDI</h3>
+                        <p class="role">Présidente Nationale</p>
+                    </div>
+                    <div class="member-card">
+                        <img src="dan_marshall.jpg" alt="Dan MARSHALL MUBENGA">
+                        <h3>M. Dan MARSHALL MUBENGA</h3>
+                        <p class="role">Secrétaire Général</p>
                     </div>
                 </div>
             </div>
@@ -63,39 +297,55 @@
 
         <section class="section-block">
             <h2 class="title-decor">Comité Interfédéral (Kongo Central)</h2>
-            <div class="carousel-container">
+            <div class="carousel-outer">
                 <div class="carousel-track">
                     <div class="member-card">
-                        <img src="jolie_yombo.jpg" alt="Jolie YOMBO MUKENDI">
-                        <h3>Mme Jolie YOMBO MUKENDI</h3>
-                        <p class="role">PRÉSIDENTE NATIONALE</p>
-                    </div>
-                    <div class="member-card">
                         <img src="mabiala_phambu.jpg" alt="MABIALA PHAMBU ADOLPHE">
-                        <h3>M. MABIALA PHAMBU ADOLPHE</h3>
+                        <h3>M. MABIALA PHAMBU A.</h3>
                         <p class="role">Président Interfédéral</p>
                     </div>
                     <div class="member-card">
-                        <img src="miantezolo.jpg" alt="MIANTEZOLO MATONDO Rolly">
-                        <h3>M. MIANTEZOLO MATONDO Rolly</h3>
+                        <div class="no-photo"><i class="fas fa-user"></i></div>
+                        <h3>M. MIANTEZOLO MATONDO R.</h3>
                         <p class="role">P.I. Adjoint (Cataractes)</p>
                     </div>
                     <div class="member-card">
-                        <img src="binda_ki.jpg" alt="BINDA KI LEVO BINDA Joséphine">
+                        <img src="binda_ki.jpg" alt="BINDA KI LEVO BINDA J.">
                         <h3>Mme BINDA KI LEVO BINDA J.</h3>
                         <p class="role">P.I. Adjointe (Bas-fleuve)</p>
                     </div>
                     <div class="member-card">
-                        <img src="ghonda_pululu.jpg" alt="GHONDA PULULU Brunette">
+                        <div class="no-photo"><i class="fas fa-user"></i></div>
                         <h3>Mme GHONDA PULULU Brunette</h3>
                         <p class="role">P.I. Adjointe (Lukaya)</p>
+                    </div>
+                    <div class="member-card">
+                        <img src="mabiala_phambu.jpg" alt="MABIALA PHAMBU ADOLPHE">
+                        <h3>M. MABIALA PHAMBU A.</h3>
+                        <p class="role">Président Interfédéral</p>
+                    </div>
+                    <div class="member-card">
+                        <div class="no-photo"><i class="fas fa-user"></i></div>
+                        <h3>M. MIANTEZOLO MATONDO R.</h3>
+                        <p class="role">P.I. Adjoint (Cataractes)</p>
                     </div>
                 </div>
             </div>
         </section>
 
-    </div>
+    </main>
 
-    <script src="script.js"></script>
+    <script>
+        // Menu Mobile Toggle
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navList = document.getElementById('nav-list');
+
+        mobileMenu.addEventListener('click', () => {
+            navList.classList.toggle('active');
+            const icon = mobileMenu.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+    </script>
 </body>
 </html>

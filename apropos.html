@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADESCO - À Propos</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-black: #000000;
+            --adesco-blue: #0056b3;
+            --bg-white: #ffffff;
+            --soft-grey: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            background-color: var(--soft-grey);
+            color: var(--primary-black);
+        }
+
+        .main-container {
+            padding: 40px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        /* CARD STYLE PROFESSIONNEL */
+        .contact-card {
+            background: var(--bg-white);
+            border-radius: 20px;
+            padding: 40px 25px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+            border-top: 5px solid var(--adesco-blue);
+        }
+
+        .header-logo {
+            width: 120px;
+            margin-bottom: 20px;
+        }
+
+        .contact-card h1 {
+            font-size: 1.6rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .contact-card h2 {
+            font-size: 1rem;
+            color: var(--adesco-blue);
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        /* ITEMS DE CONTACT */
+        .info-item {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            background: var(--soft-grey);
+            margin-bottom: 15px;
+            padding: 15px 20px;
+            border-radius: 12px;
+            text-align: left;
+            transition: 0.3s;
+        }
+
+        .info-item i {
+            font-size: 1.5rem;
+            color: var(--adesco-blue);
+            margin-right: 20px;
+            width: 30px;
+            text-align: center;
+        }
+
+        .info-text h3 {
+            font-size: 0.8rem;
+            color: #777;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        .info-text p {
+            font-size: 1rem;
+            font-weight: 500;
+            margin: 2px 0 0 0;
+        }
+
+        /* BOUTONS D'ACTION RAPIDE */
+        .action-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .btn-action {
+            text-decoration: none;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 0.9rem;
+        }
+
+        .btn-call { background: var(--adesco-blue); color: white; }
+        .btn-mail { background: var(--primary-black); color: white; }
+
+        /* FOOTER DE LA PAGE */
+        .dev-credit {
+            margin-top: 40px;
+            font-size: 0.75rem;
+            color: #999;
+            font-style: italic;
+        }
+
+        /* MOBILE OPTIMIZATION */
+        @media screen and (max-width: 600px) {
+            .main-container { padding: 20px 15px; }
+            .action-buttons { grid-template-columns: 1fr; }
+            .contact-card { padding: 30px 15px; }
+            .info-item { padding: 12px 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">ADESCO KC</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="historique.html">Historique</a></li>
+                <li><a href="actualites.html">Actualités</a></li>
+                <li><a href="adhesion.html">Adhésions</a></li>
+                <li><a href="apropos.html" class="active">À Propos</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="contact-card">
+            <img src="logo.png" alt="Logo ADESCO" class="header-logo">
+            <h1>ADESCO Kongo Central</h1>
+            <h2>PERMANENCE ET SIÈGE PROVINCIAL</h2>
+
+            <div class="info-list">
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div class="info-text">
+                        <h3>Adresse du siège (Matadi)</h3>
+                        <p>Av: MBELOLO N*23, Q/SALONGO, C/MATADI</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <i class="fas fa-landmark"></i>
+                    <div class="info-text">
+                        <h3>Référence</h3>
+                        <p>Rond point BUIMA à MATADI</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <i class="fas fa-envelope"></i>
+                    <div class="info-text">
+                        <h3>Email Officiel</h3>
+                        <p>adescokc@gmail.com</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <div class="info-text">
+                        <h3>Permanence</h3>
+                        <p>089 513 3916 / 081 249 2339</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <a href="tel:0895133916" class="btn-action btn-call">
+                    <i class="fas fa-phone"></i> Appeler
+                </a>
+                <a href="mailto:adescokc@gmail.com" class="btn-action btn-mail">
+                    <i class="fas fa-paper-plane"></i> Envoyer un Email
+                </a>
+            </div>
+        </div>
+
+        <p class="dev-credit">Développé par Optisite Digital - ADESCO Kongo Central © 2026</p>
+    </main>
+
+</body>
+</html>

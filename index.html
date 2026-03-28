@@ -85,7 +85,6 @@
         }
 
         /* --- HERO SECTION (BANIERE) --- */
-        /* MODIF CLIENT : Texte en NOIR et Logo en grand adaptable */
         .hero {
             height: 100vh;
             background: var(--white);
@@ -113,7 +112,7 @@
         .hero-title {
             font-size: 2.2rem;
             font-weight: 900;
-            /* MODIF CLIENT : Texte Noir */
+            /* MODIF CLIENT : Texte Noir Impératif */
             color: #000000; 
             margin: 10px 0;
             line-height: 1.2;
@@ -223,15 +222,15 @@
         /* --- RESPONSIVE MOBILE (SMARTPHONES) --- */
         @media (max-width: 768px) {
             .menu-toggle {
-                display: block; /* Affiche le bouton menu */
+                display: block; 
             }
 
-            /* MODIF CLIENT : Menu latéral sortant de la droite */
+            /* MODIF CLIENT : Menu latéral pro pour accéder aux onglets */
             .nav-links {
                 position: fixed;
                 top: 0;
                 right: -100%;
-                width: 80%;
+                width: 75%;
                 height: 100vh;
                 background: var(--white);
                 flex-direction: column;
@@ -247,21 +246,34 @@
             }
 
             .nav-links li {
-                margin: 15px 0;
+                margin: 20px 0;
+                width: 100%;
+                text-align: center;
             }
 
-            .hero-title { font-size: 1.6rem; }
-            .hero-logo { width: 220px; }
+            .nav-links a {
+                font-size: 1.1rem;
+                display: block;
+                padding: 10px;
+            }
+
+            .hero-title { font-size: 1.5rem; }
+            .hero-logo { width: 200px; }
             
-            /* Animation carousel plus rapide sur mobile pour fluidité */
             .carousel-track {
-                animation: scroll 25s linear infinite;
+                animation: scroll 20s linear infinite;
             }
         }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
         }
     </style>
 </head>
@@ -353,23 +365,20 @@
                         <h3>Mme Jolie YOMBO MUKENDI</h3>
                         <p class="role">Présidente Nationale</p>
                     </div>
-                    <div class="member-card"><img src="mabiala_phambu.jpg" alt=""><h3>M. MABIALA PHAMBU</h3><p class="role">Président Interfédéral</p></div>
                 </div>
             </div>
         </section>
     </main>
 
     <script>
-        /* MODIF CLIENT : Gestion JavaScript du Menu Hamburger */
         const mobileMenu = document.getElementById('mobile-menu');
         const navList = document.getElementById('nav-list');
         const menuIcon = document.getElementById('menu-icon');
 
+        /* MODIF CLIENT : Ouverture/Fermeture menu avec animation */
         mobileMenu.addEventListener('click', (e) => {
             e.stopPropagation();
             navList.classList.toggle('active');
-            
-            // Changement d'icône (Bars -> Times)
             if (navList.classList.contains('active')) {
                 menuIcon.classList.replace('fa-bars', 'fa-times');
             } else {
@@ -377,7 +386,7 @@
             }
         });
 
-        /* Fermeture du menu lors du clic sur un onglet */
+        /* Fermeture auto lors du clic sur un lien */
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 navList.classList.remove('active');
@@ -385,7 +394,7 @@
             });
         });
 
-        /* Fermeture si on clique en dehors du menu */
+        /* Fermeture si on clique n'importe où ailleurs */
         document.addEventListener('click', (e) => {
             if (!mobileMenu.contains(e.target) && !navList.contains(e.target)) {
                 navList.classList.remove('active');

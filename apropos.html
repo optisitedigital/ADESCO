@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ADESCO - À Propos</title>
     <link rel="icon" type="image/png" href="logo.png">
-    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
@@ -17,25 +16,28 @@
         }
 
         body {
-            font-family: 'Segoe UI', Arial, sans-serif;
+            font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
             margin: 0;
+            padding: 0;
             background-color: var(--soft-grey);
             color: var(--primary-black);
             overflow-x: hidden;
         }
 
-        /* --- NAVBAR COHÉRENTE --- */
+        /* --- NAVBAR UNIFORMISÉE --- */
         .navbar {
             background: #fff;
             height: 70px;
             display: flex;
             justify-content: center;
             align-items: center;
-            position: sticky;
+            position: fixed; /* Fixée en haut */
+            width: 100%;
             top: 0;
             z-index: 2000;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
+        
         .nav-container { 
             width: 90%; 
             max-width: 1200px; 
@@ -43,21 +45,27 @@
             justify-content: space-between; 
             align-items: center; 
         }
-        .nav-brand { font-weight: bold; color: var(--adesco-blue); z-index: 2001; }
         
-        .nav-links { display: flex; list-style: none; gap: 15px; margin: 0; padding: 0; }
-        .nav-links a { text-decoration: none; color: #000; font-weight: 500; font-size: 0.9rem;}
-        .nav-links a.active { color: var(--adesco-blue); border-bottom: 2px solid var(--adesco-blue); }
-
-        .menu-toggle {
-            display: none;
-            cursor: pointer;
-            z-index: 2002;
+        .nav-brand { font-weight: 800; color: var(--adesco-blue); font-size: 1.1rem; }
+        
+        .nav-links { display: flex; list-style: none; gap: 20px; margin: 0; padding: 0; }
+        
+        .nav-links a { 
+            text-decoration: none; 
+            color: #333; 
+            font-weight: 700; 
+            font-size: 0.85rem; 
+            text-transform: uppercase;
+            transition: 0.3s;
         }
+        
+        .nav-links a.active { color: var(--adesco-blue); }
+
+        .menu-toggle { display: none; cursor: pointer; z-index: 2100; }
 
         /* --- CONTENU --- */
         .main-container {
-            padding: 40px 20px;
+            padding: 110px 15px 40px;
             max-width: 800px;
             margin: 0 auto;
             text-align: center;
@@ -65,97 +73,110 @@
 
         .contact-card {
             background: var(--bg-white);
-            border-radius: 20px;
+            border-radius: 25px;
             padding: 40px 25px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
-            border-top: 5px solid var(--adesco-blue);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+            border-top: 6px solid var(--adesco-blue);
         }
 
         .header-logo {
-            width: 120px;
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
             margin-bottom: 20px;
         }
 
         .contact-card h1 {
-            font-size: 1.6rem;
-            margin-bottom: 10px;
+            font-size: 1.8rem;
+            margin: 0 0 10px 0;
+            font-weight: 900;
+            color: var(--primary-black);
             text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
         .contact-card h2 {
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: var(--adesco-blue);
-            margin-bottom: 30px;
-            font-weight: 600;
+            margin-bottom: 35px;
+            font-weight: 700;
+            letter-spacing: 1px;
         }
+
+        .info-list { margin-bottom: 30px; }
 
         .info-item {
             display: flex;
             align-items: center;
-            justify-content: flex-start;
-            background: var(--soft-grey);
+            background: #fdfdfd;
             margin-bottom: 15px;
-            padding: 15px 20px;
-            border-radius: 12px;
+            padding: 18px;
+            border-radius: 15px;
             text-align: left;
+            border: 1px solid #eee;
+            transition: 0.3s;
         }
 
+        .info-item:hover { border-color: var(--adesco-blue); background: #f0f7ff; }
+
         .info-item i {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             color: var(--adesco-blue);
             margin-right: 20px;
-            width: 30px;
+            width: 35px;
             text-align: center;
         }
 
         .info-text h3 {
-            font-size: 0.8rem;
-            color: #777;
+            font-size: 0.75rem;
+            color: #888;
             margin: 0;
             text-transform: uppercase;
+            font-weight: 800;
         }
 
         .info-text p {
             font-size: 1rem;
-            font-weight: 500;
-            margin: 2px 0 0 0;
+            font-weight: 600;
+            margin: 4px 0 0 0;
+            color: #333;
         }
 
+        /* BOUTONS D'ACTION */
         .action-buttons {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 15px;
-            margin-top: 30px;
+            margin-top: 35px;
         }
 
         .btn-action {
             text-decoration: none;
-            padding: 15px;
-            border-radius: 10px;
-            font-weight: bold;
+            padding: 16px;
+            border-radius: 12px;
+            font-weight: 800;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
             font-size: 0.9rem;
+            transition: 0.3s;
+            text-transform: uppercase;
         }
 
         .btn-call { background: var(--adesco-blue); color: white; }
         .btn-mail { background: var(--primary-black); color: white; }
+        .btn-action:hover { opacity: 0.9; transform: translateY(-2px); }
 
         .dev-credit {
-            margin-top: 40px;
-            font-size: 0.75rem;
-            color: #999;
-            font-style: italic;
+            margin-top: 50px;
+            font-size: 0.8rem;
+            color: #bbb;
+            font-weight: 500;
         }
 
-        /* --- MOBILE OPTIMIZATION --- */
+        /* --- RESPONSIVE MOBILE --- */
         @media screen and (max-width: 768px) {
-            .menu-toggle {
-                display: block !important;
-            }
+            .menu-toggle { display: block; }
 
             .nav-links {
                 position: fixed;
@@ -167,23 +188,17 @@
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                transition: 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
-                box-shadow: -10px 0 20px rgba(0,0,0,0.2);
-                z-index: 1999;
-                gap: 30px;
+                transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+                z-index: 2050;
+                gap: 25px;
             }
 
-            .nav-links.active {
-                right: 0;
-            }
+            .nav-links.active { right: 0; }
+            .nav-links a { font-size: 1.2rem; }
 
-            .nav-links a {
-                font-size: 1.4rem;
-            }
-
-            .main-container { padding: 20px 15px; }
             .action-buttons { grid-template-columns: 1fr; }
-            .contact-card { padding: 30px 15px; }
+            .contact-card h1 { font-size: 1.5rem; }
         }
     </style>
 </head>
@@ -191,10 +206,10 @@
 
     <nav class="navbar">
         <div class="nav-container">
-            <div class="nav-brand">ADESCO KC</div>
+            <div class="nav-brand">ADESCO KONGO CENTRAL</div>
             
             <div class="menu-toggle" id="mobile-menu">
-                <i class="fas fa-bars" id="menu-icon" style="font-size: 1.8rem; color: var(--adesco-blue);"></i>
+                <i class="fas fa-bars" id="menu-icon" style="font-size: 1.6rem; color: var(--adesco-blue);"></i>
             </div>
 
             <ul class="nav-links" id="nav-list">
@@ -209,7 +224,7 @@
 
     <main class="main-container">
         <div class="contact-card">
-            <img src="logo.png" alt="Logo ADESCO" class="header-logo">
+            <img src="logo.png" alt="Logo ADESCO" class="header-logo" onerror="this.src='https://via.placeholder.com/100?text=ADESCO'">
             <h1>ADESCO Kongo Central</h1>
             <h2>PERMANENCE ET SIÈGE PROVINCIAL</h2>
 
@@ -225,7 +240,7 @@
                 <div class="info-item">
                     <i class="fas fa-landmark"></i>
                     <div class="info-text">
-                        <h3>Référence</h3>
+                        <h3>Référence locale</h3>
                         <p>Rond point BUIMA à MATADI</p>
                     </div>
                 </div>
@@ -241,7 +256,7 @@
                 <div class="info-item">
                     <i class="fas fa-phone-alt"></i>
                     <div class="info-text">
-                        <h3>Permanence</h3>
+                        <h3>Permanence téléphonique</h3>
                         <p>089 513 3916 / 081 249 2339</p>
                     </div>
                 </div>
@@ -261,6 +276,7 @@
     </main>
 
     <script>
+        // NAVIGATION MOBILE
         const mobileMenu = document.getElementById('mobile-menu');
         const navList = document.getElementById('nav-list');
         const menuIcon = document.getElementById('menu-icon');
@@ -268,22 +284,18 @@
         mobileMenu.onclick = function(e) {
             e.stopPropagation();
             navList.classList.toggle('active');
-            menuIcon.className = navList.classList.contains('active') ? "fas fa-times" : "fas fa-bars";
+            if(navList.classList.contains('active')) {
+                menuIcon.classList.replace('fa-bars', 'fa-times');
+            } else {
+                menuIcon.classList.replace('fa-times', 'fa-bars');
+            }
         };
-
-        // Fermeture automatique au clic sur un lien
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.onclick = () => {
-                navList.classList.remove('active');
-                menuIcon.className = "fas fa-bars";
-            };
-        });
 
         // Fermeture au clic extérieur
         document.onclick = function(e) {
             if (!mobileMenu.contains(e.target) && !navList.contains(e.target)) {
                 navList.classList.remove('active');
-                menuIcon.className = "fas fa-bars";
+                menuIcon.classList.replace('fa-times', 'fa-bars');
             }
         };
     </script>

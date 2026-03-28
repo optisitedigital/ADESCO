@@ -25,7 +25,6 @@
             color: var(--dark);
         }
 
-        /* NAVBAR */
         .navbar {
             background: var(--white);
             height: 70px;
@@ -45,7 +44,6 @@
         .nav-links a { text-decoration: none; color: var(--dark); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; }
         .nav-links a.active { color: var(--primary); }
 
-        /* FORMULAIRE */
         .main-container { padding: 110px 15px 40px; max-width: 550px; margin: 0 auto; }
         .form-card { background: var(--white); padding: 30px 20px; border-radius: 25px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); }
 
@@ -64,7 +62,6 @@
         }
         input:focus, select:focus { border-color: var(--primary); outline: none; background: #f9fcff; }
         
-        /* Validation Error Style */
         .error-input { border-color: var(--error) !important; background: #fff8f8 !important; }
         .error-text { color: var(--error); font-size: 0.75rem; font-weight: bold; margin-top: 5px; display: none; }
 
@@ -123,7 +120,7 @@
                     </div>
                     <div class="input-group">
                         <label>État Civil *</label>
-                        <select name="etat_civil" required>
+                        <select name="statut_marital" required>
                             <option value="">Sélectionnez...</option>
                             <option value="Célibataire">Célibataire</option>
                             <option value="Marié(e)">Marié(e)</option>
@@ -143,12 +140,12 @@
                 <div class="step" id="step2">
                     <div class="input-group">
                         <label>Adresse complète (Ville, Quartier, Rue) *</label>
-                        <textarea name="adresse_complete" rows="2" placeholder="Ex: Kinshasa, Limete, Rue 12" required></textarea>
+                        <textarea name="adresse" rows="2" placeholder="Ex: Kinshasa, Limete, Rue 12" required></textarea>
                         <span class="error-text">L'adresse est requise</span>
                     </div>
                     <div class="input-group">
                         <label>Téléphone (WhatsApp) *</label>
-                        <input type="tel" name="telephone_whatsapp" placeholder="Ex: +243..." required>
+                        <input type="tel" name="telephone" placeholder="Ex: +243..." required>
                         <span class="error-text">Numéro requis</span>
                     </div>
                     <div class="input-group">
@@ -157,7 +154,7 @@
                             <label class="checkbox-item"><input type="checkbox" name="motifs" value="Valeurs"> Partage des valeurs</label>
                             <label class="checkbox-item"><input type="checkbox" name="motifs" value="Vie Politique"> Participation politique</label>
                             <label class="checkbox-item"><input type="checkbox" name="motifs" value="Projets"> Projets de développement</label>
-                            <input type="text" name="precision_motifs" placeholder="Précisez ici si autre...">
+                            <input type="text" name="motif_autre" placeholder="Précisez ici si autre...">
                         </div>
                     </div>
                     <div class="btn-container">
@@ -169,14 +166,14 @@
                 <div class="step" id="step3">
                     <div class="input-group">
                         <label>Venant d'un autre parti ? *</label>
-                        <select name="ancien_parti" required>
+                        <select name="autre_parti" required>
                             <option value="Non">Non</option>
                             <option value="Oui">Oui</option>
                         </select>
                     </div>
                     <div class="input-group">
                         <label>Si oui, nom de l'ancien parti</label>
-                        <input type="text" name="nom_ancien_parti" placeholder="Nom du parti quitté">
+                        <input type="text" name="autre_parti_nom" placeholder="Nom du parti quitté">
                     </div>
                     <div class="input-group">
                         <label>Activités souhaitées au sein d'ADESCO :</label>
@@ -184,13 +181,13 @@
                             <label class="checkbox-item"><input type="checkbox" name="activites" value="Mobilisation"> Mobilisation / Recrutement</label>
                             <label class="checkbox-item"><input type="checkbox" name="activites" value="Communication"> Communication / Parole</label>
                             <label class="checkbox-item"><input type="checkbox" name="activites" value="Logistique"> Gestion Événements</label>
-                            <input type="text" name="precision_activites" placeholder="Autres activités souhaitées...">
+                            <input type="text" name="activites_autre" placeholder="Autres activités souhaitées...">
                         </div>
                     </div>
                     <div class="input-group">
                         <label>Parrainage (Si applicable)</label>
-                        <input type="text" name="nom_parrain" placeholder="Nom du parrain">
-                        <input type="text" name="numero_parrain" placeholder="N° membre du parrain" style="margin-top:10px">
+                        <input type="text" name="parrain_nom" placeholder="Nom du parrain">
+                        <input type="text" name="parrain_numero" placeholder="N° membre du parrain" style="margin-top:10px">
                     </div>
                     <div class="input-group" style="background:var(--warning); padding:15px; border-radius:15px;">
                         <label style="cursor:pointer; font-size: 0.85rem;">
@@ -209,7 +206,6 @@
     </main>
 
     <script>
-        // Fonction pour changer d'étape sans validation
         function goToStep(n) {
             document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
             document.getElementById('step' + n).classList.add('active');
@@ -217,7 +213,6 @@
             window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
-        // Fonction de validation avant de passer à la suite
         function validateAndNext(next) {
             const currentStep = document.querySelector('.step.active');
             const inputs = currentStep.querySelectorAll('input[required], select[required], textarea[required]');
@@ -226,7 +221,7 @@
             inputs.forEach(input => {
                 if (!input.value.trim()) {
                     input.classList.add('error-input');
-                    input.nextElementSibling.style.display = 'block';
+                    if(input.nextElementSibling) input.nextElementSibling.style.display = 'block';
                     isValid = false;
                 } else {
                     input.classList.remove('error-input');
@@ -239,8 +234,7 @@
             if (isValid) goToStep(next);
         }
 
-        // ENVOI AU SCRIPT GOOGLE
-        const SCRIPT_URL = "TON_URL_SCRIPT_ICI"; // Garde ton URL actuelle
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyeF2_FigCylqCoPbsin4VPPkAn6DHcz8w5ToKkj0M13Jf_lYLSuGDS8IP9SKFRenEe5Q/exec";
 
         document.getElementById('adhesionForm').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -253,10 +247,6 @@
             const formData = new FormData(this);
             const data = Object.fromEntries(formData.entries());
 
-            // Date d'enregistrement automatique
-            data.date_enregistrement = new Date().toLocaleString();
-
-            // Motifs et Activités (Checkboxes)
             data.motifs_selectionnes = Array.from(document.querySelectorAll('input[name="motifs"]:checked')).map(cb => cb.value).join(', ');
             data.activites_selectionnees = Array.from(document.querySelectorAll('input[name="activites"]:checked')).map(cb => cb.value).join(', ');
 
@@ -272,7 +262,7 @@
             .catch(err => {
                 msg.style.background = "#f8d7da";
                 msg.style.color = "var(--error)";
-                msg.innerText = "❌ Erreur de connexion. Veuillez réessayer.";
+                msg.innerText = "❌ Erreur. Vérifiez votre connexion.";
                 btn.disabled = false;
                 btn.innerText = "Réessayer";
             });

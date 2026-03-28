@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ADESCO - Adhésion</title>
     <link rel="icon" type="image/png" href="logo.png">
-    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
@@ -14,38 +13,90 @@
             --adesco-blue: #0056b3;
             --bg-light: #f4f7f6;
             --success-green: #28a745;
+            --white: #ffffff;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, sans-serif;
+            font-family: 'Inter', 'Segoe UI', Tahoma, sans-serif;
             background-color: var(--bg-light);
             margin: 0;
+            padding: 0;
             color: var(--primary-black);
+            overflow-x: hidden;
         }
 
+        /* NAVBAR UNIFORMISÉE */
+        .navbar {
+            background: var(--white);
+            height: 70px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 2000;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+        
+        .nav-container { 
+            width: 90%; 
+            max-width: 1200px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+        }
+        
+        .nav-brand { font-weight: 800; color: var(--adesco-blue); font-size: 1.2rem; }
+        
+        .nav-links { display: flex; list-style: none; gap: 20px; margin: 0; padding: 0; }
+        
+        .nav-links a { 
+            text-decoration: none; 
+            color: var(--primary-black); 
+            font-weight: 700; 
+            font-size: 0.85rem; 
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+        
+        .nav-links a.active { color: var(--adesco-blue); }
+
+        .menu-toggle { display: none; cursor: pointer; z-index: 2100; }
+
+        /* FORMULAIRE CONTAINER */
         .main-container {
-            padding: 15px;
-            max-width: 500px; /* Plus étroit pour un look pro sur mobile */
+            padding: 100px 15px 40px;
+            max-width: 500px;
             margin: 0 auto;
         }
 
         .form-card {
             background: white;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            padding: 30px 20px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
         }
 
-        .form-header { text-align: center; margin-bottom: 20px; }
-        .form-header h1 { font-size: 1.3rem; text-transform: uppercase; border-bottom: 3px solid var(--adesco-blue); display: inline-block; padding-bottom: 5px; margin: 0;}
+        .form-header { text-align: center; margin-bottom: 25px; }
+        .form-header h1 { 
+            font-size: 1.5rem; 
+            text-transform: uppercase; 
+            color: var(--adesco-blue);
+            font-weight: 900;
+            margin: 0;
+        }
+        .underline-header {
+            width: 50px; height: 4px; background: var(--adesco-blue); margin: 10px auto; border-radius: 2px;
+        }
 
         /* SYSTÈME D'ÉTAPES */
         .step { display: none; }
         .step.active { display: block; animation: fadeIn 0.4s; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        .input-group { margin-bottom: 15px; }
-        .input-group label { display: block; font-weight: bold; margin-bottom: 8px; font-size: 0.85rem; color: #333; }
+        .input-group { margin-bottom: 20px; }
+        .input-group label { display: block; font-weight: 800; margin-bottom: 10px; font-size: 0.9rem; color: #333; }
         
         /* CHAMPS TEXTE */
         .input-group input[type="text"], 
@@ -54,51 +105,77 @@
         .input-group select, 
         .input-group textarea {
             width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font-size: 0.95rem;
+            padding: 12px;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            font-size: 1rem;
             box-sizing: border-box;
+            transition: 0.3s;
         }
+
+        .input-group input:focus { border-color: var(--adesco-blue); outline: none; background: #f0f7ff; }
 
         /* CASES À COCHER & RADIOS */
         .checkbox-group {
             display: flex;
             flex-direction: column;
-            gap: 8px;
-            background: #f9f9f9;
-            padding: 10px;
-            border-radius: 8px;
+            gap: 12px;
+            background: #f8fafb;
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid #eee;
         }
         .checkbox-item {
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 0.85rem;
+            gap: 12px;
+            font-size: 0.95rem;
             cursor: pointer;
+            font-weight: 500;
         }
-        .checkbox-item input { width: 18px; height: 18px; cursor: pointer; }
+        .checkbox-item input { width: 20px; height: 20px; cursor: pointer; accent-color: var(--adesco-blue); }
 
         /* BOUTONS */
-        .btn-container { display: flex; justify-content: space-between; margin-top: 20px; gap: 10px; }
+        .btn-container { display: flex; justify-content: space-between; margin-top: 30px; gap: 15px; }
         .btn {
-            padding: 12px;
+            padding: 15px;
             border: none;
-            border-radius: 8px;
+            border-radius: 12px;
             cursor: pointer;
-            font-weight: bold;
-            font-size: 0.9rem;
+            font-weight: 800;
+            font-size: 1rem;
             flex: 1;
+            transition: 0.3s;
+            text-transform: uppercase;
         }
         .btn-next { background: var(--adesco-blue); color: white; }
-        .btn-prev { background: #e0e0e0; color: #444; }
+        .btn-next:hover { opacity: 0.9; transform: scale(1.02); }
+        .btn-prev { background: #eee; color: #666; }
         .btn-submit { background: var(--success-green); color: white; }
+        .btn-submit:hover { background: #218838; }
 
-        #status-msg { margin-top: 15px; text-align: center; font-size: 0.85rem; font-weight: bold; }
+        #status-msg { margin-top: 20px; text-align: center; font-size: 0.95rem; font-weight: bold; }
 
-        @media screen and (max-width: 480px) {
-            .main-container { padding: 10px; }
-            .form-card { padding: 15px; }
+        /* RESPONSIVE MOBILE */
+        @media screen and (max-width: 768px) {
+            .menu-toggle { display: block; }
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                background: white;
+                width: 75%;
+                height: 100vh;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+                z-index: 2050;
+                gap: 25px;
+            }
+            .nav-links.active { right: 0; }
+            .nav-links a { font-size: 1.1rem; }
         }
     </style>
 </head>
@@ -106,8 +183,13 @@
 
     <nav class="navbar">
         <div class="nav-container">
-            <div class="nav-brand">ADESCO KC</div>
-            <ul class="nav-links">
+            <div class="nav-brand">ADESCO KONGO CENTRAL</div>
+            
+            <div class="menu-toggle" id="mobile-menu">
+                <i class="fas fa-bars" id="menu-icon" style="font-size: 1.6rem; color: var(--adesco-blue);"></i>
+            </div>
+
+            <ul class="nav-links" id="nav-list">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="historique.html">Historique</a></li>
                 <li><a href="actualites.html">Actualités</a></li>
@@ -121,6 +203,7 @@
         <div class="form-card">
             <div class="form-header">
                 <h1>Fiche d'Adhésion</h1>
+                <div class="underline-header"></div>
             </div>
 
             <form id="adhesionForm">
@@ -142,7 +225,7 @@
                         <label>Profession</label>
                         <input type="text" name="profession" placeholder="Votre métier">
                     </div>
-                    <button type="button" class="btn btn-next" onclick="nextStep(2)">Suivant</button>
+                    <button type="button" class="btn btn-next" onclick="nextStep(2)">Suivant <i class="fas fa-arrow-right"></i></button>
                 </div>
 
                 <div class="step" id="step2">
@@ -168,7 +251,7 @@
                     </div>
                     <div class="btn-container">
                         <button type="button" class="btn btn-prev" onclick="nextStep(1)">Retour</button>
-                        <button type="button" class="btn btn-next" onclick="nextStep(3)">Suivant</button>
+                        <button type="button" class="btn btn-next" onclick="nextStep(3)">Suivant <i class="fas fa-arrow-right"></i></button>
                     </div>
                 </div>
 
@@ -179,18 +262,18 @@
                             <option value="Non">Non</option>
                             <option value="Oui">Oui</option>
                         </select>
-                        <input type="text" name="autre_parti_nom" placeholder="Si oui, lequel ?" style="margin-top:5px">
+                        <input type="text" name="autre_parti_nom" placeholder="Si oui, lequel ?" style="margin-top:10px">
                     </div>
 
                     <div class="input-group">
                         <label>Parrainage (Si applicable)</label>
                         <input type="text" name="parrain_nom" placeholder="Nom du parrain">
-                        <input type="text" name="parrain_numero" placeholder="N° membre du parrain" style="margin-top:5px">
+                        <input type="text" name="parrain_numero" placeholder="N° membre du parrain" style="margin-top:10px">
                     </div>
 
-                    <div class="input-group" style="background:#fff3cd; padding:10px; border-radius:8px; border:1px solid #ffeeba;">
-                        <label style="color:#856404; font-size:0.75rem;">
-                            <input type="checkbox" required name="engagement_statuts" value="Oui"> 
+                    <div class="input-group" style="background:#fff3cd; padding:15px; border-radius:12px; border:1px solid #ffeeba;">
+                        <label style="color:#856404; font-size:0.85rem; font-weight:600; cursor:pointer;">
+                            <input type="checkbox" required name="engagement_statuts" value="Oui" style="margin-right:10px;"> 
                             Je déclare sur l'honneur que les infos sont exactes et m'engage à respecter les statuts du parti ADESCO.
                         </label>
                     </div>
@@ -207,13 +290,30 @@
     </main>
 
     <script>
-        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyeF2_FigCylqCoPbsin4VPPkAn6DHcz8w5ToKkj0M13Jf_lYLSuGDS8IP9SKFRenEe5Q/exec";
+        // NAVIGATION MOBILE
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navList = document.getElementById('nav-list');
+        const menuIcon = document.getElementById('menu-icon');
 
+        mobileMenu.onclick = function(e) {
+            e.stopPropagation();
+            navList.classList.toggle('active');
+            if(navList.classList.contains('active')) {
+                menuIcon.classList.replace('fa-bars', 'fa-times');
+            } else {
+                menuIcon.classList.replace('fa-times', 'fa-bars');
+            }
+        };
+
+        // ÉTAPES DU FORMULAIRE
         function nextStep(n) {
             document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
             document.getElementById('step' + n).classList.add('active');
-            window.scrollTo(0,0);
+            window.scrollTo({top: 0, behavior: 'smooth'});
         }
+
+        // ENVOI VERS GOOGLE SHEETS
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyeF2_FigCylqCoPbsin4VPPkAn6DHcz8w5ToKkj0M13Jf_lYLSuGDS8IP9SKFRenEe5Q/exec";
 
         document.getElementById('adhesionForm').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -221,17 +321,17 @@
             const msg = document.getElementById('status-msg');
             
             btn.disabled = true;
-            btn.innerText = "Traitement...";
+            btn.innerHTML = "<i class='fas fa-spinner fa-spin'></i> Envoi...";
 
-            // Récupération des données
             const formData = new FormData(this);
             const data = Object.fromEntries(formData.entries());
 
-            // Gestion des cases à cocher multiples (Motifs et Activités)
+            // Collecte des motifs cochés
             const motifs = [];
             document.querySelectorAll('input[name="motifs"]:checked').forEach(cb => motifs.push(cb.value));
             data.motifs_selectionnes = motifs.join(', ');
 
+            // Collecte des activités cochées
             const activites = [];
             document.querySelectorAll('input[name="activites"]:checked').forEach(cb => activites.push(cb.value));
             data.activites_selectionnees = activites.join(', ');
@@ -242,17 +342,27 @@
                 body: JSON.stringify(data)
             })
             .then(() => {
-                msg.style.color = "green";
-                msg.innerHTML = "✅ Adhésion envoyée avec succès !";
-                btn.innerText = "Envoyé";
+                msg.style.color = "#28a745";
+                msg.innerHTML = "✅ Merci ! Votre demande d'adhésion a été envoyée avec succès.";
+                btn.innerText = "ENVOYÉ";
                 this.reset();
+                setTimeout(() => nextStep(1), 5000);
             })
             .catch(err => {
-                msg.style.color = "red";
-                msg.innerText = "Erreur. Vérifiez votre connexion.";
+                msg.style.color = "#dc3545";
+                msg.innerText = "❌ Erreur. Vérifiez votre connexion internet.";
                 btn.disabled = false;
+                btn.innerText = "Réessayer";
             });
         });
+
+        // Fermeture menu au clic extérieur
+        document.onclick = function(e) {
+            if (!mobileMenu.contains(e.target) && !navList.contains(e.target)) {
+                navList.classList.remove('active');
+                menuIcon.classList.replace('fa-times', 'fa-bars');
+            }
+        };
     </script>
 </body>
 </html>

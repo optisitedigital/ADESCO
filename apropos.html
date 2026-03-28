@@ -21,8 +21,41 @@
             margin: 0;
             background-color: var(--soft-grey);
             color: var(--primary-black);
+            overflow-x: hidden;
         }
 
+        /* --- NAVBAR COHÉRENTE --- */
+        .navbar {
+            background: #fff;
+            height: 70px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 2000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .nav-container { 
+            width: 90%; 
+            max-width: 1200px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+        }
+        .nav-brand { font-weight: bold; color: var(--adesco-blue); z-index: 2001; }
+        
+        .nav-links { display: flex; list-style: none; gap: 15px; margin: 0; padding: 0; }
+        .nav-links a { text-decoration: none; color: #000; font-weight: 500; font-size: 0.9rem;}
+        .nav-links a.active { color: var(--adesco-blue); border-bottom: 2px solid var(--adesco-blue); }
+
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            z-index: 2002;
+        }
+
+        /* --- CONTENU --- */
         .main-container {
             padding: 40px 20px;
             max-width: 800px;
@@ -30,7 +63,6 @@
             text-align: center;
         }
 
-        /* CARD STYLE PROFESSIONNEL */
         .contact-card {
             background: var(--bg-white);
             border-radius: 20px;
@@ -58,7 +90,6 @@
             font-weight: 600;
         }
 
-        /* ITEMS DE CONTACT */
         .info-item {
             display: flex;
             align-items: center;
@@ -68,7 +99,6 @@
             padding: 15px 20px;
             border-radius: 12px;
             text-align: left;
-            transition: 0.3s;
         }
 
         .info-item i {
@@ -92,7 +122,6 @@
             margin: 2px 0 0 0;
         }
 
-        /* BOUTONS D'ACTION RAPIDE */
         .action-buttons {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -115,7 +144,6 @@
         .btn-call { background: var(--adesco-blue); color: white; }
         .btn-mail { background: var(--primary-black); color: white; }
 
-        /* FOOTER DE LA PAGE */
         .dev-credit {
             margin-top: 40px;
             font-size: 0.75rem;
@@ -123,12 +151,39 @@
             font-style: italic;
         }
 
-        /* MOBILE OPTIMIZATION */
-        @media screen and (max-width: 600px) {
+        /* --- MOBILE OPTIMIZATION --- */
+        @media screen and (max-width: 768px) {
+            .menu-toggle {
+                display: block !important;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                background: white;
+                width: 75%;
+                height: 100vh;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+                box-shadow: -10px 0 20px rgba(0,0,0,0.2);
+                z-index: 1999;
+                gap: 30px;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links a {
+                font-size: 1.4rem;
+            }
+
             .main-container { padding: 20px 15px; }
             .action-buttons { grid-template-columns: 1fr; }
             .contact-card { padding: 30px 15px; }
-            .info-item { padding: 12px 15px; }
         }
     </style>
 </head>
@@ -137,7 +192,12 @@
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-brand">ADESCO KC</div>
-            <ul class="nav-links">
+            
+            <div class="menu-toggle" id="mobile-menu">
+                <i class="fas fa-bars" id="menu-icon" style="font-size: 1.8rem; color: var(--adesco-blue);"></i>
+            </div>
+
+            <ul class="nav-links" id="nav-list">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="historique.html">Historique</a></li>
                 <li><a href="actualites.html">Actualités</a></li>
@@ -200,5 +260,32 @@
         <p class="dev-credit">Développé par Optisite Digital - ADESCO Kongo Central © 2026</p>
     </main>
 
+    <script>
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navList = document.getElementById('nav-list');
+        const menuIcon = document.getElementById('menu-icon');
+
+        mobileMenu.onclick = function(e) {
+            e.stopPropagation();
+            navList.classList.toggle('active');
+            menuIcon.className = navList.classList.contains('active') ? "fas fa-times" : "fas fa-bars";
+        };
+
+        // Fermeture automatique au clic sur un lien
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.onclick = () => {
+                navList.classList.remove('active');
+                menuIcon.className = "fas fa-bars";
+            };
+        });
+
+        // Fermeture au clic extérieur
+        document.onclick = function(e) {
+            if (!mobileMenu.contains(e.target) && !navList.contains(e.target)) {
+                navList.classList.remove('active');
+                menuIcon.className = "fas fa-bars";
+            }
+        };
+    </script>
 </body>
 </html>

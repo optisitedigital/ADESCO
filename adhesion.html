@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADESCO - Adhésion</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-black: #000000;
+            --adesco-blue: #0056b3;
+            --bg-light: #f4f7f6;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background-color: var(--bg-light);
+            margin: 0;
+            color: var(--primary-black);
+        }
+
+        .main-container {
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .form-header { text-align: center; margin-bottom: 25px; }
+        .form-header h1 { font-size: 1.5rem; text-transform: uppercase; border-bottom: 3px solid var(--adesco-blue); display: inline-block; padding-bottom: 5px; }
+
+        /* ÉTAPES DU FORMULAIRE */
+        .step { display: none; }
+        .step.active { display: block; animation: fadeIn 0.4s; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .input-group { margin-bottom: 15px; text-align: left; }
+        .input-group label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 0.9rem; }
+        
+        .input-group input, .input-group select, .input-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .input-group input:focus { border-color: var(--adesco-blue); }
+
+        /* BOUTONS */
+        .btn-container { display: flex; justify-content: space-between; margin-top: 25px; }
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .btn-next { background: var(--adesco-blue); color: white; width: 100%; }
+        .btn-prev { background: #eee; color: #555; margin-right: 10px; }
+        .btn-submit { background: #28a745; color: white; width: 100%; }
+
+        /* MOBILE OPTIMIZATION */
+        @media screen and (max-width: 480px) {
+            .form-card { padding: 15px; }
+            .form-header h1 { font-size: 1.2rem; }
+        }
+
+        /* LOADING INDICATOR */
+        #status-msg { margin-top: 15px; text-align: center; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">ADESCO KC</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="historique.html">Historique</a></li>
+                <li><a href="actualites.html">Actualités</a></li>
+                <li><a href="adhesion.html" class="active">Adhésions</a></li>
+                <li><a href="apropos.html">À Propos</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="form-card">
+            <div class="form-header">
+                <h1>Fiche d'Adhésion</h1>
+            </div>
+
+            <form id="adhesionForm">
+                <div class="step active" id="step1">
+                    <div class="input-group">
+                        <label>Nom complet *</label>
+                        <input type="text" name="nom_complet" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Date de naissance *</label>
+                        <input type="date" name="date_naissance" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Nationalité *</label>
+                        <input type="text" name="nationalite" value="Congolaise" required>
+                    </div>
+                    <button type="button" class="btn btn-next" onclick="nextStep(2)">Suivant</button>
+                </div>
+
+                <div class="step" id="step2">
+                    <div class="input-group">
+                        <label>Adresse complète *</label>
+                        <textarea name="adresse" rows="2" required></textarea>
+                    </div>
+                    <div class="input-group">
+                        <label>Téléphone (WhatsApp) *</label>
+                        <input type="tel" name="telephone" placeholder="+243..." required>
+                    </div>
+                    <div class="input-group">
+                        <label>Profession</label>
+                        <input type="text" name="profession">
+                    </div>
+                    <div class="input-group">
+                        <label>État Civil</label>
+                        <select name="statut_marital">
+                            <option value="Célibataire">Célibataire</option>
+                            <option value="Marié(e)">Marié(e)</option>
+                            <option value="Divorcé(e)">Divorcé(e)</option>
+                            <option value="Veuf(ve)">Veuf(ve)</option>
+                        </select>
+                    </div>
+                    <div class="btn-container">
+                        <button type="button" class="btn btn-prev" onclick="nextStep(1)">Retour</button>
+                        <button type="button" class="btn btn-next" onclick="nextStep(3)">Suivant</button>
+                    </div>
+                </div>
+
+                <div class="step" id="step3">
+                    <div class="input-group">
+                        <label>Motifs d'adhésion</label>
+                        <input type="text" name="motifs_selectionnes" placeholder="Ex: Soutenir la vision">
+                    </div>
+                    <div class="input-group">
+                        <label>Ancien parti ? (Oui/Non)</label>
+                        <select name="autre_parti">
+                            <option value="Non">Non</option>
+                            <option value="Oui">Oui</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>Nom du parrain (Si applicable)</label>
+                        <input type="text" name="parrain_nom">
+                    </div>
+                    <div class="input-group" style="display: flex; align-items: center; gap: 10px;">
+                        <input type="checkbox" name="engagement_statuts" value="Oui" required style="width: 20px;">
+                        <label style="margin: 0;">J'accepte les statuts du parti *</label>
+                    </div>
+                    <div class="btn-container">
+                        <button type="button" class="btn btn-prev" onclick="nextStep(2)">Retour</button>
+                        <button type="submit" class="btn btn-submit" id="submitBtn">Envoyer l'Adhésion</button>
+                    </div>
+                </div>
+            </form>
+            <div id="status-msg"></div>
+        </div>
+    </main>
+
+    <script>
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyeF2_FigCylqCoPbsin4VPPkAn6DHcz8w5ToKkj0M13Jf_lYLSuGDS8IP9SKFRenEe5Q/exec";
+
+        function nextStep(stepNumber) {
+            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+            document.getElementById('step' + stepNumber).classList.add('active');
+            window.scrollTo(0,0);
+        }
+
+        document.getElementById('adhesionForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            const msg = document.getElementById('status-msg');
+            
+            btn.disabled = true;
+            btn.innerText = "Envoi en cours...";
+            msg.style.color = "blue";
+            msg.innerText = "Traitement de votre demande...";
+
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData.entries());
+
+            // On ajoute les champs manquants demandés par l'App Script
+            data.motifs_selectionnes = data.motifs_selectionnes || "N/A";
+            data.activites_selectionnees = "N/A";
+            data.parrain_numero = "N/A";
+
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors', // Important pour Google Apps Script
+                cache: 'no-cache',
+                body: JSON.stringify(data)
+            })
+            .then(() => {
+                msg.style.color = "green";
+                msg.innerHTML = "<i class='fas fa-check-circle'></i> Adhésion réussie ! Bienvenue à l'ADESCO.";
+                btn.innerText = "Envoyé !";
+                this.reset();
+            })
+            .catch(err => {
+                console.error(err);
+                msg.style.color = "red";
+                msg.innerText = "Erreur lors de l'envoi. Réessayez.";
+                btn.disabled = false;
+                btn.innerText = "Envoyer l'Adhésion";
+            });
+        });
+    </script>
+</body>
+</html>

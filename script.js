@@ -1,16 +1,36 @@
-/* MODIF CLIENT : Gestion Menu Mobile Hamburger */
+/* MODIF IA : Version corrigée pour éviter le blocage mobile */
 const menuToggle = document.getElementById('mobile-menu');
-const navLinks = document.querySelector('.nav-links');
+const navList = document.getElementById('nav-list'); // Utilise l'ID ici !
+const menuIcon = document.getElementById('menu-icon');
 
-menuToggle.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-    // Animation simple du bouton
-    menuToggle.classList.toggle('open');
-});
+if (menuToggle && navList) {
+    menuToggle.onclick = function(e) {
+        // Empêche le clic de "traverser" le bouton et de fermer le menu aussitôt
+        e.stopPropagation(); 
+        
+        navList.classList.toggle('active');
+        
+        // Change l'icône (Bars vs Times)
+        if (navList.classList.contains('active')) {
+            menuIcon.className = "fas fa-times";
+        } else {
+            menuIcon.className = "fas fa-bars";
+        }
+    };
 
-// Fermer le menu si on clique en dehors
-document.addEventListener('click', (e) => {
-    if (!menuToggle.contains(e.target) && !navLinks.contains(e.target)) {
-        navLinks.classList.remove('active');
-    }
-});
+    // Fermeture automatique quand on clique sur un lien (ACCUEIL, HISTORIQUE, etc.)
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.onclick = () => {
+            navList.classList.remove('active');
+            menuIcon.className = "fas fa-bars";
+        };
+    });
+
+    // Fermer si on clique n'importe où ailleurs sur l'écran
+    document.addEventListener('click', (e) => {
+        if (!menuToggle.contains(e.target) && !navList.contains(e.target)) {
+            navList.classList.remove('active');
+            menuIcon.className = "fas fa-bars";
+        }
+    });
+}

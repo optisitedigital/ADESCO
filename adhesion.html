@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ADESCO - Adhésion</title>
+    <title>ADESCO - Adhésion Officielle</title>
     <link rel="icon" type="image/png" href="logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
@@ -14,18 +14,18 @@
             --bg: #f4f7f6;
             --white: #ffffff;
             --success: #28a745;
+            --error: #dc3545;
             --warning: #fff3cd;
         }
 
         body {
-            font-family: 'Inter', 'Segoe UI', sans-serif;
+            font-family: 'Inter', sans-serif;
             background-color: var(--bg);
             margin: 0;
-            padding: 0;
             color: var(--dark);
         }
 
-        /* NAVBAR UNIFORMISÉE */
+        /* NAVBAR */
         .navbar {
             background: var(--white);
             height: 70px;
@@ -41,50 +41,48 @@
         
         .nav-container { width: 90%; max-width: 1200px; display: flex; justify-content: space-between; align-items: center; }
         .nav-brand { font-weight: 800; color: var(--primary); font-size: 1.1rem; }
-        .nav-links { display: flex; list-style: none; gap: 20px; margin: 0; padding: 0; }
-        .nav-links a { text-decoration: none; color: var(--dark); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; transition: 0.3s; }
+        .nav-links { display: flex; list-style: none; gap: 20px; }
+        .nav-links a { text-decoration: none; color: var(--dark); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; }
         .nav-links a.active { color: var(--primary); }
-        .menu-toggle { display: none; cursor: pointer; z-index: 2100; }
 
-        /* FORMULAIRE CONTAINER */
-        .main-container { padding: 110px 15px 40px; max-width: 500px; margin: 0 auto; }
-        .form-card { background: var(--white); padding: 30px 20px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
+        /* FORMULAIRE */
+        .main-container { padding: 110px 15px 40px; max-width: 550px; margin: 0 auto; }
+        .form-card { background: var(--white); padding: 30px 20px; border-radius: 25px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); }
 
         .form-header { text-align: center; margin-bottom: 25px; }
-        .form-header h1 { font-size: 1.5rem; text-transform: uppercase; color: var(--primary); font-weight: 900; margin: 0; }
-        .underline { width: 50px; height: 4px; background: var(--primary); margin: 10px auto; border-radius: 2px; }
-
-        /* ÉTAPES */
+        .form-header h1 { font-size: 1.6rem; text-transform: uppercase; color: var(--primary); font-weight: 900; }
+        
         .step { display: none; }
         .step.active { display: block; animation: fadeIn 0.4s; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; } }
 
-        .input-group { margin-bottom: 20px; }
-        .input-group label { display: block; font-weight: 800; margin-bottom: 8px; font-size: 0.9rem; color: #333; }
+        .input-group { margin-bottom: 18px; }
+        .input-group label { display: block; font-weight: 800; margin-bottom: 8px; font-size: 0.85rem; color: #444; }
         
-        input[type="text"], input[type="date"], input[type="tel"], select, textarea {
-            width: 100%; padding: 12px; border: 2px solid #eee; border-radius: 10px; font-size: 1rem; box-sizing: border-box; transition: 0.3s;
+        input, select, textarea {
+            width: 100%; padding: 13px; border: 2px solid #eee; border-radius: 12px; font-size: 1rem; box-sizing: border-box; transition: 0.3s;
         }
-        input:focus { border-color: var(--primary); outline: none; background: #f0f7ff; }
+        input:focus, select:focus { border-color: var(--primary); outline: none; background: #f9fcff; }
+        
+        /* Validation Error Style */
+        .error-input { border-color: var(--error) !important; background: #fff8f8 !important; }
+        .error-text { color: var(--error); font-size: 0.75rem; font-weight: bold; margin-top: 5px; display: none; }
 
-        /* CHECKBOXES */
-        .checkbox-group { display: flex; flex-direction: column; gap: 10px; background: #f8fafb; padding: 15px; border-radius: 12px; border: 1px solid #eee; }
-        .checkbox-item { display: flex; align-items: center; gap: 12px; font-size: 0.95rem; cursor: pointer; font-weight: 500; }
-        .checkbox-item input { width: 19px; height: 19px; cursor: pointer; accent-color: var(--primary); }
+        .checkbox-group { background: #f8fafb; padding: 15px; border-radius: 15px; border: 1px solid #eee; }
+        .checkbox-item { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; margin-bottom: 8px; cursor: pointer; }
+        .checkbox-item input { width: 18px; height: 18px; accent-color: var(--primary); }
 
-        /* BOUTONS */
-        .btn-container { display: flex; justify-content: space-between; margin-top: 30px; gap: 15px; }
-        .btn { padding: 15px; border: none; border-radius: 12px; cursor: pointer; font-weight: 800; font-size: 0.9rem; flex: 1; transition: 0.3s; text-transform: uppercase; }
+        .btn-container { display: flex; justify-content: space-between; margin-top: 30px; gap: 10px; }
+        .btn { padding: 16px; border: none; border-radius: 15px; cursor: pointer; font-weight: 800; font-size: 0.9rem; flex: 1; text-transform: uppercase; transition: 0.3s; }
         .btn-next { background: var(--primary); color: var(--white); }
-        .btn-prev { background: #eee; color: #666; }
+        .btn-prev { background: #f0f0f0; color: #666; }
         .btn-submit { background: var(--success); color: var(--white); }
 
-        #status-msg { margin-top: 20px; text-align: center; font-size: 0.95rem; font-weight: bold; }
+        #status-msg { margin-top: 20px; text-align: center; font-size: 0.95rem; font-weight: 800; border-radius: 10px; padding: 10px; }
 
         @media (max-width: 768px) {
-            .menu-toggle { display: block; }
-            .nav-links { position: fixed; top: 0; right: -100%; background: white; width: 75%; height: 100vh; flex-direction: column; justify-content: center; align-items: center; transition: 0.4s; box-shadow: -10px 0 30px rgba(0,0,0,0.1); gap: 25px; }
-            .nav-links.active { right: 0; }
+            .nav-links { display: none; }
+            .form-card { padding: 25px 15px; }
         }
     </style>
 </head>
@@ -93,13 +91,9 @@
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-brand">ADESCO KONGO CENTRAL</div>
-            <div class="menu-toggle" id="mobile-menu"><i class="fas fa-bars"></i></div>
-            <ul class="nav-links" id="nav-list">
+            <ul class="nav-links">
                 <li><a href="accueil.html">Accueil</a></li>
-                <li><a href="historique.html">Historique</a></li>
-                <li><a href="actualites.html">Actualités</a></li>
                 <li><a href="adhesion.html" class="active">Adhésions</a></li>
-                <li><a href="apropos.html">À Propos</a></li>
             </ul>
         </div>
     </nav>
@@ -108,83 +102,104 @@
         <div class="form-card">
             <div class="form-header">
                 <h1>Fiche d'Adhésion</h1>
-                <div class="underline"></div>
+                <p id="step-indicator" style="font-weight: 700; color: var(--primary);">Étape 1 sur 3</p>
             </div>
 
             <form id="adhesionForm">
-                
                 <div class="step active" id="step1">
                     <div class="input-group">
                         <label>Nom complet *</label>
-                        <input type="text" name="nom_complet" placeholder="Votre nom" required>
+                        <input type="text" name="nom_complet" placeholder="Ex: Jean Mukendi" required>
+                        <span class="error-text">Veuillez remplir ce champ</span>
                     </div>
                     <div class="input-group">
                         <label>Date de naissance *</label>
                         <input type="date" name="date_naissance" required>
+                        <span class="error-text">Veuillez indiquer votre date de naissance</span>
                     </div>
                     <div class="input-group">
                         <label>Nationalité *</label>
                         <input type="text" name="nationalite" value="Congolaise" required>
                     </div>
                     <div class="input-group">
-                        <label>Profession</label>
-                        <input type="text" name="profession" placeholder="Votre métier">
+                        <label>État Civil *</label>
+                        <select name="etat_civil" required>
+                            <option value="">Sélectionnez...</option>
+                            <option value="Célibataire">Célibataire</option>
+                            <option value="Marié(e)">Marié(e)</option>
+                            <option value="Veuf(ve)">Veuf(ve)</option>
+                            <option value="Divorcé(e)">Divorcé(e)</option>
+                        </select>
+                        <span class="error-text">Veuillez choisir une option</span>
                     </div>
-                    <button type="button" class="btn btn-next" onclick="nextStep(2)">Suivant <i class="fas fa-arrow-right"></i></button>
+                    <div class="input-group">
+                        <label>Profession *</label>
+                        <input type="text" name="profession" placeholder="Votre métier" required>
+                        <span class="error-text">Veuillez remplir ce champ</span>
+                    </div>
+                    <button type="button" class="btn btn-next" onclick="validateAndNext(2)">Suivant <i class="fas fa-arrow-right"></i></button>
                 </div>
 
                 <div class="step" id="step2">
                     <div class="input-group">
-                        <label>Motif d'adhésion (Cochez) :</label>
+                        <label>Adresse complète (Ville, Quartier, Rue) *</label>
+                        <textarea name="adresse_complete" rows="2" placeholder="Ex: Kinshasa, Limete, Rue 12" required></textarea>
+                        <span class="error-text">L'adresse est requise</span>
+                    </div>
+                    <div class="input-group">
+                        <label>Téléphone (WhatsApp) *</label>
+                        <input type="tel" name="telephone_whatsapp" placeholder="Ex: +243..." required>
+                        <span class="error-text">Numéro requis</span>
+                    </div>
+                    <div class="input-group">
+                        <label>Motifs d'adhésion :</label>
                         <div class="checkbox-group">
                             <label class="checkbox-item"><input type="checkbox" name="motifs" value="Valeurs"> Partage des valeurs</label>
-                            <label class="checkbox-item"><input type="checkbox" name="motifs" value="Vie Politique"> Participation active</label>
-                            <label class="checkbox-item"><input type="checkbox" name="motifs" value="Projets"> Projets spécifiques</label>
-                            <input type="text" name="motif_autre" placeholder="Autres motifs..." style="margin-top:5px">
-                        </div>
-                    </div>
-
-                    <div class="input-group">
-                        <label>Activités souhaitées :</label>
-                        <div class="checkbox-group">
-                            <label class="checkbox-item"><input type="checkbox" name="activites" value="Campagnes"> Campagnes électorales</label>
-                            <label class="checkbox-item"><input type="checkbox" name="activites" value="Parole"> Prises de parole</label>
-                            <label class="checkbox-item"><input type="checkbox" name="activites" value="Evenements"> Gestion d'événements</label>
-                            <label class="checkbox-item"><input type="checkbox" name="activites" value="Recrutement"> Recrutement</label>
-                            <input type="text" name="activites_autre" placeholder="Précisez autres activités..." style="margin-top:5px">
+                            <label class="checkbox-item"><input type="checkbox" name="motifs" value="Vie Politique"> Participation politique</label>
+                            <label class="checkbox-item"><input type="checkbox" name="motifs" value="Projets"> Projets de développement</label>
+                            <input type="text" name="precision_motifs" placeholder="Précisez ici si autre...">
                         </div>
                     </div>
                     <div class="btn-container">
-                        <button type="button" class="btn btn-prev" onclick="nextStep(1)">Retour</button>
-                        <button type="button" class="btn btn-next" onclick="nextStep(3)">Suivant</button>
+                        <button type="button" class="btn btn-prev" onclick="goToStep(1)">Retour</button>
+                        <button type="button" class="btn btn-next" onclick="validateAndNext(3)">Suivant</button>
                     </div>
                 </div>
 
                 <div class="step" id="step3">
                     <div class="input-group">
-                        <label>Appartenance à un autre parti ?</label>
-                        <select name="autre_parti">
+                        <label>Venant d'un autre parti ? *</label>
+                        <select name="ancien_parti" required>
                             <option value="Non">Non</option>
                             <option value="Oui">Oui</option>
                         </select>
-                        <input type="text" name="autre_parti_nom" placeholder="Si oui, lequel ?" style="margin-top:10px">
                     </div>
-
+                    <div class="input-group">
+                        <label>Si oui, nom de l'ancien parti</label>
+                        <input type="text" name="nom_ancien_parti" placeholder="Nom du parti quitté">
+                    </div>
+                    <div class="input-group">
+                        <label>Activités souhaitées au sein d'ADESCO :</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-item"><input type="checkbox" name="activites" value="Mobilisation"> Mobilisation / Recrutement</label>
+                            <label class="checkbox-item"><input type="checkbox" name="activites" value="Communication"> Communication / Parole</label>
+                            <label class="checkbox-item"><input type="checkbox" name="activites" value="Logistique"> Gestion Événements</label>
+                            <input type="text" name="precision_activites" placeholder="Autres activités souhaitées...">
+                        </div>
+                    </div>
                     <div class="input-group">
                         <label>Parrainage (Si applicable)</label>
-                        <input type="text" name="parrain_nom" placeholder="Nom du parrain">
-                        <input type="text" name="parrain_numero" placeholder="N° membre du parrain" style="margin-top:10px">
+                        <input type="text" name="nom_parrain" placeholder="Nom du parrain">
+                        <input type="text" name="numero_parrain" placeholder="N° membre du parrain" style="margin-top:10px">
                     </div>
-
-                    <div class="input-group" style="background:var(--warning); padding:15px; border-radius:12px; border:1px solid #ffeeba;">
-                        <label style="color:#856404; font-size:0.85rem; font-weight:600; cursor:pointer;">
-                            <input type="checkbox" required name="engagement_statuts" value="Oui" style="margin-right:10px;"> 
-                            Je déclare sur l'honneur que les infos sont exactes et m'engage à respecter les statuts du parti ADESCO.
+                    <div class="input-group" style="background:var(--warning); padding:15px; border-radius:15px;">
+                        <label style="cursor:pointer; font-size: 0.85rem;">
+                            <input type="checkbox" name="engagement_statuts" value="Oui" required> 
+                            <b>Declaration:</b> Je jure sur mon honneur que ces infos sont vraies et m'engage à respecter les regles d'adesco.
                         </label>
                     </div>
-
                     <div class="btn-container">
-                        <button type="button" class="btn btn-prev" onclick="nextStep(2)">Retour</button>
+                        <button type="button" class="btn btn-prev" onclick="goToStep(2)">Retour</button>
                         <button type="submit" class="btn btn-submit" id="submitBtn">Finaliser l'Adhésion</button>
                     </div>
                 </div>
@@ -194,20 +209,38 @@
     </main>
 
     <script>
-        // NAVIGATION MOBILE
-        const mobileMenu = document.getElementById('mobile-menu');
-        const navList = document.getElementById('nav-list');
-        mobileMenu.onclick = () => navList.classList.toggle('active');
-
-        // ÉTAPES
-        function nextStep(n) {
+        // Fonction pour changer d'étape sans validation
+        function goToStep(n) {
             document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
             document.getElementById('step' + n).classList.add('active');
+            document.getElementById('step-indicator').innerText = "Étape " + n + " sur 3";
             window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
-        // GOOGLE SHEETS ENVOI (Inchangé par rapport à ton original)
-        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyeF2_FigCylqCoPbsin4VPPkAn6DHcz8w5ToKkj0M13Jf_lYLSuGDS8IP9SKFRenEe5Q/exec";
+        // Fonction de validation avant de passer à la suite
+        function validateAndNext(next) {
+            const currentStep = document.querySelector('.step.active');
+            const inputs = currentStep.querySelectorAll('input[required], select[required], textarea[required]');
+            let isValid = true;
+
+            inputs.forEach(input => {
+                if (!input.value.trim()) {
+                    input.classList.add('error-input');
+                    input.nextElementSibling.style.display = 'block';
+                    isValid = false;
+                } else {
+                    input.classList.remove('error-input');
+                    if(input.nextElementSibling && input.nextElementSibling.className === 'error-text') {
+                        input.nextElementSibling.style.display = 'none';
+                    }
+                }
+            });
+
+            if (isValid) goToStep(next);
+        }
+
+        // ENVOI AU SCRIPT GOOGLE
+        const SCRIPT_URL = "TON_URL_SCRIPT_ICI"; // Garde ton URL actuelle
 
         document.getElementById('adhesionForm').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -215,32 +248,31 @@
             const msg = document.getElementById('status-msg');
             
             btn.disabled = true;
-            btn.innerHTML = "<i class='fas fa-spinner fa-spin'></i> Envoi...";
+            btn.innerHTML = "<i class='fas fa-spinner fa-spin'></i> Traitement...";
 
             const formData = new FormData(this);
             const data = Object.fromEntries(formData.entries());
 
-            // Collecte motifs cochés
-            const motifs = [];
-            document.querySelectorAll('input[name="motifs"]:checked').forEach(cb => motifs.push(cb.value));
-            data.motifs_selectionnes = motifs.join(', ');
+            // Date d'enregistrement automatique
+            data.date_enregistrement = new Date().toLocaleString();
 
-            // Collecte activités cochées
-            const activites = [];
-            document.querySelectorAll('input[name="activites"]:checked').forEach(cb => activites.push(cb.value));
-            data.activites_selectionnees = activites.join(', ');
+            // Motifs et Activités (Checkboxes)
+            data.motifs_selectionnes = Array.from(document.querySelectorAll('input[name="motifs"]:checked')).map(cb => cb.value).join(', ');
+            data.activites_selectionnees = Array.from(document.querySelectorAll('input[name="activites"]:checked')).map(cb => cb.value).join(', ');
 
             fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(data) })
             .then(() => {
+                msg.style.background = "#d4edda";
                 msg.style.color = "var(--success)";
-                msg.innerHTML = "✅ Merci ! Votre demande d'adhésion a été envoyée avec succès.";
-                btn.innerText = "ENVOYÉ";
+                msg.innerHTML = "✅ SUCCESS ! Votre adhésion a été enregistrée. Bienvenue chez ADESCO !";
+                btn.innerText = "ADHÉSION RÉUSSIE";
                 this.reset();
-                setTimeout(() => nextStep(1), 5000);
+                setTimeout(() => location.reload(), 4000);
             })
             .catch(err => {
-                msg.style.color = "#dc3545";
-                msg.innerText = "❌ Erreur. Vérifiez votre connexion.";
+                msg.style.background = "#f8d7da";
+                msg.style.color = "var(--error)";
+                msg.innerText = "❌ Erreur de connexion. Veuillez réessayer.";
                 btn.disabled = false;
                 btn.innerText = "Réessayer";
             });

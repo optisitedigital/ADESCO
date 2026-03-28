@@ -104,43 +104,7 @@
     .btn:hover { transform: translateY(-5px); box-shadow: 0 12px 25px rgba(0,0,0,0.3); }
     .btn-primary:hover { background: #f0cc00; }
     .btn-outline:hover { background: white; color: var(--primary); }
-<style>
-    /* STYLE IDENTITÉ ADESCO (COULEURS DU PDF) */
-    .adesco-identity-container {
-        padding: 50px 5%;
-        background: rgba(255, 255, 255, 0.95);
-        border-radius: 30px;
-        margin: 40px auto;
-        max-width: 1100px;
-        box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-    }
-    .identity-card {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 25px;
-    }
-    .box-info {
-        background: #f8fafc;
-        padding: 25px;
-        border-radius: 15px;
-        border-left: 6px solid #003399; /* Bleu Royal */
-        transition: 0.3s;
-    }
-    .box-info:hover { transform: translateY(-5px); }
-    .box-info h3 {
-        color: #003399;
-        font-family: 'Playfair Display', serif;
-        font-size: 1.3rem;
-        margin-bottom: 12px;
-        border-bottom: 2px solid #FFD700; /* Or */
-        display: inline-block;
-    }
-    .box-info p { font-size: 0.9rem; color: #334155; line-height: 1.6; margin-bottom: 8px; }
-    .box-info ul { list-style: none; padding: 0; }
-    .box-info li { font-size: 0.85rem; margin-bottom: 6px; padding-left: 15px; position: relative; }
-    .box-info li::before { content: "➤"; color: #d92323; position: absolute; left: 0; }
-    .highlight-pdf { color: #003399; font-weight: 700; }        
-
+        
     /* Section Héritage Sphinx */
     .sphinx-heritage { padding: 120px 5%; background: #fff; display: flex; align-items: center; gap: 60px; flex-wrap: wrap; max-width: 1250px; margin: auto; }
     .sphinx-text { flex: 1.2; min-width: 320px; }
@@ -324,29 +288,6 @@
         </div>
         
     </section>
-<div class="adesco-identity-container">
-    <div class="identity-card">
-        <div class="box-info">
-            <h3>Historique</h3>
-            <p><strong>Création :</strong> <span class="highlight-pdf">30 juin 2023</span></p>
-            <p><strong>Fondateur :</strong> S.E. Tony Kanku Shiku.</p>
-            <p>Héritière des valeurs de l'UDPS et du combat d'Etienne Tshisekedi.</p>
-        </div>
-        <div class="box-info">
-            <h3>Siège Social</h3>
-            <p><strong>Adresse :</strong> Croisement des avenues <span class="highlight-pdf">Gambela et Enseignement</span>.</p>
-            <p>Commune de Kasa-Vubu, Kinshasa.</p>
-        </div>
-        <div class="box-info">
-            <h3>But & Objectifs</h3>
-            <p><strong>But :</strong> Instaurer une démocratie socialiste centrée sur le progrès social.</p>
-            <ul>
-                <li>Former des cadres via l'École du Parti.</li>
-                <li>Bâtir un Congo prospère et souverain.</li>
-            </ul>
-        </div>
-    </div>
-</div>
     <section id="heritage" class="sphinx-heritage">
         <div class="sphinx-text">
             <h2>L'Héritage du Sphinx</h2>
@@ -360,6 +301,115 @@
             <img src="sphinx_heritage.png" alt="Etienne Tshisekedi">
         </div>
     </section>
+<style>
+    .adesco-identity-section {
+        width: 100%;
+        padding: 60px 20px;
+        background-color: #f8fafc; /* Couleur de fond légère */
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    .adesco-identity-container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .identity-card-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 25px;
+    }
+
+    .adesco-ident-box {
+        background: #ffffff;
+        padding: 35px;
+        border-radius: 20px;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        border-top: 5px solid #003399; /* Bleu ADESCO */
+        transition: transform 0.3s ease;
+    }
+
+    .adesco-ident-box:hover {
+        transform: translateY(-10px);
+    }
+
+    .adesco-ident-box h3 {
+        color: #003399;
+        font-family: 'Playfair Display', serif;
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #FFD700; /* Or ADESCO */
+        display: inline-block;
+    }
+
+    .adesco-ident-box p {
+        margin-bottom: 12px;
+        font-size: 1rem;
+        color: #334155;
+        line-height: 1.6;
+    }
+
+    .adesco-ident-box ul {
+        padding-left: 20px;
+        color: #334155;
+        list-style-type: square;
+    }
+
+    .adesco-ident-box ul li {
+        margin-bottom: 8px;
+    }
+
+    .highlight-adesco {
+        color: #d92323; /* Rouge ADESCO */
+        font-weight: 800;
+    }
+
+    /* Adaptation Mobile */
+    @media (max-width: 768px) {
+        .adesco-identity-section {
+            padding: 40px 15px;
+        }
+        .identity-card-grid {
+            grid-template-columns: 1fr;
+        }
+        .adesco-ident-box {
+            padding: 25px;
+        }
+        .adesco-ident-box h3 {
+            font-size: 1.3rem;
+        }
+    }
+</style>
+
+<div class="adesco-identity-section">
+    <div class="adesco-identity-container">
+        <div class="identity-card-grid">
+            <div class="adesco-ident-box">
+                <h3>Historique</h3>
+                <p><strong>Création :</strong> <span class="highlight-adesco">30 juin 2023</span></p>
+                <p><strong>Fondateur :</strong> S.E. Tony Kanku Shiku.</p>
+                <p>Héritière des valeurs de l'UDPS et du combat d'Etienne Tshisekedi wa Mulumba.</p>
+            </div>
+
+            <div class="adesco-ident-box">
+                <h3>Siège Social</h3>
+                <p><strong>Adresse :</strong> Croisement des avenues <span class="highlight-adesco">Gambela et Enseignement</span>.</p>
+                <p>Commune de Kasa-Vubu, Kinshasa, RDC.</p>
+            </div>
+
+            <div class="adesco-ident-box">
+                <h3>But & Objectifs</h3>
+                <p><strong>But :</strong> Instaurer une démocratie socialiste centrée sur le progrès social.</p>
+                <ul>
+                    <li>Former des cadres via l'École du Parti.</li>
+                    <li>Bâtir un Congo prospère et souverain.</li>
+                    <li>Le Peuple d'Abord.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>        
 
     <section id="comite" class="leaders-section">
         <h2 class="section-title">Notre Comité Interfédéral</h2>

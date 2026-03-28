@@ -24,7 +24,7 @@
             color: var(--dark);
         }
 
-        /* --- NAVBAR PROFESSIONNELLE --- */
+        /* --- NAVBAR --- */
         .navbar {
             background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(10px);
@@ -50,17 +50,15 @@
 
         .nav-brand {
             font-weight: 800;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: var(--primary);
-            letter-spacing: -0.5px;
+            text-transform: uppercase;
         }
 
-        /* MODIF CLIENT : Menu Hamburger Style Pro & Épuré */
         .menu-toggle {
             display: none;
             cursor: pointer;
             z-index: 1100;
-            transition: 0.3s;
         }
 
         .nav-links {
@@ -76,15 +74,16 @@
             color: var(--dark);
             font-weight: 700;
             font-size: 0.85rem;
-            transition: 0.3s;
             text-transform: uppercase;
+            transition: 0.3s;
         }
 
-        .nav-links a:hover, .nav-links a.active {
+        .nav-links a.active, .nav-links a:hover {
             color: var(--primary);
+            border-bottom: 2px solid var(--primary);
         }
 
-        /* --- HERO SECTION (BANIERE) --- */
+        /* --- HERO --- */
         .hero {
             height: 100vh;
             background: var(--white);
@@ -92,71 +91,44 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 80px 20px 20px 20px;
-            box-sizing: border-box;
-        }
-
-        .hero-content {
-            max-width: 800px;
-            width: 100%;
+            padding: 20px;
         }
 
         .hero-logo {
-            width: 280px;
-            max-width: 70%;
-            margin-bottom: 25px;
-            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.1));
-            animation: fadeIn 1.2s ease-out;
+            width: 250px;
+            margin-bottom: 20px;
         }
 
         .hero-title {
-            font-size: 2.2rem;
+            font-size: 2.5rem;
             font-weight: 900;
-            /* MODIF CLIENT : Texte Noir Impératif */
-            color: #000000; 
-            margin: 10px 0;
-            line-height: 1.2;
-            text-transform: uppercase;
+            color: #000;
+            margin: 0;
         }
 
         .hero-subtitle {
-            font-size: 1.1rem;
-            /* MODIF CLIENT : Texte Noir */
-            color: #333333;
+            font-size: 1.2rem;
+            color: #333;
             font-weight: 600;
-            letter-spacing: 1px;
-            margin-bottom: 30px;
+            margin-top: 10px;
         }
 
-        /* --- CAROUSEL DESIGN (DIRECTION & COMITÉ) --- */
+        /* --- CAROUSEL --- */
         .section-block {
             padding: 60px 0;
             background: var(--white);
-            margin-bottom: 20px;
         }
 
         .title-decor {
             text-align: center;
-            font-size: 1.6rem;
-            margin-bottom: 40px;
-            color: var(--dark);
             text-transform: uppercase;
             font-weight: 800;
-        }
-
-        .title-decor::after {
-            content: '';
-            display: block;
-            width: 50px;
-            height: 4px;
-            background: var(--gold);
-            margin: 10px auto;
+            margin-bottom: 40px;
         }
 
         .carousel-outer {
             overflow: hidden;
             width: 100%;
-            cursor: grab;
         }
 
         .carousel-track {
@@ -164,11 +136,7 @@
             gap: 20px;
             width: max-content;
             padding: 20px;
-            animation: scroll 40s linear infinite;
-        }
-
-        .carousel-track:hover {
-            animation-play-state: paused;
+            animation: scroll 30s linear infinite;
         }
 
         @keyframes scroll {
@@ -177,103 +145,62 @@
         }
 
         .member-card {
-            width: 260px;
-            background: var(--white);
+            width: 280px;
+            background: #fff;
             border-radius: 15px;
-            padding: 25px 15px;
+            padding: 20px;
             text-align: center;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-            border: 1px solid #eeeeee;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border: 1px solid #eee;
         }
 
         .member-card img, .no-photo {
-            width: 140px;
-            height: 140px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
             margin: 0 auto 15px;
             object-fit: cover;
-            border: 5px solid var(--light);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border: 4px solid var(--primary);
         }
 
         .no-photo {
-            background: #e9ecef;
+            background: #eee;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3rem;
-            color: #adb5bd;
+            font-size: 2.5rem;
+            color: #ccc;
         }
 
         .member-card h3 {
-            font-size: 1rem;
-            margin: 10px 0 5px;
-            color: #000;
-            font-weight: 700;
+            font-size: 0.95rem;
+            margin: 5px 0;
         }
 
         .role {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 800;
             color: var(--primary);
             text-transform: uppercase;
         }
 
-        /* --- RESPONSIVE MOBILE (SMARTPHONES) --- */
+        /* --- MOBILE --- */
         @media (max-width: 768px) {
-            .menu-toggle {
-                display: block; 
-            }
-
-            /* MODIF CLIENT : Menu latéral pro pour accéder aux onglets */
+            .menu-toggle { display: block; }
             .nav-links {
                 position: fixed;
-                top: 0;
                 right: -100%;
-                width: 75%;
+                top: 0;
+                width: 70%;
                 height: 100vh;
-                background: var(--white);
+                background: white;
                 flex-direction: column;
                 justify-content: center;
-                align-items: center;
-                transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-                box-shadow: -10px 0 30px rgba(0,0,0,0.1);
-                z-index: 1050;
+                transition: 0.4s;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
             }
-
-            .nav-links.active {
-                right: 0;
-            }
-
-            .nav-links li {
-                margin: 20px 0;
-                width: 100%;
-                text-align: center;
-            }
-
-            .nav-links a {
-                font-size: 1.1rem;
-                display: block;
-                padding: 10px;
-            }
-
-            .hero-title { font-size: 1.5rem; }
-            .hero-logo { width: 200px; }
-            
-            .carousel-track {
-                animation: scroll 20s linear infinite;
-            }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-            40% {transform: translateY(-10px);}
-            60% {transform: translateY(-5px);}
+            .nav-links.active { right: 0; }
+            .hero-title { font-size: 1.8rem; }
         }
     </style>
 </head>
@@ -282,11 +209,9 @@
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-brand">ADESCO KONGO CENTRAL</div>
-            
             <div class="menu-toggle" id="mobile-menu">
-                <i class="fas fa-bars" id="menu-icon" style="font-size: 1.6rem; color: var(--primary);"></i>
+                <i class="fas fa-bars" id="menu-icon" style="font-size: 1.5rem; color: var(--primary);"></i>
             </div>
-
             <ul class="nav-links" id="nav-list">
                 <li><a href="index.html" class="active">Accueil</a></li>
                 <li><a href="historique.html">Historique</a></li>
@@ -299,107 +224,83 @@
 
     <header class="hero">
         <div class="hero-content">
-            <img src="logo.png" alt="ADESCO Logo" class="hero-logo">
+            <img src="logo.png" alt="Logo" class="hero-logo">
             <h1 class="hero-title">ADESCO KONGO CENTRAL</h1>
             <p class="hero-subtitle">ALLIANCE DES DÉMOCRATES SOCIALISTES CONGOLAIS</p>
-            
-            <div style="margin-top: 40px; animation: bounce 2s infinite;">
-                <i class="fas fa-angle-double-down" style="color: var(--primary); font-size: 2rem;"></i>
-            </div>
         </div>
     </header>
 
-    <main>
-        <section class="section-block">
-            <h2 class="title-decor">La Direction Nationale</h2>
-            <div class="carousel-outer">
-                <div class="carousel-track">
-                    <div class="member-card">
-                        <img src="tony_kanku.jpg" alt="Tony KANKU SHIKU">
-                        <h3>S.E. Tony KANKU SHIKU</h3>
-                        <p class="role">Autorité Morale</p>
-                    </div>
-                    <div class="member-card">
-                        <img src="jolie_yombo.jpg" alt="Jolie YOMBO MUKENDI">
-                        <h3>Mme Jolie YOMBO MUKENDI</h3>
-                        <p class="role">Présidente Nationale</p>
-                    </div>
-                    <div class="member-card">
-                        <img src="dan_marshall.jpg" alt="Dan MARSHALL MUBENGA">
-                        <h3>M. Dan MARSHALL MUBENGA</h3>
-                        <p class="role">Secrétaire Général</p>
-                    </div>
-                    <div class="member-card"><img src="tony_kanku.jpg" alt=""><h3>S.E. Tony KANKU SHIKU</h3><p class="role">Autorité Morale</p></div>
-                    <div class="member-card"><img src="jolie_yombo.jpg" alt=""><h3>Mme Jolie YOMBO MUKENDI</h3><p class="role">Présidente Nationale</p></div>
-                    <div class="member-card"><img src="dan_marshall.jpg" alt=""><h3>M. Dan MARSHALL MUBENGA</h3><p class="role">Secrétaire Général</p></div>
+    <section class="section-block">
+        <h2 class="title-decor">La Direction Nationale</h2>
+        <div class="carousel-outer">
+            <div class="carousel-track">
+                <div class="member-card">
+                    <img src="tony_kanku.jpg" alt="">
+                    <h3>S.E. Tony KANKU SHIKU</h3>
+                    <p class="role">Autorité Morale du Parti</p>
                 </div>
+                <div class="member-card">
+                    <img src="jolie_yombo.jpg" alt="">
+                    <h3>Mme Jolie YOMBO MUKENDI</h3>
+                    <p class="role">Présidente Nationale de l'ADESCO</p>
+                </div>
+                <div class="member-card">
+                    <img src="dan_marshall.jpg" alt="">
+                    <h3>M. Dan MARSHALL MUBENGA</h3>
+                    <p class="role">Secrétaire Général</p>
+                </div>
+                <div class="member-card"><img src="tony_kanku.jpg"><h3>S.E. Tony KANKU SHIKU</h3><p class="role">Autorité Morale</p></div>
+                <div class="member-card"><img src="jolie_yombo.jpg"><h3>Mme Jolie YOMBO MUKENDI</h3><p class="role">Présidente Nationale</p></div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section class="section-block" style="background: #fdfdfd;">
-            <h2 class="title-decor">Comité Interfédéral (Kongo Central)</h2>
-            <div class="carousel-outer">
-                <div class="carousel-track">
-                    <div class="member-card">
-                        <img src="mabiala_phambu.jpg" alt="MABIALA PHAMBU ADOLPHE">
-                        <h3>M. MABIALA PHAMBU ADOLPHE</h3>
-                        <p class="role">Président Interfédéral</p>
-                    </div>
-                    <div class="member-card">
-                        <div class="no-photo"><i class="fas fa-user-tie"></i></div>
-                        <h3>M. MIANTEZOLO MATONDO Rolly</h3>
-                        <p class="role">P.I. Adjoint (Cataractes)</p>
-                    </div>
-                    <div class="member-card">
-                        <img src="binda_ki.jpg" alt="BINDA KI LEVO Joséphine">
-                        <h3>Mme BINDA KI LEVO Joséphine</h3>
-                        <p class="role">P.I. Adjointe (Bas-fleuve)</p>
-                    </div>
-                    <div class="member-card">
-                        <div class="no-photo"><i class="fas fa-user-tie"></i></div>
-                        <h3>Mme GHONDA PULULU Brunette</h3>
-                        <p class="role">P.I. Adjointe (LUKAYA)</p>
-                    </div>
-                    <div class="member-card">
-                        <img src="jolie_yombo.jpg" alt="Jolie YOMBO MUKENDI">
-                        <h3>Mme Jolie YOMBO MUKENDI</h3>
-                        <p class="role">Présidente Nationale</p>
-                    </div>
+    <section class="section-block" style="background: #f9f9f9;">
+        <h2 class="title-decor">Comité Interfédéral (Kongo Central)</h2>
+        <div class="carousel-outer">
+            <div class="carousel-track" style="animation-duration: 25s;">
+                <div class="member-card">
+                    <div class="no-photo"><i class="fas fa-user-tie"></i></div>
+                    <h3>M. MABIALA PHAMBU ADOLPHE</h3>
+                    <p class="role">Président Interfédéral</p>
                 </div>
+                <div class="member-card">
+                    <div class="no-photo"><i class="fas fa-user-tie"></i></div>
+                    <h3>M. MIANTEZOLO MATONDO Rolly</h3>
+                    <p class="role">P.I. Adjoint (Cataractes)</p>
+                </div>
+                <div class="member-card">
+                    <div class="no-photo"><i class="fas fa-user-tie"></i></div>
+                    <h3>Mme BINDA KI LEVO Joséphine</h3>
+                    <p class="role">P.I. Adjointe (Bas-Fleuve)</p>
+                </div>
+                <div class="member-card">
+                    <div class="no-photo"><i class="fas fa-user-tie"></i></div>
+                    <h3>Mme GHONDA PULULU Brunette</h3>
+                    <p class="role">P.I. Adjointe (LUKAYA)</p>
+                </div>
+                <div class="member-card"><div class="no-photo"><i class="fas fa-user-tie"></i></div><h3>M. MABIALA PHAMBU ADOLPHE</h3><p class="role">Président Interfédéral</p></div>
+                <div class="member-card"><div class="no-photo"><i class="fas fa-user-tie"></i></div><h3>M. MIANTEZOLO MATONDO Rolly</h3><p class="role">P.I. Adjoint</p></div>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
     <script>
         const mobileMenu = document.getElementById('mobile-menu');
         const navList = document.getElementById('nav-list');
         const menuIcon = document.getElementById('menu-icon');
 
-        /* MODIF CLIENT : Ouverture/Fermeture menu avec animation */
-        mobileMenu.addEventListener('click', (e) => {
-            e.stopPropagation();
+        mobileMenu.onclick = () => {
             navList.classList.toggle('active');
-            if (navList.classList.contains('active')) {
-                menuIcon.classList.replace('fa-bars', 'fa-times');
-            } else {
-                menuIcon.classList.replace('fa-times', 'fa-bars');
-            }
-        });
+            menuIcon.classList.toggle('fa-bars');
+            menuIcon.classList.toggle('fa-times');
+        };
 
-        /* Fermeture auto lors du clic sur un lien */
         document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
+            link.onclick = () => {
                 navList.classList.remove('active');
-                menuIcon.classList.replace('fa-times', 'fa-bars');
-            });
-        });
-
-        /* Fermeture si on clique n'importe où ailleurs */
-        document.addEventListener('click', (e) => {
-            if (!mobileMenu.contains(e.target) && !navList.contains(e.target)) {
-                navList.classList.remove('active');
-                menuIcon.classList.replace('fa-times', 'fa-bars');
-            }
+                menuIcon.className = "fas fa-bars";
+            };
         });
     </script>
 </body>
